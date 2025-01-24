@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Chatbot</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #000428, #004e92, #1c92d2);
+            background-size: 300% 300%;
+            animation: gradientAnimation 15s ease infinite;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background: linear-gradient(90deg, rgba(0, 0, 50, 0.8), rgba(0, 30, 80, 0.8));
+            backdrop-filter: blur(5px);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #00ccff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #00ccff;
+            text-shadow: 0 0 8px #00ccff;
+            animation: colorChange 5s infinite alternate;
+        }
+
+        @keyframes colorChange {
+            0% { color: #00ccff; }
+            50% { color: #ff9900; }
+            100% { color: #00ccff; }
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #00ccff;
+            transform: scale(1.1);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(to bottom, rgba(0, 0, 50, 0.8), rgba(0, 30, 80, 0.8));
+            animation: fadeIn 2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            color: #00ccff;
+            text-shadow: 0 0 12px #00ccff;
+            margin-bottom: 20px;
+            animation: colorChange 5s infinite alternate;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+
+        .chat-btn {
+            padding: 12px 24px;
+            background: linear-gradient(90deg, #00ccff, #1c92d2);
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 204, 255, 0.5);
+        }
+
+        .chat-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 204, 255, 0.8);
+        }
+
+        .section-padding {
+            padding: 40px 20px;
+            background: linear-gradient(to bottom, rgba(0, 0, 50, 0.8), rgba(0, 30, 80, 0.8));
+            border-radius: 10px;
+            margin: 20px;
+            animation: fadeIn 2s ease-in;
+            box-shadow: 0 4px 15px rgba(0, 204, 255, 0.2);
+        }
+
+        .section-padding h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #00ccff;
+            text-shadow: 0 0 8px #00ccff;
+            animation: colorChange 5s infinite alternate;
+        }
+
+        .section-padding p {
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(90deg, rgba(0, 0, 50, 0.8), rgba(0, 30, 80, 0.8));
+            color: #ccc;
+            font-size: 14px;
+            border-top: 3px solid #00ccff;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Glow Animation for Links */
+        nav ul li a {
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: #00ccff;
+            bottom: -4px;
+            left: 0;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+    </style>
+    <script>
+        function redirectToChat() {
+            window.location.href = "https://cdn.botpress.cloud/webchat/v2.2/shareable.html?configUrl=https://files.bpcontent.cloud/2025/01/11/14/20250111144811-H2VD5TWG.json";
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Biyani Bot</h1>
+        <nav>
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="https://cdn.botpress.cloud/webchat/v2.2/shareable.html?configUrl=https://files.bpcontent.cloud/2025/01/11/14/20250111144811-H2VD5TWG.json">Chat</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <h2>Welcome to the Biyani Bot</h2>
+        <p>Your AI-powered assistant for campus queries and guidance.</p>
+        <button class="chat-btn" aria-label="Chat Now" onclick="redirectToChat()">Chat Now</button>
+    </section>
+
+    <section id="about" class="section-padding">
+        <h2>About Us</h2>
+        <p>Welcome to Biyani Bot – a project by MASSS, your one-stop destination for all things related to college life. We understand that navigating the complexities of college can be overwhelming, which is why we've developed a cutting-edge chatbot designed specifically to assist students with their college-related queries. Our chatbot is more than just an automated response system; it’s your reliable companion for academic guidance, campus life tips, career advice, and much more. Whether you need help choosing the right courses, figuring out your schedule, finding resources on campus, or simply need someone to talk to about your college experience, our chatbot is here to help 24/7. At Biyani Bot – a project by MASSS, we’re committed to using technology to enhance your educational journey. Our mission is to support students in making informed decisions, achieving academic success, and enjoying every moment of their college experience. Join our community and empower your college journey with us!</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 College Chatbot. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
