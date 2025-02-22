@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biyani Bot | Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Copy all root variables and basic styles from index.html */
+        :root {
+            --primary-bg: #0a0a0a;
+            --accent-1: #00ff9d;
+            --accent-2: #0095ff;
+            --text-primary: #f0f0f0;
+            --text-secondary: #888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Copy header styles from index.html */
+        .cyber-header {
+            padding: 1.5rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--accent-1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            margin-left: 2rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-1);
+        }
+
+        /* Login form specific styles */
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 1rem;
+        }
+
+        .cyber-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            border-radius: 15px;
+            border: 1px solid var(--accent-1);
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 30px rgba(0, 255, 157, 0.1);
+        }
+
+        .cyber-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--accent-2);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent-1);
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+        }
+
+        .cyber-button {
+            width: 100%;
+            background: linear-gradient(145deg, var(--accent-1), var(--accent-2));
+            color: var(--primary-bg);
+            border: none;
+            padding: 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .cyber-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .auth-container {
+                padding: 4rem 1rem;
+            }
+
+            .cyber-form {
+                padding: 2rem 1.5rem;
+                width: 90%;
+            }
+
+            .cyber-title {
+                font-size: 1.8rem;
+            }
+
+            .form-group input {
+                padding: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cyber-form {
+                padding: 1.5rem 1rem;
+            }
+
+            .cyber-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="cyber-header">
+        <nav class="nav-container">
+            <h1>Biyani<span style="color: var(--accent-1);">Bot</span></h1>
+            <div class="nav-links">
+                <a href="Home.html">About Bot</a>
+                <a href="about_us.html">About Us</a>
+                <a href="login.html">Login</a>
+                <a href="signup.html">Sign Up</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="auth-container">
+        <div class="cyber-form">
+            <h2 class="cyber-title">Access Portal</h2>
+            <form>
+                <div class="form-group">
+                    <input type="email" placeholder="College Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="cyber-button">Login</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html> 

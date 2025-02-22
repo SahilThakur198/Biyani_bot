@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Biyani Bot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #0a0a0a;
+            --accent-1: #00ff9d;
+            --accent-2: #0095ff;
+            --text-primary: #f0f0f0;
+            --text-secondary: #888;
+            --neon-glow: 0 0 10px rgba(0, 255, 157, 0.5),
+                         0 0 20px rgba(0, 255, 157, 0.3),
+                         0 0 30px rgba(0, 149, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #001a2c 100%);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .cyber-header {
+            padding: 1.5rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--accent-1);
+            box-shadow: 0 5px 20px rgba(0, 255, 157, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            margin-left: 2rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-1);
+        }
+
+        .about-container {
+            padding: 8rem 2rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            margin-bottom: 4rem;
+            min-height: 80vh;
+        }
+
+        .hero-content {
+            flex: 1;
+            padding-right: 2rem;
+        }
+
+        .brain-model {
+            flex: 1;
+            height: 600px;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: rgba(0, 20, 40, 0.3);
+            box-shadow: var(--neon-glow);
+            animation: pulseContainer 4s ease-in-out infinite;
+        }
+
+        @keyframes pulseContainer {
+            0%, 100% { transform: scale(1); box-shadow: var(--neon-glow); }
+            50% { transform: scale(1.02); box-shadow: 0 0 20px rgba(0, 255, 157, 0.7),
+                                                     0 0 40px rgba(0, 255, 157, 0.4),
+                                                     0 0 60px rgba(0, 149, 255, 0.3); }
+        }
+
+        .college-name {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .college-name::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glitchText 5s infinite linear alternate;
+        }
+
+        @keyframes glitchText {
+            0%, 100% { clip-path: inset(0 0 0 0); }
+            20% { clip-path: inset(20% 0 0 0); }
+            40% { clip-path: inset(0 20% 0 0); }
+            60% { clip-path: inset(0 0 20% 0); }
+            80% { clip-path: inset(0 0 0 20%); }
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg,
+                transparent 0%,
+                rgba(0, 255, 157, 0.1) 50%,
+                transparent 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--neon-glow);
+        }
+
+        .team-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .member-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .member-role {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .member-role::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 5px;
+            height: 5px;
+            background: var(--accent-1);
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+
+        .academic-info {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            background: rgba(0, 255, 157, 0.05);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .academic-info p {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .academic-info::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(0, 255, 157, 0.1),
+                transparent
+            );
+            animation: rotateGradient 8s linear infinite;
+        }
+
+        @keyframes rotateGradient {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-section {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .hero-content {
+                padding-right: 0;
+                text-align: center;
+            }
+
+            .brain-model {
+                width: 100%;
+                height: 400px;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-container {
+                padding: 6rem 1rem 2rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .team-card {
+                padding: 1.5rem;
+            }
+
+            .brain-model {
+                height: 300px;
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.95);
+                padding: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                margin: 1rem 0;
+            }
+
+            .menu-toggle {
+                display: block;
+                cursor: pointer;
+            }
+
+            .college-name {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-container {
+                padding: 6rem 1rem 2rem;
+            }
+
+            .college-name {
+                font-size: 1.8rem;
+            }
+
+            .brain-model {
+                height: 250px;
+            }
+        }
+
+        .project-description {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 157, 0.2);
+        }
+
+        .highlight {
+            color: var(--accent-1);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header class="cyber-header">
+        <nav class="nav-container">
+            <h1><a href="index.html" style="text-decoration: none; color: var(--text-primary);">
+                Biyani<span style="color: var(--accent-1);">Bot</span>
+            </a></h1>
+            <div class="nav-links">
+                <a href="Home.html">About Bot</a>
+                <a href="about_us.html">About Us</a>
+                <a href="login.html">Login</a>
+                <a href="signup.html">Sign Up</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="about-container">
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="college-name">Brijlal Biyani Science College</h1>
+                <p class="project-description">
+                    Welcome to <span class="highlight">BiyaniBot</span> - An innovative 
+                    AI-powered chatbot designed to enhance the college experience.
+                    <br><br>
+                    This project represents our commitment to bringing 
+                    <span class="highlight">cutting-edge technology</span> to academic support services.
+                </p>
+            </div>
+            <div class="brain-model">
+                <iframe 
+                    src="https://my.spline.design/particleaibrain-632951f6f863ed73e8ebb59c67bb6ca0/" 
+                    frameborder="0"
+                    width="100%"
+                    height="100%"
+                    style="mix-blend-mode: screen; transform: scale(1.2);"
+                ></iframe>
+            </div>
+        </section>
+
+        <section class="team-grid">
+            <div class="team-card">
+                <div class="member-name">Sahil Thakur</div>
+                <div class="member-role">Lead Developer</div>
+            </div>
+            <div class="team-card">
+                <div class="member-name">Manaswi Ingale</div>
+                <div class="member-role">Developer</div>
+            </div>
+            <div class="team-card">
+                <div class="member-name">Sanika Jirapure</div>
+                <div class="member-role">Developer</div>
+            </div>
+            <div class="team-card">
+                <div class="member-name">Shilpa Tayade</div>
+                <div class="member-role">Developer</div>
+            </div>
+            <div class="team-card">
+                <div class="member-name">Achal Jane</div>
+                <div class="member-role">Developer</div>
+            </div>
+        </section>
+
+        <div class="academic-info">
+            <p>
+                <span style="font-weight: 700">Final Year BCA Project</span>
+                <br>
+                <span style="font-size: 0.9em; opacity: 0.9">Academic Session 2024-25</span>
+            </p>
+        </div>
+    </main>
+</body>
+</html> 
