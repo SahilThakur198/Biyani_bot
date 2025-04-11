@@ -297,9 +297,15 @@
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('loggedInUser', JSON.stringify({ fullName: foundUser.fullName, email: foundUser.email }));
 
-                alert(`Login successful! Welcome, ${foundUser.fullName}!`);
-                // Redirect to the home page
-                window.location.href = 'Home.html';
+                // Display success message
+                alert('Logged in successfully!'); // Updated success message
+
+                // Check for admin credentials and redirect accordingly
+                if (email === 'thakur@gmail.com' && password === 'Justremeber') {
+                    window.location.href = 'admin_view.html'; // Redirect admin
+                } else {
+                    window.location.href = 'Home.html'; // Redirect regular users
+                }
             } else {
                 alert('Invalid email or password.');
                 localStorage.removeItem('isLoggedIn'); // Ensure logged out state if login fails

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - View Signup Data</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent-green: #00d9a6;
+            --accent-blue: #00a2ff;
+            --dark-bg: #0a0a0a;
+            --card-bg: #111111;
+            --text-light: #f5f5f5;
+            --text-secondary: #aaaaaa;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            padding: 2rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            background-color: var(--card-bg);
+            border: 1px solid #222;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #222;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #222;
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+        td {
+            color: var(--text-light);
+        }
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+        .gradient-btn {
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+            transition: all 0.3s ease;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: var(--dark-bg);
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            margin-top: 1.5rem;
+        }
+        .gradient-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 217, 166, 0.3);
+        }
+        .header-title {
+             background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="header-title">Signed Up User Data (from Local Storage)</h1>
+    <p class="text-sm text-red-500 mt-2"> Dear teacher what you think about it ?.</p>
+
+    <button id="downloadCsvBtn" class="gradient-btn">Download as CSV</button>
+
+    <div id="userDataContainer">
+        <p class="mt-4 text-gray-400">Loading user data...</p>
+        <table id="userTable" class="hidden">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Password (Insecure)</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody">
+                <!-- User data will be populated here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const userDataContainer = document.getElementById('userDataContainer');
+        const userTable = document.getElementById('userTable');
+        const userTableBody = document.getElementById('userTableBody');
+        const downloadCsvBtn = document.getElementById('downloadCsvBtn');
+
+        function displayUserData() {
+            const usersJson = localStorage.getItem('users');
+            const users = usersJson ? JSON.parse(usersJson) : [];
+
+            // Clear previous data
+            const loadingP = userDataContainer.querySelector('p');
+            if (loadingP) loadingP.remove(); // Remove loading/no data message
+
+            userTableBody.innerHTML = ''; // Clear table body
+
+            if (users.length === 0) {
+                const noDataRow = document.createElement('tr');
+                const cell = document.createElement('td');
+                cell.colSpan = 3;
+                cell.textContent = 'No user data found in local storage.';
+                cell.classList.add('text-center', 'text-gray-500', 'py-4');
+                noDataRow.appendChild(cell);
+                userTableBody.appendChild(noDataRow);
+                downloadCsvBtn.disabled = true; // Disable download if no data
+                downloadCsvBtn.style.opacity = '0.5';
+                downloadCsvBtn.style.cursor = 'not-allowed';
+            } else {
+                users.forEach(user => {
+                    const row = document.createElement('tr');
+
+                    const nameCell = document.createElement('td');
+                    nameCell.textContent = user.fullName || ''; // Use textContent for safety
+                    row.appendChild(nameCell);
+
+                    const emailCell = document.createElement('td');
+                    emailCell.textContent = user.email || ''; // Use textContent for safety
+                    row.appendChild(emailCell);
+
+                    const passwordCell = document.createElement('td');
+                    passwordCell.textContent = user.password || ''; // Use textContent for safety
+                    passwordCell.classList.add('text-red-400'); // Keep styling
+                    row.appendChild(passwordCell);
+
+                    userTableBody.appendChild(row);
+                });
+                downloadCsvBtn.disabled = false;
+                downloadCsvBtn.style.opacity = '1';
+                downloadCsvBtn.style.cursor = 'pointer';
+            }
+            userTable.classList.remove('hidden'); // Show table
+        }
+
+        // Removed the problematic escapeHtml function
+
+        function downloadCsv() {
+            const usersJson = localStorage.getItem('users');
+            const users = usersJson ? JSON.parse(usersJson) : [];
+
+            if (users.length === 0) {
+                alert('No data to download.');
+                return;
+            }
+
+            // Define CSV headers
+            const headers = ['Full Name', 'Email', 'Password'];
+            // Map user data to CSV rows, escaping commas and quotes
+            const rows = users.map(user => [
+                `"${escapeCsvField(user.fullName)}"`,
+                `"${escapeCsvField(user.email)}"`,
+                `"${escapeCsvField(user.password)}"` // Include password (insecure)
+            ]);
+
+            // Combine headers and rows
+            const csvContent = [
+                headers.join(','),
+                ...rows.map(row => row.join(','))
+            ].join('\n');
+
+            // Create a Blob and download link
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            if (link.download !== undefined) { // Feature detection
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', 'signed_up_users.csv');
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url); // Clean up
+            } else {
+                alert('CSV download is not supported in your browser.');
+            }
+        }
+
+        function escapeCsvField(field) {
+            // Ensure field is a string before replacing
+            const stringField = String(field || '');
+            // Escape double quotes by doubling them
+            return stringField.replace(/"/g, '""');
+        }
+
+
+        // Initial display
+        displayUserData();
+
+        // Add event listener for download button
+        downloadCsvBtn.addEventListener('click', downloadCsv);
+
+    </script>
+</body>
+</html>

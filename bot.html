@@ -212,9 +212,9 @@
         </div>
         <div class="input-area">
             <input type="text" class="chat-input" id="userInput" placeholder="Type your message here..." autocomplete="off">
-            <div class="send-btn" id="sendButton">
+            <button class="send-btn" id="sendButton" aria-label="Send message">
                 <i class="fas fa-paper-plane text-dark-bg"></i>
-            </div>
+            </button>
         </div>
     </div>
 
@@ -425,12 +425,12 @@
                 return knowledgeBase.developers.team;
             }
                         // Faculty (BCA Teacher Descriptions)
-if (normalizedInput.includes("k. m. supatkar") || normalizedInput.includes("supatkar")) {
-    return "K. M. Supatkar sir is a dedicated and knowledgeable teacher who has guided us through our BCA journey with clarity and patience. He plays a big role in shaping us as developers.";
+if (normalizedInput.includes("k. m. supatkar") || normalizedInput.includes("supatkar") || normalizedInput.includes("supatkar sir") || normalizedInput.includes("supu")) {
+    return "K. M. Supatkar sir is an Assistant Professor & Co-ordinator of BCA Program. They have 17 years of experience as a dedicated and knowledgeable teacher who has guided us through our BCA journey with clarity and patience. He plays a big role in shaping us as developers.";
 }
 
-if (normalizedInput.includes("k. k. tiwari") || normalizedInput.includes("tiwari")) {
-    return "K. K. Tiwari sir is known for his deep understanding and unique way of explaining complex topics. He’s been a constant support from BCA 1st to 6th semester.";
+if (normalizedInput.includes("k. k. tiwari") || normalizedInput.includes("tiwari") || normalizedInput.includes("tiu") || normalizedInput.includes("teu") ) {
+    return "K. K. Tiwari sir is an Assistant Professor in BCA Program. They have 13 years of experience and he is known for his deep understanding and unique way of explaining complex topics. He’s been a constant support from BCA 1st to 6th semester.";
 }
 
 if (normalizedInput.includes("samiksha madam") || normalizedInput.includes("samiksha")) {
@@ -441,13 +441,276 @@ if (normalizedInput.includes("gade madam") || normalizedInput.includes("gade")) 
     return "Gade ma'am brings a lot of energy and clarity to her teaching. She’s been instrumental in our academic development throughout all semesters.";
 }
 
-if (normalizedInput.includes("asawa madam") || normalizedInput.includes("asawa")) {
+if (normalizedInput.includes("asawa madam") || normalizedInput.includes("asawa") || normalizedInput.includes("asava")) {
     return "Asawa ma'am is a wonderful teacher who simplifies concepts and encourages us to think critically. Her support has been valuable in our BCA journey.";
 }
 
-if (normalizedInput.includes("nisha pujari madam") || normalizedInput.includes("nisha")) {
+if (normalizedInput.includes("nisha pujari madam") || normalizedInput.includes("nisha") || normalizedInput.includes("pujari")) {
     return "Nisha Pujari madam is a dedicated teacher who inspires students with her passion for learning and her supportive approach."; 
 }
+
+if (normalizedInput.includes("sonali muddalwar madam") || normalizedInput.includes("sonali")) {
+    return "Sonali Muddalwar madam is a dedicated and enthusiastic teacher who makes programming concepts easy to understand. Her supportive teaching style helps students grasp complex topics effectively.";
+}
+if (normalizedInput.includes("Renuka Mundwaiek") || normalizedInput.includes("renuka") || normalizedInput.includes("renuka ma'am")) {    
+    return "Renuka ma'am is an exceptional educator who combines expertise with a caring approach. Her teaching methods make complex subjects easy to understand, and her encouraging nature helps students reach their full potential.";
+}
+
+//additional knowledge added by us on 12.04.2025 midnight 1 AM by Manaswi sahil sanika and shilpa 
+
+function processCollegeQuery(normalizedInput) {
+  if (normalizedInput.includes("asawa madam") || normalizedInput.includes("asawa") || normalizedInput.includes("asava")) {
+    return "Asawa ma'am is a wonderful teacher who simplifies concepts and encourages us to think critically. Her support has been valuable in our BCA journey.";
+  }
+
+  if (normalizedInput.includes("practical sessions") && normalizedInput.includes("useful")) {
+    return "✔️ Yes, all science-related programs, including Mechatronics and Biomedical Electronics, include practical sessions. Labs are well equipped with modern instruments and internet facilities.";
+  }
+
+  if (normalizedInput.includes("industrial visits")) {
+    return "✔️ Yes, industrial visits are conducted regularly to expose students to work culture and real-world industrial environments.";
+  }
+
+  if (normalizedInput.includes("guest lectures") || normalizedInput.includes("workshops") || normalizedInput.includes("projects")) {
+    return "✔️ Yes, guest lectures and workshops are arranged regularly, particularly under the IQAC and Remedial Coaching Center initiatives.";
+  }
+
+  if (normalizedInput.includes("attendance policy")) {
+    return "✔️ A minimum of 75% attendance in theory and practicals is mandatory. Below this, students are debarred from exams.";
+  }
+
+  if (normalizedInput.includes("lectures regular") || normalizedInput.includes("classes cancelled")) {
+    return "✔️ Lectures are scheduled regularly and monitored. No mention of frequent cancellations.";
+  }
+
+  if (normalizedInput.includes("recommend this college")) {
+    return "✅ Yes ofcourse but this depends on the individual's needs, but considering the infrastructure, placement, and courses, it’s worth recommending.";
+  }
+
+  if (normalizedInput.includes("ragging issue")) {
+    return "✔️ Ragging is strictly prohibited. Disciplinary action is taken against violators.";
+  }
+
+  if (normalizedInput.includes("career guidance") || normalizedInput.includes("training sessions")) {
+    return "✔️ Yes, the college offers coaching for UPSC, MPSC, NET/SET, and more. There’s also an Alumni Association Support Scheme.";
+  }
+
+  if (normalizedInput.includes("wifi available")) {
+    return "✔️ Yes, broadband internet and digital library access are provided, especially in computer labs.";
+  }
+
+  if (normalizedInput.includes("exam pattern") || normalizedInput.includes("grading system")) {
+    return "✔️ The college follows continuous evaluation, university exams, and has grading through SGBAU, Amravati.";
+  }
+
+  if (normalizedInput.includes("practical lab")) {
+    return "✔️ Yes, well-equipped labs for all science and computer subjects are present.";
+  }
+
+  if (normalizedInput.includes("student council")) {
+    return "✔️ Yes, the Students' Council exists and includes nominated members from each department.";
+  }
+
+  if (normalizedInput.includes("classrooms clean") || normalizedInput.includes("labs clean")) {
+    return "✔️ Yes, the college is described as spacious, clean, and well-maintained.";
+  }
+
+  if (normalizedInput.includes("canteen available")) {
+    return "Yes, colleges offer canteen services; this can be confirmed during campus visit.";
+  }
+
+  if (normalizedInput.includes("notes shared") || normalizedInput.includes("study stuff shared")) {
+    return "✔️ Yes, home assignments and remedial coaching with books and resources are shared.";
+  }
+
+  if (normalizedInput.includes("college rules strict") || normalizedInput.includes("college rules relaxed")) {
+    return "✔️ The rules are moderately strict—uniform, attendance, mobile use are all regulated.";
+  }
+
+  if (normalizedInput.includes("smart boards") || normalizedInput.includes("projectors used")) {
+    return "✔️ Yes, modern teaching tools like LCD projectors and ICT tools are used.";
+  }
+
+  if (normalizedInput.includes("classes start after admissions")) {
+    return "✔️ From the first week of August.";
+  }
+
+  if (normalizedInput.includes("annual day")) {
+    return "✔️ Yes, “Antarang” is the name of the annual function.";
+  }
+
+  if (normalizedInput.includes("freshers party") || normalizedInput.includes("farewell parties")) {
+    return "Not by college but yes, by students if your seniors are good then they likely organized.";
+  }
+
+  if (normalizedInput.includes("fashion shows") || normalizedInput.includes("talent shows") || normalizedInput.includes("dj nights")) {
+    return "✔️ Talent shows and cultural competitions are mentioned, such as Sahitya Kala Sanskritik Manch. DJ nights not mentioned.";
+  }
+
+  if (normalizedInput.includes("reservation") || normalizedInput.includes("quota")) {
+    return "✔️ Yes, reservations are followed as per government rules.";
+  }
+
+  if (normalizedInput.includes("uniform") || normalizedInput.includes("dress code")) {
+    return "✔️ Yes, formal uniforms are compulsory from July 15. Wednesday is optional but formal dress is still required.";
+  }
+
+  if (normalizedInput.includes("internship")) {
+    return "✔️ Yes, industrial training and summer training are part of the curriculum for some courses like Event Management and PG diplomas.";
+  }
+
+  if (normalizedInput.includes("how many labs")) {
+    return "There are separate labs for computers, electronics, botany, chemistry, etc.";
+  }
+
+  if (normalizedInput.includes("entrance exams required")) {
+    return "Yes, now there is CET entrance exam and Admission is based on merit and document verification.";
+  }
+
+  if (normalizedInput.includes("provide wifi network")) {
+    return "✔️ Yes, broadband internet is provided, especially in labs.";
+  }
+
+  if (normalizedInput.includes("scholarships available")) {
+    return "✔️ Yes, scholarships, freeships, and alumni-sponsored support are available.";
+  }
+
+  if (normalizedInput.includes("timing of college")) {
+    return "✔️ Library and classes typically run between 7:30 AM to 6:00 PM. Exact class hours depend on the course.";
+  }
+
+  if (normalizedInput.includes("college working hours")) {
+    return "✔️ Monday to Saturday, typically 7:30 AM to 6:00 PM.";
+  }
+
+  if (normalizedInput.includes("college located")) {
+    return "✔️ Dussehra Maidan Road, Amravati – 444605.";
+  }
+
+  if (normalizedInput.includes("events and fests")) {
+    return "✔️ Annual Day “Antarang”, cultural and literary events, workshops, and competitions.";
+  }
+
+  if (normalizedInput.includes("government or private")) {
+    return "✔️ It is a private college run by Shri Brijlal Biyani Shiksha Samiti, affiliated to SGBAU Amravati.";
+  }
+
+  if (normalizedInput.includes("ncc or nss")) {
+    return "✔️ Yes, both NCC (Boys & Girls) and NSS are available with benefits like incentive marks.";
+  }
+
+  if (normalizedInput.includes("attendance compulsory")) {
+    return "✔️ Yes, with 75% minimum mandatory rule.";
+  }
+
+  if (normalizedInput.includes("prospectus from college office")) {
+    return "✔️ Yes, hard copy available during admissions.";
+  }
+
+  if (normalizedInput.includes("support students for competitive exams")) {
+    return "✔️ Yes, there’s a dedicated training center for UPSC, MPSC, NET/SET, and more.";
+  }
+
+  if (normalizedInput.includes("mobile phones allowed")) {
+    return "✔️ During lectures and inside library – strictly prohibited, allowed during breaks or in general areas.";
+  }
+
+  if (normalizedInput.includes("apply for bonafide certificate")) {
+    return "✔️ You can apply from the college office by submitting a formal application along with ID card.";
+  }
+
+  if (normalizedInput.includes("when do admissions start")) {
+    return "📌 Admissions typically begin in July each year. Exact dates are displayed on the college notice board and official website.";
+  }
+
+  if (normalizedInput.includes("apply for admission")) {
+    return "📌 You need to fill the offline admission form, attach required documents (marksheets, 2 copies of passport size photos, online submitted form printout, TC, caste certificate if applicable), and submit it to the college office.";
+  }
+
+  if (normalizedInput.includes("admission based on merit")) {
+    return "📌 Admission is strictly based on merit, considering marks of the qualifying exam. No entrance test is required for UG courses.";
+  }
+
+  if (normalizedInput.includes("admission in multiple courses")) {
+    return "📌 No, students can only enroll in one full-time course at a time as per university rules.";
+  }
+
+  if (normalizedInput.includes("sports facilities")) {
+    return "📌 Yes, the college has a dedicated Games & Sports Department with facilities for Cricket, Volleyball, Chess, Table Tennis, Swimming, Fencing, Judo, Athletics, and more.";
+  }
+
+  if (normalizedInput.includes("marks for participating in sports")) {
+    return "📌 Yes, incentive marks (up to 10) are awarded for students representing the college in inter-collegiate and university-level tournaments.";
+  }
+
+  if (normalizedInput.includes("college team or sports coach")) {
+    return "📌 Yes, the college forms official teams for various sports and provides training and support for tournaments.";
+  }
+
+  if (normalizedInput.includes("naac accreditation")) {
+    return "📌 The college is re-accredited by NAAC with a ‘B’ Grade, CGPA: 2.71, and is also ISO 9001:2015 certified.";
+  }
+
+  if (normalizedInput.includes("reservation policies")) {
+    return "📌 The college follows Government of Maharashtra reservation rules:\nSC (Scheduled Castes): 13%\nST (Scheduled Tribes): 7%\nOBC (Other Backward Classes): 19%\nEWS & other castes: As per latest government norms\nHindi Bhashik Reservation: Since the college is a Linguistic Minority Institution, certain seats are reserved for Hindi-speaking students.";
+  }
+
+  if (normalizedInput.includes("hods in the college")) {
+    return "The college has different HODs for each department. Some of them include Dr. D. S. Dhote (Electronics & Principal), Dr. P. B. Raghuwanshi (Chemistry), Dr. A. D. Rangari (Physics), Dr. D. T. Deshmukh (Statistics), Dr. N. H. Shahare (Botany), Dr. Lt. S. R. Katke (Zoology), Dr. P. R. Agrawal (Mathematics), Dr. V. S. Tondare (Computer Science), Dr. N. J. Honrao (Commerce & Management), Ms. A. R. Bhumbar (English), and Mr. S. M. Kurada (Library).";
+  }
+
+  if (normalizedInput.includes("hod of bca department")) {
+    return "Mr. K. M. Supatkar is the coordinator and main faculty for the BCA department.";
+  }
+
+  if (normalizedInput.includes("hod of bsc department")) {
+    return "B.Sc. doesn't have a single HOD. It is divided into subjects. For example, Dr. A. D. Rangari is HOD of Physics, Dr. P. B. Raghuwanshi is HOD of Chemistry, and so on.";
+  }
+
+  if (normalizedInput.includes("bca department teachers")) {
+    return "The main BCA faculty are Mr. K. M. Supatkar and Mr. K. K. Tiwari.";
+  }
+
+  if (normalizedInput.includes("teaches in bca stream")) {
+    return "Mr. K. M. Supatkar and Mr. K. K. Tiwari are the main teachers in BCA.";
+  }
+
+  if (normalizedInput.includes("head of computer applications department")) {
+    return "The Computer Applications department (BCA) is managed by Mr. K. M. Supatkar.";
+  }
+
+  if (normalizedInput.includes("in charge of bsc subjects")) {
+    return "Each subject has a different head. Physics is handled by Dr. Rangari, Chemistry by Dr. Raghuwanshi, and so on.";
+  }
+
+  if (normalizedInput.includes("list of all department heads")) {
+    return "Yes, the main HODs are Dr. D. S. Dhote (Electronics), Dr. Raghuwanshi (Chemistry), Dr. Rangari (Physics), Dr. Deshmukh (Statistics), Dr. Shahare (Botany), Dr. Katke (Zoology), Dr. Agrawal (Mathematics), Dr. Tondare (Computer Science), Dr. Honrao (Commerce), Ms. Bhumbar (English), and Mr. Kurada (Library).";
+  }
+
+  if (normalizedInput.includes("teaches in bba department")) {
+    return "The BBA department is under the Commerce & Management faculty. Dr. N. J. Honrao is the HOD, and other faculty from the same department also teach BBA.";
+  }
+
+  if (normalizedInput.includes("bba faculty")) {
+    return "Specific names of all BBA faculty are not listed in the prospectus, but the department is led by Dr. N. J. Honrao.";
+  }
+
+  if(normalizedInput.includes("wifi password")){
+      return "The WiFi password is biyani@1234";
+  }
+
+  return "I am sorry, I do not have an answer for that query.";
+}
+
+function normalizeInput(input) {
+  return input.toLowerCase().replace(/[^\w\s]/g, '');
+}
+
+function getCollegeResponse(userInput) {
+  const normalizedInput = normalizeInput(userInput);
+  return processCollegeQuery(normalizedInput);
+}
+
 
             // About individual developers
             if (normalizedInput.includes("sahil")) {
@@ -472,6 +735,31 @@ if (normalizedInput.includes("nisha pujari madam") || normalizedInput.includes("
             
             if (normalizedInput.includes("masss")) {
                 return knowledgeBase.developers.masss;
+            }
+
+            // College department queries
+            if (normalizedInput.includes("head of computer applications department") || normalizedInput.includes("head of bca")) {
+                return "The Computer Applications department (BCA) is managed by Mr. K. M. Supatkar.";
+            }
+
+            if (normalizedInput.includes("in charge of bsc subjects")) {
+                return "Each subject has a different head. Physics is handled by Dr. Rangari, Chemistry by Dr. Raghuwanshi, and so on.";
+            }
+
+            if (normalizedInput.includes("list of all department heads")) {
+                return "Yes, the main HODs are Dr. D. S. Dhote (Electronics), Dr. Raghuwanshi (Chemistry), Dr. Rangari (Physics), Dr. Deshmukh (Statistics), Dr. Shahare (Botany), Dr. Katke (Zoology), Dr. Agrawal (Mathematics), Dr. Tondare (Computer Science), Dr. Honrao (Commerce), Ms. Bhumbar (English), and Mr. Kurada (Library).";
+            }
+
+            if (normalizedInput.includes("teaches in bba department")) {
+                return "The BBA department is under the Commerce & Management faculty. Dr. N. J. Honrao is the HOD, and other faculty from the same department also teach BBA.";
+            }
+
+            if (normalizedInput.includes("bba faculty")) {
+                return "Specific names of all BBA faculty are not listed in the prospectus, but the department is led by Dr. N. J. Honrao.";
+            }
+
+            if (normalizedInput.includes("wifi password")) {
+                return "The WiFi password is biyani@1234";
             }
             
             // Admission
