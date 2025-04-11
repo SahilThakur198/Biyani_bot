@@ -185,11 +185,11 @@
         @keyframes techPulse {
             0%, 100% {
                 text-shadow: 0 0 10px var(--accent-1),
-                              0 0 20px var(--accent-2);
+                            0 0 20px var(--accent-2);
             }
             50% {
                 text-shadow: 0 0 20px var(--accent-2),
-                              0 0 30px var(--accent-1);
+                            0 0 30px var(--accent-1);
             }
         }
 
@@ -255,6 +255,72 @@
                 padding: 1rem;
             }
         }
+
+        /* Add mobile menu styles */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            padding: 5px;
+            z-index: 101;
+            cursor: pointer; /* Added cursor pointer */
+        }
+
+        .menu-toggle .bar {
+            width: 25px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: 0.3s;
+        }
+
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        @media (max-width: 768px) {
+            .nav-container { /* Added relative positioning */
+                position: relative;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute; /* Changed from fixed to absolute */
+                top: 100%; /* Position below header */
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.95);
+                padding: 1rem;
+                flex-direction: column;
+                align-items: center;
+                backdrop-filter: blur(10px);
+                border-bottom: 1px solid var(--accent-1);
+                z-index: 100;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                margin: 1rem 0; /* Adjusted margin */
+                font-size: 1.1rem;
+                width: 100%;
+                text-align: center;
+                padding: 0.5rem;
+            }
+
+            .menu-toggle {
+                display: flex; /* Changed from block to flex */
+            }
+        }
     </style>
 </head>
 <body>
@@ -264,10 +330,12 @@
                 Biyani<span style="color: var(--accent-1);">Bot</span>
             </a></h1>
             <div class="nav-links">
-                <a href="Home.html">About Bot</a>
-                <a href="about_us.html">About Us</a>
-                <a href="login.html">Login</a>
-                <a href="signup.html">Sign Up</a>
+                 <!-- Links will be populated by auth.js -->
+            </div>
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
             </div>
         </nav>
     </header>
@@ -275,14 +343,14 @@
     <div class="main-container">
         <div class="content-left">
             <h1 class="cyber-title">Welcome to Biyani Bot</h1>
-            
+
             <div class="feature-section">
-                <p>
-                    At <span class="highlight">Biyani Bot</span> – a project by <span class="highlight">MASSS</span>, 
-                    we believe that every student deserves a seamless and enjoyable college experience. 
-                    That's why we've created a 
-                    <span class="highlight-tech">state-of-the-art</span>
-                    chatbot to assist you every step of the way.
+                <p style="margin-bottom: 1.2em; line-height: 1.6;">
+                    At <span class="highlight">Biyani Bot</span> – a project by <span class="highlight">MASSS</span>,
+                    we believe that every student deserves a seamless and enjoyable college experience.
+                    That's why we've created a
+                    <span class="highlight-tech">State-of-the-Art </span>
+                    chatbot to assist you at every step of the way.
                 </p>
             </div>
 
@@ -303,10 +371,10 @@
         </div>
 
         <div class="robot-container">
-            <iframe 
+            <iframe
                 src='https://my.spline.design/robotfollowcursorforlandingpage-1c3308601b1f3e24e25aa9b2fba428c1/'
-                frameborder='0' 
-                width='100%' 
+                frameborder='0'
+                width='100%'
                 height='100%'
                 style="mix-blend-mode: screen;"
             ></iframe>
@@ -315,11 +383,21 @@
 
     <script>
         function openChatbot() {
-            window.open('https://cdn.botpress.cloud/webchat/v2.2/shareable.html?configUrl=https://files.bpcontent.cloud/2025/01/11/14/20250111144811-H2VD5TWG.json',
-                '_blank',
-                'width=400,height=600,location=no,toolbar=no,menubar=no'
-            );
+            window.open('bot.html',
+                    '_blank',
+                    'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes');    
         }
+
+        // Toggle navigation menu
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+            document.querySelector('.menu-toggle').classList.toggle('active'); // Toggle active on button too
+        });
+    </script>
+    <script src="auth.js"></script> <!-- Add auth script -->
+    <script>
+        // Protect this page - must be called after auth.js is loaded
+        protectPage();
     </script>
 </body>
 </html>

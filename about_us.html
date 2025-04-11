@@ -274,8 +274,7 @@
             }
 
             .team-card {
-                margin: 0.5rem;
-                padding: 1.2rem;
+                padding: 1.5rem;
             }
 
             .brain-model {
@@ -310,19 +309,6 @@
             .college-name {
                 font-size: 2rem;
             }
-
-            .member-name {
-                font-size: 1.3rem;
-            }
-
-            .member-role {
-                font-size: 0.9rem;
-            }
-
-            .academic-info {
-                margin: 2rem 0.5rem;
-                padding: 1.5rem;
-            }
         }
 
         @media (max-width: 480px) {
@@ -353,6 +339,72 @@
             color: var(--accent-1);
             font-weight: 600;
         }
+
+        /* Add mobile menu styles */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            padding: 5px;
+            z-index: 101;
+            cursor: pointer; /* Added cursor pointer */
+        }
+
+        .menu-toggle .bar {
+            width: 25px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: 0.3s;
+        }
+
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        @media (max-width: 768px) {
+            .nav-container { /* Added relative positioning */
+                position: relative;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute; /* Changed from fixed to absolute */
+                top: 100%; /* Position below header */
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.95);
+                padding: 1rem;
+                flex-direction: column;
+                align-items: center;
+                backdrop-filter: blur(10px);
+                border-bottom: 1px solid var(--accent-1);
+                z-index: 100;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                margin: 1rem 0; /* Adjusted margin */
+                font-size: 1.1rem;
+                width: 100%;
+                text-align: center;
+                padding: 0.5rem;
+            }
+
+            .menu-toggle {
+                display: flex; /* Changed from block to flex */
+            }
+        }
     </style>
 </head>
 <body>
@@ -362,10 +414,12 @@
                 Biyani<span style="color: var(--accent-1);">Bot</span>
             </a></h1>
             <div class="nav-links">
-                <a href="Home.html">About Bot</a>
-                <a href="about_us.html">About Us</a>
-                <a href="login.html">Login</a>
-                <a href="signup.html">Sign Up</a>
+                <!-- Links will be populated by auth.js -->
+            </div>
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
             </div>
         </nav>
     </header>
@@ -395,7 +449,24 @@
 
         <section class="team-grid">
             <div class="team-card">
-                <div class="member-name">Developed by Sahil Thakur</div>
+                <div class="member-name">Sahil Thakur</div>
+                <div class="member-role"> Main Developer</div>
+            </div>
+            <div class="team-card">
+                <div class="member-name">Manaswi Ingale</div>
+                <div class="member-role">Developer</div>
+            </div>
+            <div class="team-card">
+                <div class="member-name">Sanika Jirapure</div>
+                <div class="member-role">Developer</div>
+            </div>
+            <div class="team-card">
+                <div class="member-name">Shilpa Tayade</div>
+                <div class="member-role">Developer</div>
+            </div>
+            <div class="team-card">
+                <div class="member-name">Achal Jane</div>
+                <div class="member-role">Developer</div>
             </div>
         </section>
 
@@ -407,5 +478,14 @@
             </p>
         </div>
     </main>
+
+    <script>
+        // Toggle navigation menu
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+            document.querySelector('.menu-toggle').classList.toggle('active'); // Toggle active on button too
+        });
+    </script>
+    <script src="auth.js"></script> <!-- Add auth script -->
 </body>
 </html>

@@ -175,17 +175,87 @@
         .cyber-button:active {
             transform: scale(0.98);
         }
+
+        /* Add mobile menu styles */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            padding: 5px;
+            z-index: 101;
+            cursor: pointer; /* Added cursor pointer */
+        }
+
+        .menu-toggle .bar {
+            width: 25px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: 0.3s;
+        }
+
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        @media (max-width: 768px) {
+            .nav-container { /* Added relative positioning */
+                position: relative;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute; /* Changed from fixed to absolute */
+                top: 100%; /* Position below header */
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.95);
+                padding: 1rem;
+                flex-direction: column;
+                align-items: center;
+                backdrop-filter: blur(10px);
+                border-bottom: 1px solid var(--accent-1);
+                z-index: 100;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                margin: 1rem 0; /* Adjusted margin */
+                font-size: 1.1rem;
+                width: 100%;
+                text-align: center;
+                padding: 0.5rem;
+            }
+
+            .menu-toggle {
+                display: flex; /* Changed from block to flex */
+            }
+        }
     </style>
 </head>
 <body>
     <header class="cyber-header">
         <nav class="nav-container">
-            <h1>Biyani<span style="color: var(--accent-1);">Bot</span></h1>
+            <a href="index.html" style="text-decoration: none; color: inherit;">
+                <h1>Biyani<span style="color: var(--accent-1);">Bot</span></h1>
+            </a>
             <div class="nav-links">
-                <a href="Home.html">About Bot</a>
-                <a href="about_us.html">About Us</a>
-                <a href="login.html">Login</a>
-                <a href="signup.html">Sign Up</a>
+                <!-- Links will be populated by auth.js -->
+            </div>
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
             </div>
         </nav>
     </header>
@@ -193,22 +263,86 @@
     <main class="auth-container">
         <div class="cyber-form">
             <h2 class="cyber-title">Create Account</h2>
-            <form>
+            <form id="signupForm">
                 <div class="form-group">
-                    <input type="text" placeholder="Full Name" required>
+                    <input type="text" id="fullName" placeholder="Full Name" required>
                 </div>
                 <div class="form-group">
-                    <input type="email" placeholder="College Email" required>
+                    <input type="email" id="email" placeholder="College Email" required>
                 </div>
                 <div class="form-group">
-                    <input type="password" placeholder="Create Password" required>
+                    <input type="password" id="password" placeholder="Create Password" required>
                 </div>
                 <div class="form-group">
-                    <input type="password" placeholder="Confirm Password" required>
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
                 </div>
                 <button type="submit" class="cyber-button">Sign Up</button>
             </form>
         </div>
     </main>
+
+    <script>
+        // Toggle navigation menu
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+            document.querySelector('.menu-toggle').classList.toggle('active'); // Toggle active on button too
+        });
+
+        // Signup Logic
+        const signupForm = document.getElementById('signupForm');
+        const fullNameInput = document.getElementById('fullName');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+
+        signupForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            const fullName = fullNameInput.value.trim();
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            // Basic validation
+            if (!fullName || !email || !password || !confirmPassword) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match.');
+                return;
+            }
+
+            // --- Local Storage Interaction ---
+            // IMPORTANT: Storing passwords directly in localStorage is insecure and not recommended for production applications.
+            // Passwords should be securely hashed on a server-side backend. This is for demonstration purposes only.
+
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+
+            // Check if email already exists
+            const existingUser = users.find(user => user.email === email);
+            if (existingUser) {
+                alert('An account with this email already exists.');
+                return;
+            }
+
+            // Add new user
+            const newUser = {
+                fullName: fullName,
+                email: email,
+                password: password // Storing plain password - INSECURE!
+            };
+            users.push(newUser);
+
+            // Save updated user list to localStorage
+            localStorage.setItem('users', JSON.stringify(users));
+
+            alert('Signup successful! You can now log in.');
+            // Optionally redirect to login page
+            window.location.href = 'login.html';
+        });
+    </script>
+    <script src="auth.js"></script> <!-- Add auth script -->
 </body>
-</html> 
+</html>

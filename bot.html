@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiyaniBot - Your College Companion</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --accent-green: #00d9a6;
+            --accent-blue: #00a2ff;
+            --dark-bg: #0a0a0a;
+            --card-bg: #111111;
+            --text-light: #f5f5f5;
+            --text-secondary: #aaaaaa;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo span {
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        
+        .accent-line {
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+            width: 100%;
+        }
+        
+        .gradient-btn {
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+            transition: all 0.3s ease;
+        }
+        
+        .gradient-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 217, 166, 0.3);
+        }
+        
+        .chat-container {
+            background-color: var(--card-bg);
+            border: 1px solid #222;
+            border-radius: 10px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        
+        .chat-messages {
+            overflow-y: auto;
+            flex-grow: 1;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.3s forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .user-message {
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+            color: black;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .bot-message {
+            background-color: #222;
+            color: var(--text-light);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .input-area {
+            padding: 1rem;
+            border-top: 1px solid #222;
+            display: flex;
+        }
+        
+        .chat-input {
+            flex-grow: 1;
+            background-color: #222;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 217, 166, 0.5);
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover {
+            color: var(--text-light);
+        }
+        
+        .nav-links a.accent {
+            color: var(--accent-green);
+        }
+        
+        .typing-indicator {
+            display: inline-block;
+            margin-left: 4px;
+        }
+        
+        .typing-indicator span {
+            height: 6px;
+            width: 6px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 3px;
+            animation: typingAnimation 1.5s infinite ease-in-out;
+        }
+        
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typingAnimation {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0); }
+        }
+        
+        .send-btn {
+            margin-left: 10px;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 217, 166, 0.5);
+        }
+        
+        .greeting-text {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="px-4 py-2">
+    <header class="flex justify-between items-center px-2 py-4">
+        <div class="logo text-xl">
+            Biyani<span>Bot</span>
+        </div>
+    </header>
+    
+    <div class="accent-line mb-6"></div>
+    
+    <div class="chat-container my-6">
+        <div class="chat-messages" id="chatMessages">
+            <p class="greeting-text">I'm here now, your college companion</p>
+            <div class="message bot-message">
+                Hello! I'm BiyaniBot, your dedicated guide to Brijlal Biyani Science College. How can I help you today?
+            </div>
+        </div>
+        <div class="input-area">
+            <input type="text" class="chat-input" id="userInput" placeholder="Type your message here..." autocomplete="off">
+            <div class="send-btn" id="sendButton">
+                <i class="fas fa-paper-plane text-dark-bg"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chatMessages');
+        const userInput = document.getElementById('userInput');
+        const sendButton = document.getElementById('sendButton');
+        
+        // Knowledge base
+        const knowledgeBase = {
+            // Institution info
+            institution: {
+                name: "Brijlal Biyani Science College, Amravati",
+                established: "1972, founded by Shri Brijlal Biyani Shiksha Samiti in honor of freedom fighter and social reformer Late Shri Brijlalji Biyani",
+                motto: "Be educated and let others be educated.",
+                affiliation: "Sant Gadge Baba Amravati University (SGBAU)",
+                website: "https://sgbau.ac.in/",
+                accreditations: "NAAC Re-accredited \"B\" Grade (CGPA: 2.71), ISO 9001:2015 Certified, Recognized as a Linguistic Minority Institution (Hindi) by the Government of Maharashtra",
+                campus: "7.2 acres in Durgavihar, Amravati, with modern labs, libraries, sports facilities, and a girls' hostel (60 seats)"
+            },
+            
+            // Academic programs
+            programs: {
+                undergraduate: "B.Sc. (General) with streams like PCM, CBZ, BTB, Bioinformatics, etc. BBA/BCA/B.Com with industry-aligned curriculum. B.Voc (Medical Equipment Techniques & Management): UGC-funded, NSQF-aligned vocational program.",
+                postgraduate: "M.Sc. with specializations in Botany, Chemistry, Electronics, Computer Science, Mathematics. M.Com with focus on financial accounting and taxation. PG Diplomas: PGDM (Mechatronics), PGDBME (Biomedical Electronics).",
+                doctoral: "Ph.D. offered in Botany, Chemistry, Electronics, Mathematics, Zoology (12–20 seats).",
+                addon: "Diploma in Event Management (industry collaboration). Certificate/Diploma in Analytical Chemistry, Biotechnology, ICT."
+            },
+            
+            // Admission process
+            admission: {
+                eligibility: "For UG: HSC (Science/Commerce) with 50-60% marks (course-specific). For PG: Bachelor's degree in relevant discipline (45-60% marks). For Ph.D.: Master's degree with ≥55% marks.",
+                selection: "Merit-based or entrance exams (if applicable).",
+                reservation: "Follows Maharashtra Government norms: SC (13%), ST (7%), OBC (19%), EWS (10%), PwD (3%), Sports Quota, Freedom Fighters/Ex-servicemen."
+            },
+            
+            // Fees structure
+            fees: {
+                undergraduate: "B.Sc.: ₹3,614–₹7,000/year, BBA/BCA/B.Com: ₹12,017–₹15,491/year, B.Voc: ₹3,614/year.",
+                postgraduate: "M.Sc.: ₹11,245–₹19,292/year, M.Com: ₹9,792/year.",
+                additional: "Additional charges include lab, library, and development fees."
+            },
+            
+            // Faculty & Administration
+            faculty: {
+                principal: "Dr. D. S. Dhote",
+                principalContact: "Email: biyani_college@yahoo.com, Phone: 0721-2677011",
+                departmentHeads: "Chemistry: Dr. P. B. Raghuwanshi, Computer Science: Dr. Ms. V. S. T, BCA: K. M. Supatkar",
+                members: "50+ members with 1–35 years of experience"
+            },
+            
+            // Student support
+            studentSupport: {
+                inductionProgram: "Student Induction Program (Deeksharambh) conducted annually to ease transitions for freshers",
+                activities: "Morning exercises, career talks, department tours, mentoring, debates, cultural programs, and feedback sessions",
+                annualEvents: "Women's Health Camp, Science Club, Tradition Day, Outreach Programs (Muktangan), and Annual Gathering",
+                clubs: "NCC, NSS, Debate Club, Nature Club (with incentive marks for participation)"
+            },
+            
+            // Placements
+            placements: {
+                recruiters: "Wipro, Cognizant, ICICI Bank, L&T, Yashraj Biotech",
+                scholarships: "GOI Post-Matric, EBC, Alumni Merit Scholarships",
+                statistics: "2019-20 Placements: 27 students placed (highest package: ₹3 LPA)"
+            },
+            
+            // Infrastructure
+            infrastructure: {
+                labs: "Advanced facilities for Physics, Chemistry, Biotechnology, etc.",
+                library: "22,896+ books, 43 journals, e-resources (e-PG Pathshala)",
+                sports: "Cricket, basketball, archery, swimming, and gym facilities"
+            },
+            
+            // Governance
+            governance: {
+                committee: "Executive Committee with 17 members, including President Shri Ashok T. Rathi",
+                iqac: "IQAC ensures academic quality under Dr. S.N. Gupta",
+                grievance: "Internal Complaints Committee (ICC) and Earn-While-Learn Scheme"
+            },
+            
+            // Contact info
+            contact: {
+                address: "Biyani Educational Campus, Dussehra Maidan Road, Amravati - 444605",
+                website: "www.bbscamt.com, www.ycmoucollege.com"
+            },
+            
+            // Project team
+            developers: {
+                team: "The BiyaniBot was developed by a team of Final Year BCA students as their 2024-25 project. The team is often referred to as MASSS, derived from the first letters of their names.",
+                sahil: "Sahil Arakh Thakur is the Lead Developer of the BiyaniBot project.",
+                manaswi: "Manaswi Ingale is a Developer on the BiyaniBot project team.",
+                sanika: "Sanika Jirapure is a Developer on the BiyaniBot project team.",
+                shilpa: "Shilpa Tayade is a Developer on the BiyaniBot project team.",
+                achal: "Achal Jane is a Developer on the BiyaniBot project team.",
+                masss: "MASSS stands for the team of developers: Manaswi, Achal, Sahil, Shilpa, and Sanika who created the BiyaniBot as their Final Year BCA project for 2024-25."
+            }
+
+        };
+        
+        // Function to add message to chat
+        function addMessage(message, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+            messageDiv.textContent = message;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Function to show typing indicator
+        function showTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.classList.add('message', 'bot-message', 'typing-indicator-container');
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = 'Typing<div class="typing-indicator"><span></span><span></span><span></span></div>';
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Function to remove typing indicator
+        function removeTypingIndicator() {
+            const typingIndicator = document.getElementById('typingIndicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+        
+        // Function to get response from knowledge base
+        function getBotResponse(input) {
+            const normalizedInput = input.toLowerCase();
+            
+            // Greetings
+            if (/^(hi|hello|hey|greetings|what's up|sup)(\s|$)/i.test(normalizedInput)) {
+                return "Hello! I'm BiyaniBot, your guide to Brijlal Biyani Science College. How can I help you today?";
+            }
+            
+            // Farewell
+            if (/^(bye|goodbye|see you|farewell|take care)(\s|$)/i.test(normalizedInput)) {
+                return "Thank you for chatting with me! If you have more questions about Brijlal Biyani Science College, feel free to ask anytime. Goodbye!";
+            }
+            
+            // About the college/institution
+            if (normalizedInput.includes("about college") || 
+                normalizedInput.includes("about institution") || 
+                normalizedInput.includes("about brijlal biyani")) {
+                return `${knowledgeBase.institution.name} was established in ${knowledgeBase.institution.established.split(",")[0]}. It's affiliated with ${knowledgeBase.institution.affiliation} and is located on a ${knowledgeBase.institution.campus.split(",")[0]} campus.`;
+            }
+            
+            // When was the college established
+            if (normalizedInput.includes("when") && 
+                (normalizedInput.includes("establish") || normalizedInput.includes("found") || normalizedInput.includes("start"))) {
+                return `${knowledgeBase.institution.name} was established in ${knowledgeBase.institution.established.split(",")[0]}.`;
+            }
+            
+            // College motto
+            if (normalizedInput.includes("motto")) {
+                return `The motto of ${knowledgeBase.institution.name} is "${knowledgeBase.institution.motto}"`;
+            }
+            
+            // Courses or programs
+            if (normalizedInput.includes("courses") || 
+                normalizedInput.includes("programs") || 
+                normalizedInput.includes("degrees")) {
+                return `The college offers undergraduate programs like B.Sc., BBA, BCA, B.Com, and B.Voc. Postgraduate programs include M.Sc. and M.Com. The college also offers Ph.D. programs in several disciplines.`;
+            }
+            
+            // Specific programs
+            if (normalizedInput.includes("undergraduate") || 
+                normalizedInput.includes("ug") || 
+                normalizedInput.includes("bachelor")) {
+                return `Undergraduate programs include: ${knowledgeBase.programs.undergraduate}`;
+            }
+            
+            if (normalizedInput.includes("postgraduate") || 
+                normalizedInput.includes("pg") || 
+                normalizedInput.includes("master")) {
+                return `Postgraduate programs include: ${knowledgeBase.programs.postgraduate}`;
+            }
+            
+            if (normalizedInput.includes("phd") || 
+                normalizedInput.includes("doctoral") || 
+                normalizedInput.includes("doctorate")) {
+                return `Doctoral programs: ${knowledgeBase.programs.doctoral}`;
+            }
+            
+            // Fees
+            if (normalizedInput.includes("fee") || normalizedInput.includes("cost") || normalizedInput.includes("tuition")) {
+                if (normalizedInput.includes("bsc") || normalizedInput.includes("b.sc")) {
+                    return "The fee for B.Sc. programs ranges from ₹3,614 to ₹7,000 per year.";
+                } else if (normalizedInput.includes("bba") || normalizedInput.includes("bca") || normalizedInput.includes("bcom") || normalizedInput.includes("b.com")) {
+                    return "The fee for BBA/BCA/B.Com programs ranges from ₹12,017 to ₹15,491 per year.";
+                } else if (normalizedInput.includes("msc") || normalizedInput.includes("m.sc")) {
+                    return "The fee for M.Sc. programs ranges from ₹11,245 to ₹19,292 per year.";
+                } else if (normalizedInput.includes("mcom") || normalizedInput.includes("m.com")) {
+                    return "The fee for M.Com program is ₹9,792 per year.";
+                } else {
+                    return "Undergraduate fees: B.Sc. (₹3,614–₹7,000/year), BBA/BCA/B.Com (₹12,017–₹15,491/year), B.Voc (₹3,614/year). Postgraduate fees: M.Sc. (₹11,245–₹19,292/year), M.Com (₹9,792/year).";
+                }
+            }
+            
+            // Principal
+            if (normalizedInput.includes("principal") || normalizedInput.includes("head of college") || normalizedInput.includes("college head")) {
+                return `The principal of ${knowledgeBase.institution.name} is ${knowledgeBase.faculty.principal}.`;
+            }
+            
+            // About developers
+            if (normalizedInput.includes("developer") || normalizedInput.includes("developed") || normalizedInput.includes("creators") || normalizedInput.includes("team")) {
+                return knowledgeBase.developers.team;
+            }
+                        // Faculty (BCA Teacher Descriptions)
+if (normalizedInput.includes("k. m. supatkar") || normalizedInput.includes("supatkar")) {
+    return "K. M. Supatkar sir is a dedicated and knowledgeable teacher who has guided us through our BCA journey with clarity and patience. He plays a big role in shaping us as developers.";
+}
+
+if (normalizedInput.includes("k. k. tiwari") || normalizedInput.includes("tiwari")) {
+    return "K. K. Tiwari sir is known for his deep understanding and unique way of explaining complex topics. He’s been a constant support from BCA 1st to 6th semester.";
+}
+
+if (normalizedInput.includes("samiksha madam") || normalizedInput.includes("samiksha")) {
+    return "Samiksha ma'am is a passionate and supportive teacher who makes learning smooth and enjoyable. Her teaching has helped us grow as developers.";
+}
+
+if (normalizedInput.includes("gade madam") || normalizedInput.includes("gade")) {
+    return "Gade ma'am brings a lot of energy and clarity to her teaching. She’s been instrumental in our academic development throughout all semesters.";
+}
+
+if (normalizedInput.includes("asawa madam") || normalizedInput.includes("asawa")) {
+    return "Asawa ma'am is a wonderful teacher who simplifies concepts and encourages us to think critically. Her support has been valuable in our BCA journey.";
+}
+
+if (normalizedInput.includes("nisha pujari madam") || normalizedInput.includes("nisha")) {
+    return "Nisha Pujari madam is a dedicated teacher who inspires students with her passion for learning and her supportive approach."; 
+}
+
+            // About individual developers
+            if (normalizedInput.includes("sahil")) {
+                return knowledgeBase.developers.sahil;
+            }
+            
+            if (normalizedInput.includes("manaswi")) {
+                return knowledgeBase.developers.manaswi;
+            }
+            
+            if (normalizedInput.includes("sanika")) {
+                return knowledgeBase.developers.sanika;
+            }
+            
+            if (normalizedInput.includes("shilpa")) {
+                return knowledgeBase.developers.shilpa;
+            }
+            
+            if (normalizedInput.includes("achal")) {
+                return knowledgeBase.developers.achal;
+            }
+            
+            if (normalizedInput.includes("masss")) {
+                return knowledgeBase.developers.masss;
+            }
+            
+            // Admission
+            if (normalizedInput.includes("admission") || normalizedInput.includes("enroll") || normalizedInput.includes("apply")) {
+                return `Admission is generally merit-based. Eligibility for undergraduate programs requires HSC (Science/Commerce) with 50-60% marks, depending on the specific course. For postgraduate programs, a bachelor's degree in a relevant discipline with 45-60% marks is required.`;
+            }
+            
+            // Campus
+            if (normalizedInput.includes("campus") || normalizedInput.includes("infrastructure") || normalizedInput.includes("facilities")) {
+                return `The college has a 7.2-acre campus in Durgavihar, Amravati, featuring modern labs, a well-stocked library with 22,896+ books, sports facilities including cricket, basketball, archery, swimming, and gym, and a girls' hostel with 60 seats.`;
+            }
+            
+            // Contact
+            if (normalizedInput.includes("contact") || normalizedInput.includes("address") || normalizedInput.includes("location")) {
+                return `Address: ${knowledgeBase.contact.address}. Website: ${knowledgeBase.contact.website}. Principal's contact: ${knowledgeBase.faculty.principalContact}.`;
+            }
+            
+            // Library
+            if (normalizedInput.includes("library") || normalizedInput.includes("books")) {
+                return `The college library has ${knowledgeBase.infrastructure.library}.`;
+            }
+            
+            // Sports
+            if (normalizedInput.includes("sports") || normalizedInput.includes("games") || normalizedInput.includes("athletic")) {
+                return `The college offers various sports facilities including ${knowledgeBase.infrastructure.sports}.`;
+            }
+            
+            // Placements
+            if (normalizedInput.includes("placement") || normalizedInput.includes("job") || normalizedInput.includes("career")) {
+                return `The college has connections with recruiters like ${knowledgeBase.placements.recruiters}. In 2019-20, ${knowledgeBase.placements.statistics}.`;
+            }
+            
+            // Default response
+            return "I don't have specific information about that. Would you like to know about our courses, fees, faculty, or campus facilities?";
+        }
+        
+        // Function to handle sending message
+        function sendMessage() {
+            const message = userInput.value.trim();
+            if (message === '') return;
+            
+            // Add user message
+            addMessage(message, 'user');
+            userInput.value = '';
+            
+            // Show typing indicator
+            showTypingIndicator();
+            
+            // Simulate thinking time
+            setTimeout(() => {
+                removeTypingIndicator();
+                const response = getBotResponse(message);
+                addMessage(response, 'bot');
+            }, 1000 + Math.random() * 1000); // Random delay between 1-2 seconds
+        }
+        
+        // Event listeners
+        sendButton.addEventListener('click', sendMessage);
+        
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        // Focus input on page load
+        userInput.focus();
+    </script>
+</body>
+</html>

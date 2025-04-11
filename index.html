@@ -59,7 +59,7 @@
         }
 
         .robot-container {
-            background: radial-gradient(circle at center, #001a1a 0%, #000 100%);
+            background: radial-gradient(circle at center, #001a1a 0%, #000 100%); 
             height: 90vh;
             margin-top: 80px;
             position: relative;
@@ -640,6 +640,34 @@
             }
         }
 
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            padding: 5px;
+            z-index: 101;
+            cursor: pointer;
+        }
+
+        .menu-toggle .bar {
+            width: 25px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: 0.3s;
+        }
+
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
         @media (max-width: 768px) {
             .cyber-header {
                 padding: 1rem;
@@ -651,29 +679,33 @@
 
             .nav-links {
                 display: none;
-                position: absolute;
-                top: 100%;
+                position: fixed;
+                top: 80px;
                 left: 0;
                 width: 100%;
                 background: rgba(10, 10, 10, 0.95);
                 padding: 1rem;
-                text-align: center;
+                flex-direction: column;
+                align-items: center;
+                backdrop-filter: blur(10px);
+                border-bottom: 1px solid var(--accent-1);
+                z-index: 100;
             }
 
             .nav-links.active {
                 display: flex;
-                flex-direction: column;
-                gap: 1rem;
             }
 
             .nav-links a {
-                margin: 0.5rem 0;
-                display: block;
+                margin: 1rem 0;
+                font-size: 1.1rem;
+                width: 100%;
+                text-align: center;
+                padding: 0.5rem;
             }
 
             .menu-toggle {
-                display: block;
-                cursor: pointer;
+                display: flex;
             }
 
             .cyber-title {
@@ -734,74 +766,9 @@
             animation: blink 0.7s infinite;
         }
 
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-
         @keyframes fadeInOut {
             0%, 100% { opacity: 0; transform: translateY(10px); }
             20%, 80% { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Add mobile menu styles */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            padding: 5px;
-            z-index: 101;
-        }
-
-        .menu-toggle .bar {
-            width: 25px;
-            height: 2px;
-            background: var(--text-primary);
-            transition: 0.3s;
-        }
-
-        .menu-toggle.active .bar:nth-child(1) {
-            transform: rotate(45deg) translate(6px, 6px);
-        }
-
-        .menu-toggle.active .bar:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-toggle.active .bar:nth-child(3) {
-            transform: rotate(-45deg) translate(6px, -6px);
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: fixed;
-                top: 80px;
-                left: 0;
-                width: 100%;
-                background: rgba(10, 10, 10, 0.95);
-                padding: 1rem;
-                flex-direction: column;
-                align-items: center;
-                backdrop-filter: blur(10px);
-                border-bottom: 1px solid var(--accent-1);
-                z-index: 100;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-links a {
-                margin: 1rem 0;
-                font-size: 1.1rem;
-                width: 100%;
-                text-align: center;
-                padding: 0.5rem;
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
         }
     </style>
 </head>
@@ -810,10 +777,12 @@
         <nav class="nav-container">
             <h1>Biyani<span style="color: var(--accent-1);">Bot</span></h1>
             <div class="nav-links">
-                <a href="Home.html">About Bot</a>
-                <a href="about_us.html">About Us</a>
-                <a href="login.html">Login</a>
-                <a href="signup.html">Sign Up</a>
+                <!-- Links will be populated by auth.js -->
+            </div>
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
             </div>
         </nav>
     </header>
@@ -855,10 +824,10 @@
                 width='100%' 
                 height='100%'
                 style="mix-blend-mode: screen;"
+                title="3D Robot Animation"
             ></iframe>
         </div>
     </main>
-
     <!-- Add transition overlay -->
     <div class="transition-overlay"></div>
 
@@ -880,7 +849,12 @@
             animationObserver.observe(el);
         });
 
-        // Existing scroll animation
+        // Toggle navigation menu
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+            document.querySelector('.menu-toggle').classList.toggle('active');
+        });
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -910,9 +884,9 @@
             
             // Delay opening the chat window
             setTimeout(() => {
-                window.open('https://cdn.botpress.cloud/webchat/v2.2/shareable.html?configUrl=https://files.bpcontent.cloud/2025/01/11/14/20250111144811-H2VD5TWG.json',
+                window.open('bot.html',
                     '_blank',
-                    'width=400,height=600,location=no,toolbar=no,menubar=no'
+                    
                 );
             }, 400); // Open chat after 400ms
 
@@ -959,5 +933,6 @@
 
         animateSequence();
     </script>
+    <script src="auth.js"></script> <!-- Add auth script -->
 </body>
 </html>

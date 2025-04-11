@@ -158,34 +158,155 @@
                 font-size: 1.5rem;
             }
         }
+
+        /* Add mobile menu styles */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            padding: 5px;
+            z-index: 101;
+            cursor: pointer; /* Added cursor pointer */
+        }
+
+        .menu-toggle .bar {
+            width: 25px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: 0.3s;
+        }
+
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        @media (max-width: 768px) {
+            .nav-container { /* Added relative positioning */
+                position: relative;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute; /* Changed from fixed to absolute */
+                top: 100%; /* Position below header */
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.95);
+                padding: 1rem;
+                flex-direction: column;
+                align-items: center;
+                backdrop-filter: blur(10px);
+                border-bottom: 1px solid var(--accent-1);
+                z-index: 100;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                margin: 1rem 0; /* Adjusted margin */
+                font-size: 1.1rem;
+                width: 100%;
+                text-align: center;
+                padding: 0.5rem;
+            }
+
+            .menu-toggle {
+                display: flex; /* Changed from block to flex */
+            }
+        }
     </style>
 </head>
+
 <body>
     <header class="cyber-header">
         <nav class="nav-container">
-            <h1>Biyani<span style="color: var(--accent-1);">Bot</span></h1>
+            <a href="index.html" style="text-decoration: none; color: inherit;">
+                <h1>Biyani<span style="color: var(--accent-1);">Bot</span></h1>
+            </a>
             <div class="nav-links">
-                <a href="Home.html">About Bot</a>
-                <a href="about_us.html">About Us</a>
-                <a href="login.html">Login</a>
-                <a href="signup.html">Sign Up</a>
+                <!-- Links will be populated by auth.js -->
+            </div>
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
             </div>
         </nav>
+
     </header>
 
     <main class="auth-container">
         <div class="cyber-form">
             <h2 class="cyber-title">Access Portal</h2>
-            <form>
+            <form id="loginForm">
                 <div class="form-group">
-                    <input type="email" placeholder="College Email" required>
+                    <input type="email" id="email" placeholder="College Email" required>
                 </div>
                 <div class="form-group">
-                    <input type="password" placeholder="Password" required>
+                    <input type="password" id="password" placeholder="Password" required>
                 </div>
                 <button type="submit" class="cyber-button">Login</button>
             </form>
         </div>
     </main>
+
+    <script>
+        // Toggle navigation menu
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+            document.querySelector('.menu-toggle').classList.toggle('active'); // Toggle active on button too
+        });
+
+        // Login Logic
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            // Basic validation
+            if (!email || !password) {
+                alert('Please enter both email and password.');
+                return;
+            }
+
+            // --- Local Storage Interaction ---
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+
+            // Find user with matching email and password
+            // IMPORTANT: Comparing plain text passwords is INSECURE. This is for demonstration only.
+            // IMPORTANT: Comparing plain text passwords is INSECURE. This is for demonstration only.
+            const foundUser = users.find(user => user.email === email && user.password === password);
+
+            if (foundUser) {
+                // Store login status and user info in localStorage
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('loggedInUser', JSON.stringify({ fullName: foundUser.fullName, email: foundUser.email }));
+
+                alert(`Login successful! Welcome, ${foundUser.fullName}!`);
+                // Redirect to the home page
+                window.location.href = 'Home.html';
+            } else {
+                alert('Invalid email or password.');
+                localStorage.removeItem('isLoggedIn'); // Ensure logged out state if login fails
+                localStorage.removeItem('loggedInUser');
+            }
+        });
+    </script>
+    <script src="auth.js"></script> <!-- Add auth script -->
 </body>
-</html> 
+</html>
