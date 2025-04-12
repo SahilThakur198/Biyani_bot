@@ -1,78 +1,73 @@
+/**
+ * Authentication Module
+ * Handles user authentication state and navigation updates
+ */
+
+// Initialize auth state when DOM loads
 document.addEventListener('DOMContentLoaded', () => {
     updateNavigation();
 });
 
+/**
+ * Checks if a user is currently logged in
+ * Verifies login status from localStorage
+ * @returns {boolean} True if user is logged in, false otherwise
+ */
 function isLoggedIn() {
-    return localStorage.getItem('isLoggedIn') === 'true';
+    const loginStatus = localStorage.getItem('isLoggedIn');
+    return loginStatus === 'true';
 }
 
+/**
+ * Retrieves currently logged in user data
+ * @returns {Object|null} User object if found, null otherwise
+ */
 function getLoggedInUser() {
-    const userString = localStorage.getItem('loggedInUser');
-    return userString ? JSON.parse(userString) : null;
+    const userData = localStorage.getItem('currentUser');
+    return userData ? JSON.parse(userData) : null;
 }
 
+/**
+ * Updates Navigation Links
+ * Modifies navigation based on authentication state
+ * Shows/hides appropriate links for logged in/out users
+ */
 function updateNavigation() {
-    const navLinksContainer = document.querySelector('.nav-links');
-    if (!navLinksContainer) return; // Exit if nav links container not found
+    const navLinks = document.querySelector('.nav-links');
+    const isUserLoggedIn = isLoggedIn();
+    const currentUser = getLoggedInUser();
 
-    const loggedIn = isLoggedIn();
-    const user = getLoggedInUser();
-
-    // Clear existing links except potentially the logo link if it's inside
-    navLinksContainer.innerHTML = ''; // Clear previous links
-
-    // Always add About Bot and About Us
-    navLinksContainer.innerHTML += `<a href="Home.html" id="navHomeLink">About Bot</a>`; // Added ID
-    navLinksContainer.innerHTML += `<a href="about_us.html">About Us</a>`;
-
-    if (loggedIn && user) {
-        // Logged-in state: Show user name and Logout link
-        // Hide the "About Bot" link initially if it's the protected page
-        const homeLink = navLinksContainer.querySelector('#navHomeLink');
-        if (homeLink) homeLink.style.display = 'inline-block'; // Ensure it's visible when logged in
-
-        navLinksContainer.innerHTML += `<span style="color: var(--text-secondary); margin-left: 2rem;">Welcome, ${user.fullName}</span>`;
-        navLinksContainer.innerHTML += `<a href="#" id="logoutLink" style="margin-left: 1rem; color: var(--accent-2);">Logout</a>`;
-
-        // Add event listener for logout
-        const logoutLink = navLinksContainer.querySelector('#logoutLink');
-        if (logoutLink) {
-            logoutLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                logout();
-            });
-        }
+    // Define navigation links based on auth state
+    let links = [];
+    if (isUserLoggedIn) {
+        links = [
+            { href: 'about_us.html', text: 'About Us' },
+            { href: 'bot.html', text: 'Chat' },
+            { href: 'home.html', text: 'About Bot' },
+            { href: '#', text: 'Logout', onclick: 'logout()' }
+        ];
     } else {
-        // Logged-out state: Show Login and Sign Up links
-        // Hide the "About Bot" link if it's the protected page
-        const homeLink = navLinksContainer.querySelector('#navHomeLink');
-        if (homeLink) homeLink.style.display = 'none'; // Hide Home link when logged out
-
-        navLinksContainer.innerHTML += `<a href="login.html">Login</a>`;
-        navLinksContainer.innerHTML += `<a href="signup.html">Sign Up</a>`;
+        links = [
+            { href: 'about_us.html', text: 'About Us' },
+            { href: 'login.html', text: 'Login' },
+            { href: 'signup.html', text: 'Sign Up' }
+        ];
     }
 
-    // Re-attach mobile menu toggle if it exists and was cleared
-    // This depends on the exact HTML structure, might need adjustment
-    // If the toggle button is outside nav-links, this isn't needed.
-    // If it's inside, we need to ensure it's still functional.
-    // Assuming the toggle button is outside .nav-links based on provided HTML.
+    // Update DOM with new links
+    navLinks.innerHTML = links.map(link => 
+        `<a href="${link.href}" ${link.onclick ? `onclick="${link.onclick}"` : ''}>${link.text}</a>`
+    ).join('');
 }
 
-
+/**
+ * Handles user logout
+ * Clears authentication state and redirects to login
+ */
 function logout() {
+    // Clear auth data
     localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('loggedInUser');
-    alert('You have been logged out.');
-    // Redirect to login page or index page after logout
+    localStorage.removeItem('currentUser');
+    // Redirect to login
     window.location.href = 'login.html';
-}
-
-// --- Protection for specific pages ---
-function protectPage() {
-    // Add this function call at the start of scripts on pages that require login (e.g., Home.html)
-    if (!isLoggedIn()) {
-        alert('You must be logged in to view this page.');
-        window.location.href = 'login.html'; // Redirect to login
-    }
 }

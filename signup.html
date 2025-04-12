@@ -241,6 +241,43 @@
                 display: flex; /* Changed from block to flex */
             }
         }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-1);
+            transition: all 0.3s ease;
+        }
+
+        .toggle-password:focus {
+            outline: none;
+        }
+
+        .toggle-password i {
+            font-size: 18px;
+            pointer-events: none;
+        }
+
+        .toggle-password:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .toggle-password:active {
+            transform: translateY(-50%) scale(0.9);
+        }
     </style>
 </head>
 <body>
@@ -271,10 +308,20 @@
                     <input type="email" id="email" placeholder="College Email" required>
                 </div>
                 <div class="form-group">
-                    <input type="password" id="password" placeholder="Create Password" required>
+                    <div class="password-container">
+                        <input type="password" id="password" placeholder="Create Password" required>
+                        <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                            <i>⚡</i>
+                        </button>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                    <div class="password-container">
+                        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                        <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                            <i>⚡</i>
+                        </button>
+                    </div>
                 </div>
                 <button type="submit" class="cyber-button">Sign Up</button>
             </form>
@@ -282,6 +329,18 @@
     </main>
 
     <script>
+        // Add this before existing scripts
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                const input = document.getElementById(targetId);
+                const type = input.getAttribute('type');
+                
+                input.setAttribute('type', type === 'password' ? 'text' : 'password');
+                this.classList.toggle('hide');
+            });
+        });
+
         // Toggle navigation menu
         document.querySelector('.menu-toggle').addEventListener('click', () => {
             document.querySelector('.nav-links').classList.toggle('active');
@@ -341,6 +400,27 @@
             alert('Sign up successfully!'); // Updated success message
             // Optionally redirect to login page
             window.location.href = 'login.html';
+        });
+
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                const icon = this.querySelector('i');
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.textContent = '✨';
+                } else {
+                    input.type = 'password';
+                    icon.textContent = '⚡';
+                }
+                
+                // Add subtle animation
+                this.style.transform = 'translateY(-50%) scale(1.2)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-50%) scale(1)';
+                }, 100);
+            });
         });
     </script>
     <script src="auth.js"></script> <!-- Add auth script -->

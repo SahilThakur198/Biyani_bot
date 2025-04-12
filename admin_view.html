@@ -1,207 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - View Signup Data</title>
+    <meta charset="UTF-8"> <!-- Specifies the character encoding for the document -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configures the viewport for responsive design -->
+    <title>Admin - View Signup Data</title> <!-- Sets the title of the page -->
+    <!-- Link to Tailwind CSS CDN for utility classes -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Link to Google Fonts for the 'Montserrat' font family -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* CSS Variables for consistent styling */
         :root {
-            --accent-green: #00d9a6;
-            --accent-blue: #00a2ff;
-            --dark-bg: #0a0a0a;
-            --card-bg: #111111;
-            --text-light: #f5f5f5;
-            --text-secondary: #aaaaaa;
+            --accent-green: #00d9a6; /* Accent green color */
+            --accent-blue: #00a2ff; /* Accent blue color */
+            --dark-bg: #0a0a0a; /* Dark background color */
+            --card-bg: #111111; /* Background color for cards/tables */
+            --text-light: #f5f5f5; /* Light text color */
+            --text-secondary: #aaaaaa; /* Secondary text color */
         }
+        /* Body styling */
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--dark-bg);
-            color: var(--text-light);
-            padding: 2rem;
+            font-family: 'Montserrat', sans-serif; /* Set default font */
+            background-color: var(--dark-bg); /* Apply dark background */
+            color: var(--text-light); /* Set default text color */
+            padding: 2rem; /* Add padding around the content */
         }
+        /* Table styling */
         table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1.5rem;
-            background-color: var(--card-bg);
-            border: 1px solid #222;
-            border-radius: 8px;
-            overflow: hidden;
+            width: 100%; /* Full width */
+            border-collapse: collapse; /* Collapse borders into a single line */
+            margin-top: 1.5rem; /* Top margin */
+            background-color: var(--card-bg); /* Card background color */
+            border: 1px solid #222; /* Subtle border */
+            border-radius: 8px; /* Rounded corners */
+            overflow: hidden; /* Ensure content respects border radius */
         }
+        /* Table header and data cell styling */
         th, td {
-            border: 1px solid #222;
-            padding: 12px 15px;
-            text-align: left;
+            border: 1px solid #222; /* Cell borders */
+            padding: 12px 15px; /* Cell padding */
+            text-align: left; /* Align text to the left */
         }
+        /* Table header specific styling */
         th {
-            background-color: #222;
-            color: var(--accent-green);
-            font-weight: 600;
+            background-color: #222; /* Darker background for header */
+            color: var(--accent-green); /* Accent green text color */
+            font-weight: 600; /* Semi-bold font weight */
         }
+        /* Table data cell specific styling */
         td {
-            color: var(--text-light);
+            color: var(--text-light); /* Light text color */
         }
+        /* Alternating row background color for readability */
         tr:nth-child(even) {
-            background-color: rgba(255, 255, 255, 0.03);
+            background-color: rgba(255, 255, 255, 0.03); /* Slightly lighter background for even rows */
         }
+        /* Gradient button styling */
         .gradient-btn {
-            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
-            transition: all 0.3s ease;
-            padding: 10px 20px;
-            border-radius: 5px;
-            color: var(--dark-bg);
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            margin-top: 1.5rem;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue)); /* Gradient background */
+            transition: all 0.3s ease; /* Smooth transition for hover effects */
+            padding: 10px 20px; /* Padding */
+            border-radius: 5px; /* Rounded corners */
+            color: var(--dark-bg); /* Dark text color for contrast */
+            font-weight: 600; /* Semi-bold font weight */
+            cursor: pointer; /* Pointer cursor on hover */
+            border: none; /* Remove default border */
+            margin-top: 1.5rem; /* Top margin */
         }
+        /* Gradient button hover effects */
         .gradient-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 217, 166, 0.3);
+            opacity: 0.9; /* Slightly transparent on hover */
+            transform: translateY(-1px); /* Slight lift effect */
+            box-shadow: 0 4px 12px rgba(0, 217, 166, 0.3); /* Subtle glow effect */
         }
+        /* Header title styling with gradient text */
         .header-title {
-             background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 700;
-            font-size: 1.5rem;
+             background: linear-gradient(90deg, var(--accent-green), var(--accent-blue)); /* Gradient background */
+            -webkit-background-clip: text; /* Clip background to text (for WebKit browsers) */
+            background-clip: text; /* Clip background to text */
+            -webkit-text-fill-color: transparent; /* Make text transparent to show gradient */
+            font-weight: 700; /* Bold font weight */
+            font-size: 1.5rem; /* Font size */
         }
     </style>
 </head>
 <body>
+    <!-- Main heading with gradient text -->
     <h1 class="header-title">Signed Up User Data (from Local Storage)</h1>
-    <p class="text-sm text-red-500 mt-2"> Dear teacher what you think about it ?.</p>
+    <!-- Subtitle/Note -->
+    <p class="text-sm text-red-500 mt-2"> Dear teacher what you think about it ?.</p> <!-- Note: This text might need review -->
 
+    <!-- Button to download user data as CSV -->
     <button id="downloadCsvBtn" class="gradient-btn">Download as CSV</button>
 
+    <!-- Container for the user data table -->
     <div id="userDataContainer">
+        <!-- Initial message shown while loading or if no data -->
         <p class="mt-4 text-gray-400">Loading user data...</p>
+        <!-- Table to display user data (initially hidden) -->
         <table id="userTable" class="hidden">
             <thead>
                 <tr>
                     <th>Full Name</th>
                     <th>Email</th>
-                    <th>Password (Insecure)</th>
+                    <th>Password (Insecure)</th> <!-- Warning: Displaying passwords is a security risk -->
                 </tr>
             </thead>
             <tbody id="userTableBody">
-                <!-- User data will be populated here -->
+                <!-- User data rows will be populated here by JavaScript -->
             </tbody>
         </table>
     </div>
 
     <script>
+        // Get references to DOM elements
         const userDataContainer = document.getElementById('userDataContainer');
         const userTable = document.getElementById('userTable');
         const userTableBody = document.getElementById('userTableBody');
         const downloadCsvBtn = document.getElementById('downloadCsvBtn');
 
+        /**
+         * Fetches user data from local storage and displays it in the table.
+         */
         function displayUserData() {
+            // Retrieve user data string from local storage
             const usersJson = localStorage.getItem('users');
+            // Parse the JSON string into an array, or use an empty array if no data exists
             const users = usersJson ? JSON.parse(usersJson) : [];
 
-            // Clear previous data
+            // Clear previous status message (e.g., "Loading...")
             const loadingP = userDataContainer.querySelector('p');
-            if (loadingP) loadingP.remove(); // Remove loading/no data message
+            if (loadingP) loadingP.remove(); // Remove the paragraph element if it exists
 
-            userTableBody.innerHTML = ''; // Clear table body
+            // Clear any existing rows in the table body
+            userTableBody.innerHTML = '';
 
+            // Check if there are any users
             if (users.length === 0) {
+                // If no users, display a message in the table
                 const noDataRow = document.createElement('tr');
                 const cell = document.createElement('td');
-                cell.colSpan = 3;
+                cell.colSpan = 3; // Span across all columns
                 cell.textContent = 'No user data found in local storage.';
-                cell.classList.add('text-center', 'text-gray-500', 'py-4');
+                cell.classList.add('text-center', 'text-gray-500', 'py-4'); // Add styling
                 noDataRow.appendChild(cell);
                 userTableBody.appendChild(noDataRow);
-                downloadCsvBtn.disabled = true; // Disable download if no data
+                // Disable the download button if there's no data
+                downloadCsvBtn.disabled = true;
                 downloadCsvBtn.style.opacity = '0.5';
                 downloadCsvBtn.style.cursor = 'not-allowed';
             } else {
+                // If users exist, iterate through them and create table rows
                 users.forEach(user => {
                     const row = document.createElement('tr');
 
+                    // Create cell for Full Name
                     const nameCell = document.createElement('td');
-                    nameCell.textContent = user.fullName || ''; // Use textContent for safety
+                    nameCell.textContent = user.fullName || ''; // Use textContent for safety against XSS
                     row.appendChild(nameCell);
 
+                    // Create cell for Email
                     const emailCell = document.createElement('td');
                     emailCell.textContent = user.email || ''; // Use textContent for safety
                     row.appendChild(emailCell);
 
+                    // Create cell for Password (Security Warning: Displaying passwords is bad practice)
                     const passwordCell = document.createElement('td');
                     passwordCell.textContent = user.password || ''; // Use textContent for safety
-                    passwordCell.classList.add('text-red-400'); // Keep styling
+                    passwordCell.classList.add('text-red-400'); // Style password differently (e.g., red)
                     row.appendChild(passwordCell);
 
+                    // Add the completed row to the table body
                     userTableBody.appendChild(row);
                 });
+                // Enable the download button as there is data
                 downloadCsvBtn.disabled = false;
                 downloadCsvBtn.style.opacity = '1';
                 downloadCsvBtn.style.cursor = 'pointer';
             }
-            userTable.classList.remove('hidden'); // Show table
+            // Make the table visible
+            userTable.classList.remove('hidden');
         }
 
-        // Removed the problematic escapeHtml function
+        // Note: The problematic escapeHtml function was removed as textContent provides basic XSS protection here.
 
+        /**
+         * Generates a CSV file from the user data and initiates download.
+         */
         function downloadCsv() {
+            // Retrieve user data from local storage
             const usersJson = localStorage.getItem('users');
             const users = usersJson ? JSON.parse(usersJson) : [];
 
+            // Check if there is data to download
             if (users.length === 0) {
                 alert('No data to download.');
-                return;
+                return; // Exit function if no data
             }
 
             // Define CSV headers
             const headers = ['Full Name', 'Email', 'Password'];
-            // Map user data to CSV rows, escaping commas and quotes
+            // Map user data to CSV rows, escaping fields appropriately
             const rows = users.map(user => [
-                `"${escapeCsvField(user.fullName)}"`,
+                `"${escapeCsvField(user.fullName)}"`, // Enclose in quotes and escape internal quotes
                 `"${escapeCsvField(user.email)}"`,
-                `"${escapeCsvField(user.password)}"` // Include password (insecure)
+                `"${escapeCsvField(user.password)}"` // Include password (still insecure)
             ]);
 
-            // Combine headers and rows
+            // Combine headers and rows into a single CSV string
             const csvContent = [
-                headers.join(','),
-                ...rows.map(row => row.join(','))
-            ].join('\n');
+                headers.join(','), // Join headers with commas
+                ...rows.map(row => row.join(',')) // Join each row's fields with commas
+            ].join('\n'); // Join all lines with newline characters
 
-            // Create a Blob and download link
+            // Create a Blob (Binary Large Object) containing the CSV data
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            // Create a temporary anchor element for downloading
             const link = document.createElement('a');
-            if (link.download !== undefined) { // Feature detection
+
+            // Check if the browser supports the download attribute
+            if (link.download !== undefined) {
+                // Create a URL for the Blob
                 const url = URL.createObjectURL(blob);
+                // Set the download attributes for the anchor element
                 link.setAttribute('href', url);
-                link.setAttribute('download', 'signed_up_users.csv');
-                link.style.visibility = 'hidden';
+                link.setAttribute('download', 'signed_up_users.csv'); // Set the filename
+                link.style.visibility = 'hidden'; // Hide the link
+                // Append the link to the body, click it, and then remove it
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
-                URL.revokeObjectURL(url); // Clean up
+                // Release the object URL to free up memory
+                URL.revokeObjectURL(url);
             } else {
+                // Fallback for browsers that don't support the download attribute
                 alert('CSV download is not supported in your browser.');
             }
         }
 
+        /**
+         * Escapes characters within a CSV field that could cause issues (e.g., double quotes).
+         * @param {any} field - The data to be placed in a CSV field.
+         * @returns {string} - The escaped string suitable for a CSV field.
+         */
         function escapeCsvField(field) {
-            // Ensure field is a string before replacing
+            // Ensure the field is treated as a string, handle null/undefined
             const stringField = String(field || '');
-            // Escape double quotes by doubling them
+            // Escape double quotes by replacing them with two double quotes
             return stringField.replace(/"/g, '""');
         }
 
 
-        // Initial display
+        // Initial call to display data when the page loads
         displayUserData();
 
-        // Add event listener for download button
+        // Add event listener to the download button to trigger the downloadCsv function on click
         downloadCsvBtn.addEventListener('click', downloadCsv);
 
     </script>
