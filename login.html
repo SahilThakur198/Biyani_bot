@@ -86,6 +86,7 @@
             margin-bottom: 2rem;
             background: linear-gradient(45deg, var(--accent-1), var(--accent-2));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             text-align: center;
         }
@@ -97,7 +98,7 @@
         .form-group input {
             width: 100%;
             padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(30, 30, 30, 0.9);
             border: 1px solid var(--accent-2);
             border-radius: 8px;
             color: var(--text-primary);
@@ -105,6 +106,7 @@
             transition: all 0.3s ease;
             -webkit-text-fill-color: var(--text-primary);
             -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.05) inset;
+            box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.05) inset;
         }
 
         .form-group input:focus {
@@ -119,6 +121,16 @@
             -webkit-text-fill-color: var(--text-primary);
             -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.05) inset;
             transition: background-color 5000s ease-in-out 0s;
+        }
+
+        /* Override browser autofill styles */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px rgb(30, 30, 30) inset !important;
+            -webkit-text-fill-color: var(--text-primary) !important;
+            caret-color: var(--text-primary) !important;
         }
 
         .cyber-button {
@@ -287,9 +299,7 @@
                 <div class="form-group">
                     <div class="password-container">
                         <input type="password" id="password" placeholder="Password" required>
-                        <button type="button" class="toggle-password">
-                            <i class="fas fa-eye"></i>
-                        </button>
+                        <span class="toggle-password">🙈</span>
                     </div>
                 </div>
                 <button type="submit" class="cyber-button">Login</button>
@@ -338,7 +348,7 @@
                 alert('Logged in successfully!'); // Updated success message
 
                 // Check for admin credentials and redirect accordingly
-                if (email === 'thakur@gmail.com' && password === 'Justremeber') {
+                if (email === 'masss@gmail.com' && password === 'Pappupass') {
                     window.location.href = 'admin_view.html'; // Redirect admin
                 } else {
                     window.location.href = 'Home.html'; // Redirect regular users
@@ -354,19 +364,17 @@
         const togglePassword = document.querySelector('.toggle-password');
         togglePassword.addEventListener('click', function() {
             const passwordInput = document.getElementById('password');
-            const icon = this.querySelector('i');
             
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
+                this.textContent = '🙊';
             } else {
                 passwordInput.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
+                this.textContent = '🙈';
             }
         });
     </script>
     <script src="auth.js"></script> <!-- Add auth script -->
+    <script src="audio.js" defer></script>
 </body>
 </html>

@@ -657,11 +657,11 @@
             }
             
             // Greetings
-            if (/^(hi|hello|hey|greetings|what's up|sup)(\s|$)/i.test(normalizedInput)) {
+            if (/^(hi|hello|hey|hii|hiii|hiiii|hiiiiii|greetings|what's up|sup)(\s|$)/i.test(normalizedInput)) {
                 return "👋 Hello! I'm BiyaniBot, your guide to Brijlal Biyani Science College. How can I help you today?";
             }
 
-            if (/^(Namaste|Namathe)(\s|$)/i.test(normalizedInput)) {
+            if (/^(Namaste|Namasthe)(\s|$)/i.test(normalizedInput)) {
                 return "नमस्ते 🙏";
             }
             
@@ -919,6 +919,8 @@ function processCollegeQuery(normalizedInput) {
 
   if (normalizedInput.includes("attendance compulsory") || 
       normalizedInput.includes("minimum attendance") || 
+      normalizedInput.includes("attendance mendetory") ||
+      normalizedInput.includes("attendance mandatory") || 
       normalizedInput.includes("how much attendance needed") || 
       normalizedInput.includes("attendance required") || 
       normalizedInput.includes("college attendance rules")) {
@@ -953,7 +955,7 @@ function processCollegeQuery(normalizedInput) {
     return "📌 Admissions typically begin in July each year. Exact dates are displayed on the college notice board and official website.";
   }
 
-  if (normalizedInput.includes("apply for admission")) {
+  if (normalizedInput.includes("admission doc's") || normalizedInput.includes("admission documents")) {
     return "📌 You need to fill the offline admission form, attach required documents (marksheets, 2 copies of passport size photos, online submitted form printout, TC, caste certificate if applicable), and submit it to the college office.";
   }
 
@@ -1158,5 +1160,6 @@ function getCollegeResponse(userInput) {
         // Focus input on page load
         userInput.focus();
     </script>
+    <script src="audio.js" defer></script>
 </body>
 </html>

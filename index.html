@@ -908,6 +908,7 @@
         let currentIndex = 0;
 
         async function typeText(text, isLast = false) {
+            textElement.classList.add('typing');
             for (let i = 0; i <= text.length; i++) {
                 textElement.textContent = text.slice(0, i);
                 await new Promise(resolve => setTimeout(resolve, 100));
@@ -920,6 +921,7 @@
                     await new Promise(resolve => setTimeout(resolve, 50));
                 }
             }
+            textElement.classList.remove('typing');
         }
 
         async function animateSequence() {
@@ -937,7 +939,8 @@
     <script src="js/audioUtils.js"></script>
     <script src="js/script.js"></script>
     <!-- Change the href or onclick handlers of your chat buttons -->
-    <a href="bot.html" class="lets-talk">let's talk</a>
+    <!-- <a href="bot.html" class="lets-talk">let's talk</a> --> <!-- Removed this link -->
     <!-- If you have other chat buttons, modify them similarly -->
+    <script src="audio.js" defer></script>
 </body>
 </html>
