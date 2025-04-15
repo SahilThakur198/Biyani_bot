@@ -457,6 +457,56 @@
                 display: flex;
             }
         }
+
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+        }
+
+        .modal-content {
+            max-width: 80%;
+            max-height: 80vh;
+            transform: scale(0.7);
+            opacity: 0;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent-1);
+            box-shadow: var(--neon-glow);
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--accent-1);
+            font-size: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-close:hover {
+            transform: scale(1.2);
+        }
     </style>
 </head>
 <body>
@@ -543,6 +593,12 @@
         </div>
     </main>
 
+    <!-- Add modal container at the end of body -->
+    <div class="modal" id="imageModal">
+        <span class="modal-close">&times;</span>
+        <img src="images/sahil.jpg" alt="Sahil" class="modal-content">
+    </div>
+
     <!-- JavaScript for mobile menu toggle functionality -->
     <script>
         // Get the menu toggle button and navigation links container
@@ -555,6 +611,41 @@
             navLinks.classList.toggle('active');
             // Toggle the 'active' class on the menu toggle button itself (for styling the 'X')
             menuToggle.classList.toggle('active');
+        });
+
+        // Add triple click handler
+        const sahilName = document.querySelector('.team-card:first-child .member-name');
+        const imageModal = document.getElementById('imageModal');
+        const modalClose = document.querySelector('.modal-close');
+
+        let clickCount = 0;
+        let lastClickTime = 0;
+
+        sahilName.addEventListener('click', (e) => {
+            const currentTime = new Date().getTime();
+            
+            if (currentTime - lastClickTime > 500) {
+                clickCount = 1;
+            } else {
+                clickCount++;
+            }
+
+            lastClickTime = currentTime;
+
+            if (clickCount === 3) {
+                imageModal.classList.add('show');
+                clickCount = 0;
+            }
+        });
+
+        modalClose.addEventListener('click', () => {
+            imageModal.classList.remove('show');
+        });
+
+        imageModal.addEventListener('click', (e) => {
+            if (e.target === imageModal) {
+                imageModal.classList.remove('show');
+            }
         });
     </script>
     <!-- Include the authentication script (likely handles login status and updates nav links) -->
