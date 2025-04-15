@@ -290,19 +290,10 @@
             // If no robot male voice, try to find any male voice
             if (!selectedVoice) {
                 selectedVoice = voices.find(voice => 
-                    (voice.name.toLowerCase().includes('male') || voice.name.toLowerCase().includes('david')) &&
-                    voice.lang.startsWith('en')
-                );
-            }
-
-            // Final fallback to any English voice that seems masculine
-            if (!selectedVoice) {
-                selectedVoice = voices.find(voice => 
-                    (voice.name.includes('US English Male') || 
-                     voice.name.includes('Daniel') || 
-                     voice.name.includes('James') ||
-                     voice.name.includes('Thomas')) &&
-                    voice.lang.startsWith('en')
+                    voice.name.toLowerCase().includes('male') ||
+                    voice.name.toLowerCase().includes('david') ||
+                    voice.name.toLowerCase().includes('james') ||
+                    voice.name.toLowerCase().includes('thomas')
                 );
             }
 
@@ -1268,30 +1259,12 @@ if (normalizedInput.includes("vivan") || normalizedInput.includes("vevan")) {
     return "✔️ It is a private college run by Shri Brijlal Biyani Shiksha Samiti, affiliated to SGBAU Amravati.";
   }
 
-  if (normalizedInput.includes("ncc")) {
-    return "✔️ Yes, NCC (Boys & Girls) is available with benefits like incentive marks.";
+  if (normalizedInput.includes("ncc or nss")) {
+    return "✔️ Yes, both NCC (Boys & Girls) and NSS are available with benefits like incentive marks.";
   }
 
-  if (normalizedInput.includes("nss")) {
-    return "✔️ Yes, NSS (National Service Scheme) is available with various community service opportunities.";
-  }
-
-  if (normalizedInput.includes("attendance compulsory") || 
-      normalizedInput.includes("minimum attendance") || 
-      normalizedInput.includes("attendance mendetory") ||
-      normalizedInput.includes("attendance mandatory") || 
-      normalizedInput.includes("how much attendance needed") || 
-      normalizedInput.includes("attendance required") || 
-      normalizedInput.includes("college attendance rules")) {
+  if (normalizedInput.includes("attendance compulsory")) {
     return "✔️ Yes, with 75% minimum mandatory rule.";
-  }
-
-  if (normalizedInput.includes("can i skip classes") || 
-      normalizedInput.includes("bunking allowed") ||
-      normalizedInput.includes("can i skip the classes") ||  
-      normalizedInput.includes("attendance percentage") || 
-      normalizedInput.includes("attendance criteria")) {
-    return "✔️ No, attendance is strictly monitored with 75% minimum mandatory rule.";
   }
 
   if (normalizedInput.includes("prospectus from college office")) {
@@ -1314,7 +1287,7 @@ if (normalizedInput.includes("vivan") || normalizedInput.includes("vevan")) {
     return "📌 Admissions typically begin in July each year. Exact dates are displayed on the college notice board and official website.";
   }
 
-  if (normalizedInput.includes("admission doc's") || normalizedInput.includes("admission documents")) {
+  if (normalizedInput.includes("apply for admission")) {
     return "📌 You need to fill the offline admission form, attach required documents (marksheets, 2 copies of passport size photos, online submitted form printout, TC, caste certificate if applicable), and submit it to the college office.";
   }
 
