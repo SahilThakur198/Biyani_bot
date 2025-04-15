@@ -771,6 +771,11 @@
             20%, 80% { opacity: 1; transform: translateY(0); }
         }
     </style>
+    <!-- Update script source paths to be relative -->
+    <script src="./auth.js"></script>
+    <script src="./js/audioUtils.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="./audio.js" defer></script>
 </head>
 <body>
     <header class="cyber-header">
@@ -882,12 +887,9 @@
             const button = document.querySelector('.glass-button');
             button.classList.add('clicking');
             
-            // Delay opening the chat window
+            // Update the path to be relative
             setTimeout(() => {
-                window.open('bot.html',
-                    '_blank',
-                    
-                );
+                window.open('./bot.html', '_blank');
             }, 400); // Open chat after 400ms
 
             // Remove clicking class after animation
@@ -935,12 +937,12 @@
 
         animateSequence();
     </script>
-    <script src="auth.js"></script> <!-- Add auth script -->
-    <script src="js/audioUtils.js"></script>
-    <script src="js/script.js"></script>
+    <script src="./auth.js"></script> <!-- Add auth script -->
+    <script src="./js/audioUtils.js"></script>
+    <script src="./js/script.js"></script>
     <!-- Change the href or onclick handlers of your chat buttons -->
     <!-- <a href="bot.html" class="lets-talk">let's talk</a> --> <!-- Removed this link -->
     <!-- If you have other chat buttons, modify them similarly -->
-    <script src="audio.js" defer></script>
+    <script src="./audio.js" defer></script>
 </body>
 </html>
