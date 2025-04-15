@@ -282,19 +282,38 @@
 
             const utterance = new SpeechSynthesisUtterance(text);
             
-            // Attempt to find a robotic or distinct voice (highly browser/OS dependent)
-            // You might need to experiment with voice names found in console.log(voices)
-            let selectedVoice = voices.find(voice => voice.name.includes('Robot')) || 
-                                voices.find(voice => voice.name.includes('Google US English')) || // Common fallback
-                                voices.find(voice => voice.lang === 'en-US'); // Generic US English
+            // First try to find a male robotic voice
+            let selectedVoice = voices.find(voice => 
+                voice.name.toLowerCase().includes('robot') && voice.name.toLowerCase().includes('male')
+            );
+
+            // If no robot male voice, try to find any male voice
+            if (!selectedVoice) {
+                selectedVoice = voices.find(voice => 
+                    (voice.name.toLowerCase().includes('male') || voice.name.toLowerCase().includes('david')) &&
+                    voice.lang.startsWith('en')
+                );
+            }
+
+            // Final fallback to any English voice that seems masculine
+            if (!selectedVoice) {
+                selectedVoice = voices.find(voice => 
+                    (voice.name.includes('US English Male') || 
+                     voice.name.includes('Daniel') || 
+                     voice.name.includes('James') ||
+                     voice.name.includes('Thomas')) &&
+                    voice.lang.startsWith('en')
+                );
+            }
 
             if (selectedVoice) {
                 utterance.voice = selectedVoice;
             }
             
-            // Optional: Adjust pitch and rate for a more robotic feel
-            utterance.pitch = 0.8; // Lower pitch
-            utterance.rate = 0.9; // Slightly slower rate
+            // Adjust for more robotic male sound
+            utterance.pitch = 0.7;  // Lower pitch for male voice
+            utterance.rate = 0.9;   // Slightly slower rate
+            utterance.volume = 1.0; // Full volume
 
             utterance.onerror = (event) => {
                 console.error('SpeechSynthesisUtterance.onerror', event);
@@ -782,6 +801,24 @@
             // Farewell
             if (/^(bye|goodbye|see you|farewell|take care)(\s|$)/i.test(normalizedInput)) {
                 return "👋 Thank you for chatting with me! If you have more questions about Brijlal Biyani Science College, feel free to ask anytime. Goodbye!";
+            }
+
+            // General questions
+            // Name-related questions with variations
+            if (/^(what'?s your name|what is your name|who are you|your name|tell me your name|may i know your name|name please|introduce yourself|could you tell me your name|can you tell me your name|how should i call you|what do they call you|what can i call you|what do people call you|how are you called|what name do you go by|what is your bot name|give me your name|share your name|state your name|identify yourself|your identity|who am i talking to|who am i speaking with|what should i address you as)(\?|\s|$)/i.test(normalizedInput)) {
+                const nameResponses = [
+                    "I'm BiyaniBot! 🤖 How can I assist you?",
+                    "My name is BiyaniBot - your college companion! 🎓",
+                    "I'm BiyaniBot, ready to help you! 💫",
+                    "BiyaniBot here! What can I do for you? ✨",
+                    "I go by BiyaniBot - your friendly college guide! 🌟",
+                    "They call me BiyaniBot! How may I help? 🤝",
+                    "BiyaniBot at your service! 🎯",
+                    "Hello! I'm BiyaniBot, your college assistant! 📚",
+                    "The name's Bot - BiyaniBot! 🌠",
+                    "You can call me BiyaniBot! Need any help? 💫"
+                ];
+                return nameResponses[Math.floor(Math.random() * nameResponses.length)];
             }
             
             // About the college/institution
