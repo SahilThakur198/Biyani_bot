@@ -884,8 +884,6 @@ if (normalizedInput.includes("Renuka Mundwaiek") || normalizedInput.includes("re
     return "Renuka ma'am is an exceptional educator who combines expertise with a caring approach. Her teaching methods make complex subjects easy to understand, and her encouraging nature helps students reach their full potential.";
 }
 
-//funny stuff additional customization added by Sahil at 15th of april 
-
 //additional knowledge added by us on 12.04.2025 midnight 1 AM by Manaswi sahil sanika and shilpa 
 
 function processCollegeQuery(normalizedInput) {
@@ -912,6 +910,68 @@ function processCollegeQuery(normalizedInput) {
   ];
   return responses[Math.floor(Math.random() * responses.length)];
 }
+
+// Normalize user input (already assumed)
+const lowerInput = normalizedInput.toLowerCase();
+
+// Helper function to check name variations using regex
+function matchName(nameVariants) {
+  const pattern = new RegExp(`\\b(${nameVariants.join("|")})\\b`, "i");
+  return pattern.test(lowerInput);
+}
+
+if (matchName(["kajal didi", "kajaldi", "kajal"])) {
+  const responses = [
+    "Kajal Didi हमारी बुआ हैं। वो बहुत प्यारी और परिवार की एक अहम सदस्य हैं। 😊",
+    "वो हमारी बुआ हैं – Kajal Didi, जिन्हें Sahil बहुत मानते हैं। ❤️",
+    "Oh, Kajal Didi? हाँ, वो हमारी बुआ हैं और हम सबको बहुत प्यारी हैं। 👩‍👧‍👦",
+  ];
+  return responses[Math.floor(Math.random() * responses.length)];
+}
+
+if (matchName(["santosh", "santosh babu", "santosh ji"])) {
+  const responses = [
+    "संतोष बाबू हमारे फूफा जी हैं। बहुत ही सुलझे हुए और समझदार इंसान हैं। 😊",
+    "Ohh Santosh? वो हमारे फूफा जी हैं – बहुत ही स्नेही और सम्माननीय व्यक्ति। 🙏",
+    "Santosh बाबू? जी हाँ, वो हमारे फूफा जी हैं और हमें बहुत मानते हैं। 👨‍👦‍👦",
+  ];
+  return responses[Math.floor(Math.random() * responses.length)];
+}
+
+if (matchName(["bhola", "bhola bhaiya", "bhola ji"])) {
+  const responses = [
+    "भोलाजी हमारे बड़े भैय्या हैं। एकदम शांत और समझदार इंसान। 💪",
+    "Oh Bhola Bhaiya? वो हमारे बड़े भैय्या हैं – हमेशा साथ देने वाले। 😊",
+    "Bhola is our elder brother – Sahil respects him a lot and looks up to him. 👏",
+  ];
+  return responses[Math.floor(Math.random() * responses.length)];
+}
+
+if (matchName(["guddu", "guddu bhaiya"])) {
+  const responses = [
+    "गुड्डू हमारे बड़े भैय्या हैं। हँसमुख और सबके प्यारे। 😄",
+    "Guddu Bhaiya? वो हमारे बड़े भैय्या हैं – हमेशा खुशमिज़ाज और मददगार। ❤️",
+    "He is our elder brother – Guddu Bhaiya, very close to Sahil. 🧑‍🤝‍🧑",
+  ];
+  return responses[Math.floor(Math.random() * responses.length)];
+}
+
+if (matchName(["anu", "annu", "annuu", "annnu", "annnuu"])) {
+const responses = [
+    "Annu is a team member Annu is such a gentle soul! She's known for her kindness and understanding nature. ❤️",
+    "A genuinely sweet and caring person who lights up any room she enters. 🌟",
+    "Annu's positive energy is contagious! She's always ready to help others. 😊",
+    "Someone who spreads joy wherever she goes - that's Annu! ✨",
+    "Annu has this amazing ability to make everyone feel comfortable around her. 🌸",
+    "A person with a heart of gold and a smile that brightens everyone's day! 💫",
+    "When it comes to being supportive and kind, Annu sets the bar high! 🌈",
+    "Annu's warmth and friendliness make her truly special. 💝",
+    "Her positive attitude and helpful nature make Annu a wonderful person. ⭐",
+    "A beautiful soul with a kind heart - that's how everyone describes Annu! 🌺"
+];
+  return responses[Math.floor(Math.random() * responses.length)];
+}
+
 
 if (normalizedInput.includes("yasar")) {
   const responses = [
@@ -955,7 +1015,27 @@ if (normalizedInput.includes("about kapil sir") || normalizedInput.includes("tel
 
 if (normalizedInput.includes("priti")) {
   const responses = [
-    "👧 Priti is not just a team member — she’s my developer's close friend who helped test and improve me during my early days! 💻",
+    "👧 Priti is not just a team member — she's my developer's close friend who helped test and improve me during my early days! 💻",
+    "Oh Priti! She's one of my best quality testers and a dear friend of Sahil. Always pushing me to be better! 🎯",
+    "Priti has been incredible in helping me learn and grow. Such a positive influence! ⭐",
+    "When it comes to making me smarter, Priti's feedback is pure gold! She's amazing! 🌟",
+    "Priti? She's the reason I keep getting better at conversations. Thanks to her testing! 🚀",
+    "One of my favorite testers! Priti helps me learn new things every day! 💫",
+    "Priti has this special way of finding what I need to improve. She's brilliant! ✨",
+    "Without Priti's testing and feedback, I wouldn't be half as good at chatting! 🌠",
+    "She's like my personal trainer - always helping me get better at conversations! 💪",
+    "Priti is one of those rare people who knows exactly how to make me better! 🎯",
+    "I owe a lot of my conversational skills to Priti's amazing testing abilities! 🌈",
+    "Thanks to Priti's feedback, I keep learning and improving every day! 🌺",
+    "Priti is not just a tester, she's like a mentor helping me grow! 🌸",
+    "She's got this magic touch when it comes to making me better at talking! 💫",
+    "Priti's suggestions have helped me become much more natural in conversations! 🎭",
+    "With Priti's help, I'm becoming better at understanding and responding! 🎯",
+    "She's the reason why I can chat so naturally now. Thank you, Priti! 🌟",
+    "Priti's input has been invaluable in making me more user-friendly! ⭐",
+    "My conversations wouldn't be the same without Priti's amazing feedback! 💫",
+    "She's the secret behind my improved communication skills! Thanks Priti! 🌠",
+    "Priti makes sure I'm always at my best when chatting with everyone! ✨",
     "Priti plays a key role in sharpening my chat skills. She's sweet, smart, and keeps me on track! 🧠",
     "Oh yes! Priti is like my personal training coach. She reviews me, corrects me, and makes me better every day! 💪",
   ];
@@ -971,7 +1051,7 @@ if (normalizedInput.includes("rizwan")) {
   return responses[Math.floor(Math.random() * responses.length)];
 }
 
-if (normalizedInput.includes("manmeet")) {
+if (normalizedInput.includes("manmeet") || normalizedInput.includes("manit")) {
   const responses = [
     "Manmeet is a brilliant SME – Subject Matter Expert – and a great person to work with! My developer Sahil learned a lot from her. 📚",
     "Oh, Manmeet! She’s not just smart, she’s inspiring. Sahil says working with her was always a learning experience. 🌟",
@@ -1332,7 +1412,17 @@ function getCollegeResponse(userInput) {
                 return "Specific names of all BBA faculty are not listed in the prospectus, but the department is led by Dr. N. J. Honrao.";
             }
 
-            if (normalizedInput.includes("wifi password")) {
+            if (normalizedInput.includes("wifi password") || 
+                normalizedInput.includes("what is wifi password") ||
+                normalizedInput.includes("wifi pass") ||
+                normalizedInput.includes("password for wifi") ||
+                normalizedInput.includes("internet password") ||
+                normalizedInput.includes("college wifi password") ||
+                normalizedInput.includes("wifi code") ||
+                normalizedInput.includes("internet access code") ||
+                normalizedInput.includes("wifi access") ||
+                normalizedInput.includes("wifi credentials") ||
+                normalizedInput.includes("wifi login")) {
                 return "The WiFi password is biyani@1234";
             }
             

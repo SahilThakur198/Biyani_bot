@@ -36,15 +36,14 @@ function updateNavigation() {
     const navLinks = document.querySelector('.nav-links');
     const isUserLoggedIn = isLoggedIn();
     const currentUser = getLoggedInUser();
-    const currentPage = window.location.pathname.split('/').pop(); // Get the current page filename
+    const currentPage = window.location.pathname.split('/').pop().toLowerCase(); 
 
-    // Define base navigation links
     let baseLinks = [];
     if (isUserLoggedIn) {
         baseLinks = [
             { href: 'about_us.html', text: 'About Us' },
             { href: 'bot.html', text: 'Chat' },
-            { href: 'home.html', text: 'About Bot' }, // Changed from Home.html to home.html
+            { href: 'Home.html', text: 'About Bot' }, // Keep Home.html capitalized to match file
             { href: '#', text: 'Logout', onclick: 'logout()' }
         ];
     } else {
@@ -55,10 +54,11 @@ function updateNavigation() {
         ];
     }
 
-    // Filter out the link corresponding to the current page (case-insensitive comparison)
-    const links = baseLinks.filter(link => link.href.toLowerCase() !== currentPage.toLowerCase());
+    // Filter out current page (case-insensitive)
+    const links = baseLinks.filter(link => 
+        link.href.toLowerCase() !== currentPage
+    );
 
-    // Update DOM with new links
     navLinks.innerHTML = links.map(link => 
         `<a href="${link.href}" ${link.onclick ? `onclick="${link.onclick}"` : ''}>${link.text}</a>`
     ).join('');
