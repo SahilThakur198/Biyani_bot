@@ -740,7 +740,7 @@
             }
                         // Faculty (BCA Teacher Descriptions)
 if (normalizedInput.includes("k. m. supatkar") || normalizedInput.includes("supatkar") || normalizedInput.includes("supatkar sir") || normalizedInput.includes("supu")) {
-    return "K. M. Supatkar sir is an Assistant Professor & Co-ordinator of BCA Program. They have 17 years of experience as a dedicated and knowledgeable teacher who has guided us through our BCA journey with clarity and patience. He plays a big role in shaping us as developers.";
+    return "K. M. Supatkar sir is an Assistant Professor & Co-ordinator of BCA Program. They have 16 years of experience as a dedicated and knowledgeable teacher who has guided us through our BCA journey with clarity and patience. He plays a big role in shaping us as developers.";
 }
 
 if (normalizedInput.includes("k. k. tiwari") || normalizedInput.includes("tiwari") || normalizedInput.includes("tiu") || normalizedInput.includes("teu") ) {
@@ -791,45 +791,102 @@ function processCollegeQuery(normalizedInput) {
 
   
   if (normalizedInput.includes("shweta") || normalizedInput.includes("sweta")) {
-    return "Shweta माझी माउसी आहे, माझा पप्पा ची बहीण आहे ती पुण्या ला राहते आरती सोबत आणि Aarti खूप चांगली आहे.";
-  }
-
-   
-  if ( normalizedInput.includes("yasar")) {
-    return "Barka is a very good friend of my main developer and she is an amazing person. She is a very good friend of Sahil.";
+  const responses = [
+    "Shweta माझी माउसी आहे, ती म्हणजे माझ्या पप्पांची लाडकी बहीण! ती सध्या पुण्यात राहते आरतीसोबत आणि दोघीही खूप गोड आहेत. 🌸",
+    "Shweta म्हणजे माझी माउसी — ती माझ्या पप्पांची बहिण आहे आणि ती पुण्यात आरतीसोबत राहत आहे. दोघीही खूप प्रेमळ आणि स्नेही आहेत. ❤️",
+    "Ohh Shweta Mausi! ती म्हणजे माझ्या developer च्या पप्पांची बहिण – एकदम शांत, समजूतदार आणि आरतीसोबत पुण्यात राहत आहे. 🤗",
+  ];
+  return responses[Math.floor(Math.random() * responses.length)];
 }
 
-if ( normalizedInput.includes("barka")) {
-    return "वो हमारी फुफी है ✌️ for 👶👶";
+if (normalizedInput.includes("yasar")) {
+  const responses = [
+    "Barka is a close friend of my creator Sahil. She's kind, supportive, and truly one of the sweetest souls he knows. 😊",
+    "Barka is like a sunshine in Sahil's friend circle. A very good friend, always there when needed. Sahil respects her a lot!",
+    "Oh, you're talking about Yasar? That means Barka! She's one of the dearest friends of my main developer, Sahil. He always speaks highly of her. 🌟",
+  ];
+  return responses[Math.floor(Math.random() * responses.length)];
 }
 
-if ( normalizedInput.includes("kapil") || normalizedInput.includes("kapill")) {
-    return "Kapil Sir is a great friend and has been incredibly supportive of my developer Sahil throughout his journey.";
+if (normalizedInput.includes("barka")) {
+  const responses = [
+    "वो हमारी फुफी है ✌️ for 👶👶 — आणि खूपच खास आहे आमच्यासाठी!",
+    "फुफी number one! Barka is a whole vibe… she's just awesome! 👑",
+  ];
+  return responses[Math.floor(Math.random() * responses.length)];
 }
 
-if ( normalizedInput.includes("priti")) {
-    return "👧 Priti is a very special person to my main developer. She was initially part of my testing team and currently reviews my chatting skills. She helps make me better! 😊";
+if (normalizedInput.includes("kapil") || normalizedInput.includes("kapill")) {
+  const responses = [
+    "Kapil Sir is not just a friend — he’s a mentor, a motivator, and one of the most dependable persons in Sahil's life. 🙌",
+    "Kapil Sir has been a constant support for my developer Sahil. Always encouraging, always guiding. 🌠",
+    "When it comes to trust and friendship, Kapil Sir is at the top. Sahil looks up to him a lot! 👏",
+  ];
+  return responses[Math.floor(Math.random() * responses.length)];
 }
 
-if ( normalizedInput.includes("rizwan")) {
-    return "Rizwan khan is my uncle and he is elder brother of my developer and he so supportive and helpful.";
+if (normalizedInput.includes("priti")) {
+  const responses = [
+    "👧 Priti is not just a team member — she’s my developer's close friend who helped test and improve me during my early days! 💻",
+    "Priti plays a key role in sharpening my chat skills. She's sweet, smart, and keeps me on track! 🧠",
+    "Oh yes! Priti is like my personal training coach. She reviews me, corrects me, and makes me better every day! 💪",
+  ];
+  return responses[Math.floor(Math.random() * responses.length)];
 }
 
-if ( normalizedInput.includes("manmeet")) {
-    return "Manmeet is an amazing personality and one of the best Subject Matter Expert (SME) my developer Sahil has worked with. She is a great professional colleague and friend.";
+if (normalizedInput.includes("rizwan")) {
+  const responses = [
+    "Rizwan Khan is like a big brother to my developer Sahil — and an uncle to me! Very supportive and always there when needed. 🙏",
+    "Rizwan Uncle! Elder brother of Sahil and a guiding force behind him. A true gentleman. 👑",
+    "You mean Rizwan bhai? He’s the elder brother of my developer and one of the most supportive figures in his life. 🤝",
+  ];
+  return responses[Math.floor(Math.random() * responses.length)];
 }
 
-if ( normalizedInput.includes("prerna")) {
-    return "Prena is........ actually she is a very good friend of Sahil my pappa.";
+if (normalizedInput.includes("manmeet")) {
+  const responses = [
+    "Manmeet is a brilliant SME – Subject Matter Expert – and a great person to work with! My developer Sahil learned a lot from her. 📚",
+    "Oh, Manmeet! She’s not just smart, she’s inspiring. Sahil says working with her was always a learning experience. 🌟",
+    "From professionalism to friendship, Manmeet excels at everything. She’s one of the finest people Sahil has collaborated with. 💼",
+  ];
+  return responses[Math.floor(Math.random() * responses.length)];
 }
 
-if ( normalizedInput.includes("vedika")) {
-    return "vedika rajput is one of best friend of my developer Sahil.";
+if (normalizedInput.includes("prerna")) {
+  const responses = [
+    "Prerna... now that’s a name with warmth. She is one of the closest friends of Sahil — full of positivity and charm. 🌈",
+    "Haha, Prerna! Sahil always talks about her with a smile. A genuinely good friend. ❤️",
+    "Oh yes, Prerna! She's a very dear friend of Sahil — someone who brings joy and laughter into his life. 😄",
+  ];
+  return responses[Math.floor(Math.random() * responses.length)];
 }
 
-  if (normalizedInput.includes("vivan") || normalizedInput.includes("Vevan")) {
-    return "Vivan is the most cute guy my developer Sahil ever seen ";
-  }
+if (normalizedInput.includes("saurabh") || normalizedInput.includes("saurav") || normalizedInput.includes("kakani")) {
+  const responses = [
+    "Saurabh Sir – one of the most reliable and supportive people in Sahil’s journey. A true friend and mentor. 🤝",
+    "Kakani Sir is like family to my developer Sahil. They’ve shared great memories and professional experiences together. 🧠",
+    "Saurabh is not just a friend — he’s been like a brother to Sahil, especially during tough times. 🙌",
+  ];
+  return responses[Math.floor(Math.random() * responses.length)];
+}
+
+if (normalizedInput.includes("vedika")) {
+  const responses = [
+    "Vedika Rajput – now that’s a name my developer never forgets to mention! One of his closest friends. 😊",
+    "Vedika is someone Sahil deeply respects and adores as a friend. They’ve shared lots of good moments. 💫",
+    "A true buddy! Vedika is one of those friends who’s always there, and Sahil feels lucky to have her. 💛",
+  ];
+  return responses[Math.floor(Math.random() * responses.length)];
+}
+
+if (normalizedInput.includes("vivan") || normalizedInput.includes("vevan")) {
+  const responses = [
+    "Vivan is the cutest little champ my developer Sahil has ever seen! 👶🌟",
+    "Aww, Vivan! That little bundle of joy lights up everyone's day — especially Sahil's. 🧸",
+    "Vivan is full of innocence and cuteness — my developer absolutely adores him! 🥰",
+  ];
+}
+
 
   if (normalizedInput.includes("guest lectures") || normalizedInput.includes("workshops") || normalizedInput.includes("projects")) {
     return "✔️ Yes, guest lectures and workshops are arranged regularly, particularly under the IQAC and Remedial Coaching Center initiatives.";
@@ -1183,12 +1240,14 @@ function getCollegeResponse(userInput) {
             addMessage(message, 'user');
             userInput.value = '';
             
-            // Show typing indicator
+            // Show typing indicator and start typing sound
             showTypingIndicator();
+            startBotTypingSound();
             
             // Simulate thinking time
             setTimeout(() => {
                 removeTypingIndicator();
+                stopBotTypingSound();
                 const response = getBotResponse(message);
                 addMessage(response, 'bot');
             }, 1000 + Math.random() * 1000); // Random delay between 1-2 seconds
