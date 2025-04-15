@@ -693,7 +693,7 @@
                 return "Specific names of all BBA faculty are not listed in the prospectus, but the department is led by Dr. N. J. Honrao.";
             }
 
-            if(normalizedInput.includes("wifi password")){
+            if(normalizedInput.includes("wifi password") || normalizedInput.includes("wifi")){
                 return "The WiFi password is biyani@1234";
             }
 
@@ -716,12 +716,67 @@
             }
             
             // Greetings
-            if (/^(hi|hello|hey|hii|hiii|hiiii|hiiiiii|greetings|what's up|sup)(\s|$)/i.test(normalizedInput)) {
-                return "👋 Hello! I'm BiyaniBot, your guide to Brijlal Biyani Science College. How can I help you today?";
+            // Greetings and introduction variations
+            if (/^(hi|hello|hey|hii|hiii|hiiii|hiiiiii|helo|hellow|helloo|hy|heyy|heyyy|heya|hiya|wassup|yo|hai|howdy|greetings|what'?s up|sup|namaste|ram ram|jai shree ram|jai shree krishna)(\s|$)/i.test(normalizedInput)) {
+                const greetings = [
+                    "👋 Hello! I'm BiyaniBot, your college companion. How can I assist you?",
+                    "Hi there! Ready to help you learn about Brijlal Biyani College! 🎓",
+                    "Hey! I'm your college guide. What would you like to know? 🤝",
+                    "Greetings! Let me help you explore our college! 🏫",
+                    "Hello! Ask me anything about the college! 📚",
+                    "Hi! I'm here to answer your questions about our institution! ✨",
+                    "Hey there! Ready to guide you through college info! 🌟",
+                    "Welcome! How can I help you today? 😊",
+                    "Hello! Let's explore Brijlal Biyani College together! 🎯",
+                    "Hi! I'm your virtual college assistant! What's on your mind? 💭"
+                ];
+                return greetings[Math.floor(Math.random() * greetings.length)];
             }
 
-            if (/^(Namaste|Namasthe)(\s|$)/i.test(normalizedInput)) {
-                return "नमस्ते 🙏";
+            // General purpose questions
+            if (/^(what can you (do|help with)|how can you help|what do you do|what'?s your purpose|who are you|what are you|tell me about yourself|introduce yourself|what services)(\s|$)/i.test(normalizedInput)) {
+                const responses = [
+                    "I'm BiyaniBot! 🤖 I can help you with:\n- College information 📚\n- Course details 🎓\n- Admission process 📝\n- Faculty info 👨‍🏫\n- Fees structure 💰\n- Campus facilities 🏫",
+                    "I'm your college companion! Ask me about:\n- Programs offered 📚\n- Admission requirements 📋\n- Campus life 🏃\n- Faculty members 👩‍🏫\n- Infrastructure 🏢\n- Events & activities 🎯",
+                    "Hello! I can assist with:\n- Course information 📖\n- Application process 📝\n- Fee details 💳\n- Department info 🏫\n- Student services 🎓\n- Contact details 📞",
+                    "I'm here to help with:\n- Academic programs 🎓\n- Enrollment info 📚\n- Campus facilities 🏫\n- Faculty details 👨‍🏫\n- Student life 🎯\n- College rules 📋"
+                ];
+                return responses[Math.floor(Math.random() * responses.length)];
+            }
+
+            // How are you variations
+            if (/^(how are you|how r u|how r you|how are u|how you doing|how you|howdy)(\s|$)/i.test(normalizedInput)) {
+                const responses = [
+                    "I'm operating at peak efficiency! How can I assist you? 🚀",
+                    "I'm great and ready to help! What would you like to know? ✨",
+                    "All systems running perfectly! What can I do for you? 💫",
+                    "I'm doing well! Ready to answer your questions! 🌟",
+                    "Functioning optimally! How may I help you today? 🤖"
+                ];
+                return responses[Math.floor(Math.random() * responses.length)];
+            }
+
+            // Good morning/afternoon/evening/night variations
+            if (/^(good|gd) (morning|afternoon|evening|night)(\s|$)/i.test(normalizedInput)) {
+                const timeGreetings = [
+                    "Good day! How can I assist you with college information? 🌟",
+                    "Hello there! Ready to help you learn about our institution! 📚",
+                    "Greetings! What would you like to know about the college? 🎓",
+                    "Hi! Let's explore Brijlal Biyani College together! 🏫",
+                    "Welcome! How may I assist you today? ✨"
+                ];
+                return timeGreetings[Math.floor(Math.random() * timeGreetings.length)];
+            }
+
+            if (/^(nmste|nmskr|namaste|namasthe|namaskaar|namashkaar|namaskar|ram ram|jai shree ram|jai shri ram|jay shree ram|jay shri ram|jai shree krishna|jai shri krishna|jay shree krishna|jay shri krishna|radhe radhe|jai mata di|jay mata di)(\s|$)/i.test(normalizedInput)) {
+                const greetings = [
+                    "नमस्ते 🙏",
+                    "नमस्कार 🙏",
+                    "राम राम 🙏",
+                    "जय श्री राम 🙏",
+                    "राधे राधे 🙏",
+                ];
+                return greetings[Math.floor(Math.random() * greetings.length)];
             }
             
             // Farewell
@@ -875,13 +930,27 @@ if (normalizedInput.includes("barka")) {
   return responses[Math.floor(Math.random() * responses.length)];
 }
 
-if (normalizedInput.includes("kapil") || normalizedInput.includes("kapill")) {
-  const responses = [
-    "Kapil Sir is not just a friend — he’s a mentor, a motivator, and one of the most dependable persons in Sahil's life. 🙌",
-    "Kapil Sir has been a constant support for my developer Sahil. Always encouraging, always guiding. 🌠",
-    "When it comes to trust and friendship, Kapil Sir is at the top. Sahil looks up to him a lot! 👏",
-  ];
-  return responses[Math.floor(Math.random() * responses.length)];
+if (normalizedInput.includes("who is kapil sir") || normalizedInput.includes("kapil sir who") || normalizedInput.includes("kapil sir kon") || normalizedInput.includes("tell me about kapil sir") || normalizedInput.includes("kapil sir who is") || normalizedInput.includes("kapil sir kaun")) {
+    const responses = [
+        "Kapil Sir is my developer Sahil's mentor and former colleague. Their bond is stronger than ever despite the distance. 🌟",
+        "He's a mentor, guide and one of the most influential people in Sahil's professional journey. 🎯", 
+        "Kapil Sir is someone who helped shape my developer's growth and continues to be his trusted advisor. ✨",
+        "He's one of Sahil's most respected mentors who became family over time. Their connection transcends work boundaries. 🤝",
+        "A former colleague turned lifelong mentor - that's who Kapil Sir is to my developer Sahil. 💫"
+    ];
+    return responses[Math.floor(Math.random() * responses.length)];
+}
+
+if (normalizedInput.includes("about kapil sir") || normalizedInput.includes("tell me more about kapil sir") || normalizedInput.includes("want to know about kapil sir") || normalizedInput.includes("kapil sir ke bare me") || normalizedInput.includes("kapil sir details")) {
+    const responses = [
+        "Though they work separately now, Kapil Sir continues to be one of Sahil's most trusted mentors. Always encouraging, always guiding. 🌠",
+        "The wisdom and guidance Kapil Sir shares with Sahil transcends their former workplace connection. A true mentor for life! 🌟", 
+        "Time and distance haven't diminished their special bond - Kapil Sir remains one of Sahil's closest mentors and friends. 💫",
+        "Their mentor-mentee relationship has evolved into a beautiful friendship that stands the test of time. Distance is just a number! 🎯",
+        "Working together might be in the past, but Kapil Sir's positive influence on Sahil's life continues to grow stronger each day. ✨",
+        "Though paths may have separated, Kapil Sir remains one of Sahil's most dependable advisors. Their connection keeps getting stronger! 🤝"
+    ];
+    return responses[Math.floor(Math.random() * responses.length)];
 }
 
 if (normalizedInput.includes("priti")) {
@@ -922,7 +991,17 @@ if (normalizedInput.includes("prerna")) {
 
 if (normalizedInput.includes("saurabh") || normalizedInput.includes("saurav") || normalizedInput.includes("kakani")) {
   const responses = [
-    "Saurabh Sir – one of the most reliable and supportive people in Sahil’s journey. A true friend and mentor. 🤝",
+    "Saurabh Sir – one of the most reliable and supportive people in Sahil's journey. A true friend and mentor. 🤝",
+    "Kakani Sir has been an incredible support system for Sahil, always there through thick and thin. 💫",
+    "Saurabh Kakani - a name that represents trust, guidance, and unwavering support in Sahil's life. 🌟",
+    "When it comes to dependability, Kakani Sir tops the list - a mentor who became family. ⭐",
+    "Saurabh Sir's impact on Sahil's life goes beyond professional guidance - he's family now. 🙌",
+    "A friend, mentor, and guardian - that's Kakani Sir for my developer Sahil. 💪",
+    "The bond between Sahil and Saurabh Sir is one of mutual respect and endless support. ✨",
+    "Kakani Sir represents everything a true mentor should be - supportive, understanding, and caring. 🎯",
+    "Saurabh Sir's presence in Sahil's life has been a blessing - always guiding, always supporting. 🌠",
+    "Words fall short to describe the impact Kakani Sir has had on Sahil's personal and professional growth. 💫",
+    "A pillar of support and source of inspiration - that's what Saurabh Sir means to Sahil. 🎓",
     "Kakani Sir is like family to my developer Sahil. They’ve shared great memories and professional experiences together. 🧠",
     "Saurabh is not just a friend — he’s been like a brother to Sahil, especially during tough times. 🙌",
   ];
@@ -1288,7 +1367,20 @@ function getCollegeResponse(userInput) {
             }
             
             // Default response
-            return "❓ I don't have specific information about that. Would you like to know about our courses 📚, fees 💰, faculty 👨‍🏫, or campus facilities 🏫?";
+            // Default responses with variations
+            const defaultResponses = [
+                "I don't have that info. Want to know about our courses 📚, fees 💰, faculty 👨‍🏫, or facilities 🏫?",
+                "Not sure about that. Can I tell you about our programs 📝, costs 💵, teachers 👩‍🏫, or campus 🎓?",
+                "I'm not certain. Would you like details about academics 📖, charges 💳, staff 🧑‍🏫, or amenities 🏢?",
+                "That's not in my database. Interested in learning about studies 📕, expenses 💸, educators 👨‍🎓, or infrastructure 🏛️?",
+                "I don't have that information. Shall I share about degrees 🎓, tuition 💰, professors 👩‍🎓, or facilities 🏫?",
+                "Not in my knowledge base. Want to explore courses 📚, payments 💵, faculty 👨‍🏫, or campus life 🏢?",
+                "I'm not programmed for that. Like to know about programs 📝, fees 💰, teachers 🧑‍🏫, or amenities 🏛️?",
+                "Can't help with that. Interest in academics 📖, costs 💸, staff 👩‍🏫, or infrastructure 🎓?",
+                "Don't have that info. Should I tell you about streams 📕, charges 💳, professors 👨‍🎓, or facilities 🏫?",
+                "🤔 Yarr itne mushkil questions to mt pucho 🤦‍♂️ tummmmm ?"
+            ];
+            return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
         }
         
         // Function to handle sending message
