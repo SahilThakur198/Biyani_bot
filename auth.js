@@ -44,7 +44,7 @@ function updateNavigation() {
         baseLinks = [
             { href: 'about_us.html', text: 'About Us' },
             { href: 'bot.html', text: 'Chat' },
-            { href: 'home.html', text: 'About Bot' },
+            { href: 'home.html', text: 'About Bot' }, // Changed from Home.html to home.html
             { href: '#', text: 'Logout', onclick: 'logout()' }
         ];
     } else {
