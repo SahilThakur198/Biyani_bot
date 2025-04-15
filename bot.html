@@ -792,7 +792,7 @@ function processCollegeQuery(normalizedInput) {
   
   if (normalizedInput.includes("shweta") || normalizedInput.includes("sweta")) {
   const responses = [
-    "Shweta माझी माउसी आहे, ती म्हणजे माझ्या पप्पांची लाडकी बहीण! ती सध्या पुण्यात राहते आरतीसोबत आणि दोघीही खूप गोड आहेत. 🌸",
+    "Shweta माझी माउसी आहे, ती म्हणजे माझ्या पप्पांची बहीण! ती सध्या पुण्यात राहते आरतीसोबत आणि दोघीही खूप गोड आहेत. 🌸",
     "Shweta म्हणजे माझी माउसी — ती माझ्या पप्पांची बहिण आहे आणि ती पुण्यात आरतीसोबत राहत आहे. दोघीही खूप प्रेमळ आणि स्नेही आहेत. ❤️",
     "Ohh Shweta Mausi! ती म्हणजे माझ्या developer च्या पप्पांची बहिण – एकदम शांत, समजूतदार आणि आरतीसोबत पुण्यात राहत आहे. 🤗",
   ];
@@ -885,6 +885,7 @@ if (normalizedInput.includes("vivan") || normalizedInput.includes("vevan")) {
     "Aww, Vivan! That little bundle of joy lights up everyone's day — especially Sahil's. 🧸",
     "Vivan is full of innocence and cuteness — my developer absolutely adores him! 🥰",
   ];
+  return responses[Math.floor(Math.random() * responses.length)];
 }
 
 
@@ -1240,14 +1241,12 @@ function getCollegeResponse(userInput) {
             addMessage(message, 'user');
             userInput.value = '';
             
-            // Show typing indicator and start typing sound
+            // Show typing indicator
             showTypingIndicator();
-            startBotTypingSound();
             
             // Simulate thinking time
             setTimeout(() => {
                 removeTypingIndicator();
-                stopBotTypingSound();
                 const response = getBotResponse(message);
                 addMessage(response, 'bot');
             }, 1000 + Math.random() * 1000); // Random delay between 1-2 seconds
