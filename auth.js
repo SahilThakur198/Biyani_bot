@@ -36,23 +36,27 @@ function updateNavigation() {
     const navLinks = document.querySelector('.nav-links');
     const isUserLoggedIn = isLoggedIn();
     const currentUser = getLoggedInUser();
+    const currentPage = window.location.pathname.split('/').pop(); // Get the current page filename
 
-    // Define navigation links based on auth state
-    let links = [];
+    // Define base navigation links
+    let baseLinks = [];
     if (isUserLoggedIn) {
-        links = [
+        baseLinks = [
             { href: 'about_us.html', text: 'About Us' },
             { href: 'bot.html', text: 'Chat' },
             { href: 'home.html', text: 'About Bot' },
             { href: '#', text: 'Logout', onclick: 'logout()' }
         ];
     } else {
-        links = [
+        baseLinks = [
             { href: 'about_us.html', text: 'About Us' },
             { href: 'login.html', text: 'Login' },
             { href: 'signup.html', text: 'Sign Up' }
         ];
     }
+
+    // Filter out the link corresponding to the current page (case-insensitive comparison)
+    const links = baseLinks.filter(link => link.href.toLowerCase() !== currentPage.toLowerCase());
 
     // Update DOM with new links
     navLinks.innerHTML = links.map(link => 

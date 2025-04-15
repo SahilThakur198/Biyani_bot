@@ -394,7 +394,19 @@
             document.querySelector('.menu-toggle').classList.toggle('active'); // Toggle active on button too
         });
     </script>
-    <script src="auth.js"></script> <!-- Add auth script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if the current page is "About Bot"
+            if (window.location.pathname.includes('home.html')) {
+                // Find the "About Bot" button and remove it
+                const aboutBotButton = document.querySelector('.nav-links a[href="home.html"]');
+                if (aboutBotButton) {
+                    aboutBotButton.remove();
+                }
+            }
+        });
+    </script>
+    <script src="auth.js"></script>
     <script>
         // Protect this page - must be called after auth.js is loaded
         protectPage();

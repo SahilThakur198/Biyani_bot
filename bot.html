@@ -218,9 +218,14 @@
         <div class="logo text-xl">
             Biyani<span>Bot</span>
         </div>
-        <a href="index.html" class="text-white hover:text-gray-300 transition-colors duration-300">
-            <i class="fas fa-home text-xl"></i>
-        </a>
+        <div class="flex items-center space-x-4">
+            <button id="audioToggle" class="text-white hover:text-gray-300 transition-colors duration-300" aria-label="Toggle audio">
+                <i class="fas fa-volume-off text-xl"></i> <!-- Start with audio off -->
+            </button>
+            <a href="index.html" class="text-white hover:text-gray-300 transition-colors duration-300">
+                <i class="fas fa-home text-xl"></i>
+            </a>
+        </div>
     </header>
     
     <div class="accent-line mb-6"></div>
@@ -246,7 +251,58 @@
         const chatMessages = document.getElementById('chatMessages');
         const userInput = document.getElementById('userInput');
         const sendButton = document.getElementById('sendButton');
-        
+        const audioToggleButton = document.getElementById('audioToggle');
+        const audioIcon = audioToggleButton.querySelector('i');
+
+        let isAudioEnabled = false; // Audio is off by default
+        let synth = window.speechSynthesis;
+        let voices = [];
+
+        function loadVoices() {
+            voices = synth.getVoices();
+            // You might want to log voices here to see available options
+            // console.log(voices);
+        }
+
+        // Load voices when they are ready
+        if (synth.onvoiceschanged !== undefined) {
+            synth.onvoiceschanged = loadVoices;
+        }
+        loadVoices(); // Initial load attempt
+
+        /**
+         * Speaks the given text using the Web Speech API
+         * @param {string} text - The text to speak
+         */
+        function speakMessage(text) {
+            if (!isAudioEnabled || !synth || text.trim() === '') return;
+
+            // Cancel any previous speech
+            synth.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            
+            // Attempt to find a robotic or distinct voice (highly browser/OS dependent)
+            // You might need to experiment with voice names found in console.log(voices)
+            let selectedVoice = voices.find(voice => voice.name.includes('Robot')) || 
+                                voices.find(voice => voice.name.includes('Google US English')) || // Common fallback
+                                voices.find(voice => voice.lang === 'en-US'); // Generic US English
+
+            if (selectedVoice) {
+                utterance.voice = selectedVoice;
+            }
+            
+            // Optional: Adjust pitch and rate for a more robotic feel
+            utterance.pitch = 0.8; // Lower pitch
+            utterance.rate = 0.9; // Slightly slower rate
+
+            utterance.onerror = (event) => {
+                console.error('SpeechSynthesisUtterance.onerror', event);
+            };
+
+            synth.speak(utterance);
+        }
+
         /**
          * Main Knowledge Base Object
          * Contains all the information that the chatbot can access and respond with
@@ -360,6 +416,9 @@
             messageDiv.textContent = message;
             chatMessages.appendChild(messageDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Speak the message if audio is enabled
+            speakMessage(message);
         }
         
         /**
@@ -1241,12 +1300,14 @@ function getCollegeResponse(userInput) {
             addMessage(message, 'user');
             userInput.value = '';
             
-            // Show typing indicator
+            // Show typing indicator and start typing sound
             showTypingIndicator();
+            startBotTypingSound();
             
             // Simulate thinking time
             setTimeout(() => {
                 removeTypingIndicator();
+                stopBotTypingSound();
                 const response = getBotResponse(message);
                 addMessage(response, 'bot');
             }, 1000 + Math.random() * 1000); // Random delay between 1-2 seconds
@@ -1255,6 +1316,22 @@ function getCollegeResponse(userInput) {
         // Event listeners
         sendButton.addEventListener('click', sendMessage);
         
+        audioToggleButton.addEventListener('click', () => {
+            isAudioEnabled = !isAudioEnabled;
+            if (isAudioEnabled) {
+                audioIcon.classList.remove('fa-volume-off');
+                audioIcon.classList.add('fa-volume-up');
+                // Optional: Speak a confirmation
+                speakMessage("Audio enabled"); 
+            } else {
+                audioIcon.classList.remove('fa-volume-up');
+                audioIcon.classList.add('fa-volume-off');
+                synth.cancel(); // Stop any ongoing speech
+                // Optional: Speak a confirmation
+                // speakMessage("Audio disabled"); // Can't speak if disabled!
+            }
+        });
+
         userInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 sendMessage();
