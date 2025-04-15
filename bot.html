@@ -1010,6 +1010,27 @@ if (normalizedInput.includes("yasar")) {
   return responses[Math.floor(Math.random() * responses.length)];
 }
 
+if (normalizedInput.includes("shankar") || normalizedInput.includes("dhadake")) {
+    // Static counter that persists between function calls
+    if (!window.shankarResponseCounter) {
+        window.shankarResponseCounter = 0;
+    }
+
+    const responses = [
+        "Ah, Shankar! He was my father's best buddy from school days. Though distance separates them now, their friendship remains timeless! 🌟",
+        "Shankar and pappa Sahil go way back to school days. Miles apart but forever best friends! ❤️", 
+        "Oh, you mean Shankar? He's that special friend from Sahil's school years. Distance can't touch their unbreakable bond! 🤝",
+        "Shankar holds a special place in Sahil's heart - their friendship from school days stands strong despite the miles between them. ✨",
+        "Shankar bhai 🏑 hokey ke bhot bade player the phir ekdin unhone mere pappa se udhar le liye...., lekin mere pappa ❤️ ke bhot achese"
+    ];
+
+    // Get response based on counter and increment it
+    const response = responses[window.shankarResponseCounter % responses.length];
+    window.shankarResponseCounter++;
+
+    return response;
+}
+
 if (normalizedInput.includes("barka")) {
   const responses = [
     "वो हमारी फुफी है ✌️ for 👶👶 ",
