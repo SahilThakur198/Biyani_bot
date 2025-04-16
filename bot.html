@@ -1021,7 +1021,7 @@ if (normalizedInput.includes("shankar") || normalizedInput.includes("dhadake")) 
         "Shankar and pappa Sahil go way back to school days. Miles apart but forever best friends! ❤️", 
         "Oh, you mean Shankar? He's that special friend from Sahil's school years. Distance can't touch their unbreakable bond! 🤝",
         "Shankar holds a special place in Sahil's heart - their friendship from school days stands strong despite the miles between them. ✨",
-        "Shankar bhai 🏑 hokey ke bhot bade player the phir ekdin unhone mere pappa se udhar le liye...., lekin mere pappa ❤️ ke bhot ache hai 😅"
+        "Shankar bhai 🏑 hokey ke bhot bade player the phir ekdin unhone mere pappa se udhar le liye...., lekin mere pappa ❤️ ke bhot achese"
     ];
 
     // Get response based on counter and increment it
@@ -1091,20 +1091,39 @@ if (normalizedInput.includes("priti")) {
   return responses[Math.floor(Math.random() * responses.length)];
 }
 
-if (normalizedInput.includes("rizwan")) {
+if (normalizedInput.includes("yugandhara") || normalizedInput.includes("vairagale") || normalizedInput.includes("yugu") || normalizedInput.includes("manager")) {
   const responses = [
-    "Rizwan Khan is like a big brother to my developer Sahil — and an uncle to me! Very supportive and always there when needed. 🙏",
-    "Rizwan Uncle! Elder brother of Sahil and a guiding force behind him. A true gentleman. 👑",
-    "You mean Rizwan bhai? He’s the elder brother of my developer and one of the most supportive figures in his life. 🤝",
-	  "unki ek tang nakhli hai wo hocky 🏑 bhot bade player the, ekdin glti se unki nazar amz vacancy pe pd gyi tb se abtk so night shift kr rhe hai, wo ❤️ ke bhot ache hai 😂",
+    "👩‍💼 Yugandhara is an amazing manager at Amazon VCS - she's one of my developer's most trusted mentors! 🌟",
+    "Meet Yugandhara! She's not just a manager at Amazon VCS, but also someone who inspires my developer every day! ✨",
+    "Yugandhara? Oh, she's the incredible Amazon VCS manager who guides my developer through challenges and growth! 💫",
+    "She's one of the finest managers at Amazon VCS - Yugandhara brings wisdom and support to my developer's journey! 🚀",
+    "A brilliant leader at Amazon VCS, Yugandhara helps shape career paths with her exceptional guidance! 💪",
+    "Yugandhara is that special mentor who transforms challenges into opportunities at Amazon VCS! 🌟",
+    "An inspirational manager from Amazon VCS - that's Yugandhara! She's always there to support and guide! ⭐",
+    "In the world of Amazon VCS, Yugandhara stands out as a manager who truly cares about her team's growth! 🌠",
+    "She's the kind of manager everyone wishes for - Yugandhara brings both expertise and empathy to Amazon VCS! 💫",
+    "A phenomenal manager and mentor at Amazon VCS - Yugandhara makes every day a learning opportunity! ✨"
+
   ];
   return responses[Math.floor(Math.random() * responses.length)];
 }
 
-if (normalizedInput.includes("jane")) {
+if (normalizedInput.includes("rizwan")) {
   const responses = [
-    "The MOST रिकामतेकड़ी person working on the project bot currently",
-  return responses[Math.floor(Math.random() * responses.length)];
+    "Rizwan Khan is like a big brother to my developer Sahil — and an uncle to me! Very supportive and always there when needed. 🙏",
+    "Rizwan Uncle! Elder brother of Sahil and a guiding force behind him. A true gentleman. 👑",
+    "Rizwan Bhai Hokey 🏑 ke bhot bade player the, Phir ek din unki nazar glti se Amazon ki vacancy per chali tb se abhi tk wo night shift kr rahe hai, magar Rizwan Bhai ❤️ ke bhot ache hai 😂 ",
+  ];
+// Use a static counter that persists between function calls
+if (!window.rizwanResponseCounter) {
+    window.rizwanResponseCounter = 0;
+}
+
+// Get response based on counter and increment it
+const response = responses[window.rizwanResponseCounter % responses.length];
+window.rizwanResponseCounter++;
+
+return response;
 }
 
 if (normalizedInput.includes("manmeet") || normalizedInput.includes("manit")) {
@@ -1162,7 +1181,13 @@ if (normalizedInput.includes("vivan") || normalizedInput.includes("vevan")) {
   return responses[Math.floor(Math.random() * responses.length)];
 }
 
+   if (normalizedInput.includes("jane")) {
+    return "Miss Achal Jane is most रिकामटेकडी 👶 person working on the project bot";
+  }
 
+  if (normalizedInput.includes("dhote")) {
+    return "Principal of college";
+  }
   if (normalizedInput.includes("guest lectures") || normalizedInput.includes("workshops") || normalizedInput.includes("projects")) {
     return "✔️ Yes, guest lectures and workshops are arranged regularly, particularly under the IQAC and Remedial Coaching Center initiatives.";
   }
