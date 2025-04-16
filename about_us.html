@@ -1,496 +1,514 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Biyani Bot</title>
+    <meta charset="UTF-8"> <!-- Specifies the character encoding for the document -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configures the viewport for responsive design -->
+    <title>About Us - Biyani Bot</title> <!-- Sets the title of the page -->
+    <!-- Link to Google Fonts for the 'Inter' font family -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* CSS Variables for consistent styling */
         :root {
-            --primary-bg: #0a0a0a;
-            --accent-1: #00ff9d;
-            --accent-2: #0095ff;
-            --text-primary: #f0f0f0;
-            --text-secondary: #888;
+            --primary-bg: #0a0a0a; /* Primary background color */
+            --accent-1: #00ff9d; /* First accent color (neon green) */
+            --accent-2: #0095ff; /* Second accent color (blue) */
+            --text-primary: #f0f0f0; /* Primary text color */
+            --text-secondary: #888; /* Secondary text color */
+            /* Neon glow effect for specific elements */
             --neon-glow: 0 0 10px rgba(0, 255, 157, 0.5),
                          0 0 20px rgba(0, 255, 157, 0.3),
                          0 0 30px rgba(0, 149, 255, 0.2);
-            --quantum-glow: 0 0 15px rgba(0, 255, 157, 1),
-                           0 0 30px rgba(0, 149, 255, 0.7);
         }
 
+        /* Basic reset for all elements */
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            box-sizing: border-box; /* Include padding and border in element's total width and height */
         }
 
+        /* Body styling */
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #001a2c 100%);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif; /* Set default font */
+            background: linear-gradient(135deg, #0a0a0a 0%, #001a2c 100%); /* Gradient background */
+            color: var(--text-primary); /* Set default text color */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            min-height: 100vh; /* Ensure body takes at least the full viewport height */
         }
 
+        /* Header styling */
         .cyber-header {
-            padding: 1.5rem 5%;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--accent-1);
-            box-shadow: 0 5px 20px rgba(0, 255, 157, 0.1);
+            padding: 1.5rem 5%; /* Padding top/bottom and left/right */
+            position: fixed; /* Keep header fixed at the top */
+            width: 100%; /* Full width */
+            top: 0; /* Position at the top */
+            z-index: 100; /* Ensure header is above other content */
+            background: rgba(10, 10, 10, 0.95); /* Semi-transparent background */
+            backdrop-filter: blur(10px); /* Apply blur effect to background */
+            border-bottom: 1px solid var(--accent-1); /* Neon green bottom border */
+            box-shadow: 0 5px 20px rgba(0, 255, 157, 0.1); /* Subtle shadow */
         }
 
+        /* Navigation container styling */
         .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
+            display: flex; /* Use flexbox for layout */
+            justify-content: space-between; /* Space items evenly */
+            align-items: center; /* Align items vertically */
+            max-width: 1200px; /* Maximum width of the container */
+            margin: 0 auto; /* Center the container */
         }
 
+        /* Navigation links styling */
         .nav-links a {
-            color: var(--text-primary);
-            text-decoration: none;
-            margin-left: 2rem;
-            position: relative;
-            transition: color 0.3s ease;
+            color: var(--text-primary); /* Text color */
+            text-decoration: none; /* Remove underline */
+            margin-left: 2rem; /* Space between links */
+            position: relative; /* Needed for potential pseudo-elements */
+            transition: color 0.3s ease; /* Smooth color transition on hover */
         }
 
+        /* Navigation link hover effect */
         .nav-links a:hover {
-            color: var(--accent-1);
+            color: var(--accent-1); /* Change color to neon green on hover */
         }
 
+        /* Main content container styling */
         .about-container {
-            padding: 8rem 2rem 4rem;
-            max-width: 1400px;
-            margin: 0 auto;
+            padding: 8rem 2rem 4rem; /* Padding top, left/right, bottom */
+            max-width: 1400px; /* Maximum width */
+            margin: 0 auto; /* Center the container */
         }
 
+        /* Hero section styling */
         .hero-section {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 4rem;
-            margin-bottom: 4rem;
-            min-height: 80vh;
+            display: flex; /* Use flexbox */
+            align-items: center; /* Align items vertically */
+            justify-content: space-between; /* Space items */
+            gap: 4rem; /* Gap between flex items */
+            margin-bottom: 4rem; /* Bottom margin */
+            min-height: 80vh; /* Minimum height */
         }
 
+        /* Hero content styling */
         .hero-content {
-            flex: 1;
-            padding-right: 2rem;
+            flex: 1; /* Take up available space */
+            padding-right: 2rem; /* Right padding */
         }
 
+        /* Brain model container styling */
         .brain-model {
-            flex: 1;
-            height: 600px;
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            background: rgba(0, 20, 40, 0.3);
-            box-shadow: var(--neon-glow);
-            animation: pulseContainer 4s ease-in-out infinite;
+            flex: 1; /* Take up available space */
+            height: 600px; /* Fixed height */
+            position: relative; /* Needed for absolute positioning or animations */
+            border-radius: 20px; /* Rounded corners */
+            overflow: hidden; /* Hide overflowing content (like the iframe) */
+            background: rgba(0, 20, 40, 0.3); /* Semi-transparent background */
+            box-shadow: var(--neon-glow); /* Apply neon glow */
+            animation: pulseContainer 4s ease-in-out infinite; /* Apply pulsing animation */
         }
 
+        /* Keyframes for the brain model container pulsing animation */
         @keyframes pulseContainer {
-            0%, 100% { transform: scale(1); box-shadow: var(--neon-glow); }
+            0%, 100% { transform: scale(1); box-shadow: var(--neon-glow); } /* Start and end state */
             50% { transform: scale(1.02); box-shadow: 0 0 20px rgba(0, 255, 157, 0.7),
                                                      0 0 40px rgba(0, 255, 157, 0.4),
-                                                     0 0 60px rgba(0, 149, 255, 0.3); }
+                                                     0 0 60px rgba(0, 149, 255, 0.3); } /* Mid-animation state */
         }
 
+        /* College name heading styling */
         .college-name {
-            font-size: 3.5rem;
-            line-height: 1.2;
-            margin-bottom: 2rem;
-            position: relative;
-            display: inline-block;
+            font-size: 3.5rem; /* Font size */
+            line-height: 1.2; /* Line height */
+            margin-bottom: 2rem; /* Bottom margin */
+            position: relative; /* Needed for pseudo-element */
+            display: inline-block; /* Allows pseudo-element positioning */
         }
 
+        /* Glitch effect for college name */
         .college-name::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, var(--accent-1), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: glitchText 5s infinite linear alternate;
+            content: ''; /* Required for pseudo-elements */
+            position: absolute; /* Position relative to the parent */
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            background: linear-gradient(45deg, var(--accent-1), var(--accent-2)); /* Gradient background */
+            -webkit-background-clip: text; /* Clip background to text */
+            -webkit-text-fill-color: transparent; /* Make text transparent to show background */
+            animation: glitchText 5s infinite linear alternate; /* Apply glitch animation */
         }
 
+        /* Keyframes for the glitch text animation */
         @keyframes glitchText {
             0%, 100% { clip-path: inset(0 0 0 0); }
-            20% { clip-path: inset(20% 0 0 0); }
-            40% { clip-path: inset(0 20% 0 0); }
-            60% { clip-path: inset(0 0 20% 0); }
-            80% { clip-path: inset(0 0 0 20%); }
+            20% { clip-path: inset(20% 0 0 0); } /* Clip top */
+            40% { clip-path: inset(0 20% 0 0); } /* Clip right */
+            60% { clip-path: inset(0 0 20% 0); } /* Clip bottom */
+            80% { clip-path: inset(0 0 0 20%); } /* Clip left */
         }
 
+        /* Team grid styling */
         .team-grid {
-            display: grid;
+            display: grid; /* Use CSS Grid */
+            /* Create responsive columns: fit as many 280px columns as possible */
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
+            gap: 2rem; /* Gap between grid items */
+            margin-top: 4rem; /* Top margin */
         }
 
+        /* Team card styling */
         .team-card {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 15px;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.03); /* Very subtle light background */
+            border-radius: 15px; /* Rounded corners */
+            padding: 2rem; /* Padding inside the card */
+            position: relative; /* Needed for pseudo-element and hover effects */
+            overflow: hidden; /* Hide overflowing pseudo-element */
+            transition: all 0.4s ease; /* Smooth transition for all properties */
         }
 
-        .member-image {
-            width: 100px;
-            height: 100px;
-            border-radius: 10px;
-            object-fit: cover;
-            position: absolute;
-            right: 2rem;
-            top: 50%;
-            transform: translateY(-50%) scale(0);
-            opacity: 0;
-            filter: brightness(0.3) blur(5px);
-            z-index: 0;
-            transition: none;
-            pointer-events: none;
-        }
-
-        .team-card:hover .member-image {
-            animation: quantumMaterialize 7s ease-out forwards;
-        }
-
-        @keyframes quantumMaterialize {
-            0% {
-                opacity: 0;
-                transform: translateY(-50%) scale(0);
-                filter: brightness(0.3) blur(5px);
-            }
-            50% {
-                opacity: 0.5;
-                transform: translateY(-50%) scale(0.7);
-                filter: brightness(0.6) blur(2px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(-50%) scale(1);
-                filter: brightness(1) blur(0);
-                border: 3px solid var(--accent-1);
-                box-shadow: var(--quantum-glow);
-                z-index: 2;
-            }
-        }
-
-        /* Particle Effect */
+        /* Team card hover effect - sliding gradient */
         .team-card::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 10% 20%, rgba(0, 255, 157, 0.3) 2px, transparent 3px),
-                radial-gradient(circle at 90% 80%, rgba(0, 149, 255, 0.3) 2px, transparent 3px),
-                radial-gradient(circle at 50% 50%, rgba(0, 255, 157, 0.2) 2px, transparent 3px);
-            background-size: 20px 20px;
-            opacity: 0;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .team-card:hover::before {
-            animation: particleForm 7s ease-out forwards;
-        }
-
-        @keyframes particleForm {
-            0% { opacity: 0; transform: scale(0.5); }
-            30% { opacity: 0.7; transform: scale(1.1); }
-            70% { opacity: 0.5; transform: scale(1); }
-            100% { opacity: 0; transform: scale(1); }
-        }
-
-        /* Scan Line Effect */
-        .team-card::after {
-            content: '';
-            position: absolute;
+            content: ''; /* Required for pseudo-elements */
+            position: absolute; /* Position relative to the card */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                to bottom,
-                rgba(0, 255, 157, 0.2) 0%,
-                transparent 2%,
-                transparent 98%,
-                rgba(0, 255, 157, 0.2) 100%
-            );
-            opacity: 0;
-            z-index: 1;
-            pointer-events: none;
+            /* Diagonal gradient overlay */
+            background: linear-gradient(45deg,
+                transparent 0%,
+                rgba(0, 255, 157, 0.1) 50%,
+                transparent 100%);
+            transform: translateX(-100%); /* Initially off-screen to the left */
+            transition: transform 0.6s ease; /* Smooth transition for the slide */
         }
 
-        .team-card:hover::after {
-            animation: scanLines 7s ease-out forwards;
-        }
-
-        @keyframes scanLines {
-            0% { opacity: 0; transform: translateY(-100%); }
-            20% { opacity: 0.6; transform: translateY(0); }
-            80% { opacity: 0.4; transform: translateY(100%); }
-            100% { opacity: 0; transform: translateY(100%); }
-        }
-
-        .member-info {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            padding-left: 1.5rem;
-            z-index: 3;
-        }
-
-        .member-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(45deg, var(--accent-1), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transform: translateX(-10px);
-        }
-
-        .member-role {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            padding-left: 1rem;
-            transform: translateX(10px);
-        }
-
-        .member-role::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            width: 5px;
-            height: 5px;
-            background: var(--accent-1);
-            border-radius: 50%;
-            transform: translateY(-50%);
-        }
-
-        .team-card:hover .member-name,
-        .team-card:hover .member-role {
-            color: #fff;
-            -webkit-text-fill-color: #fff;
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
-            transition: opacity 0.3s ease-out 7s;
-            opacity: 1;
-        }
-
-        .team-card:hover .member-image[style*="opacity: 1"] ~ .member-info .member-name,
-        .team-card:hover .member-image[style*="opacity: 1"] ~ .member-info .member-role {
-            opacity: 0.6;
-        }
-
+        /* Team card hover state */
         .team-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--neon-glow);
+            transform: translateY(-10px); /* Lift the card slightly */
+            box-shadow: var(--neon-glow); /* Add neon glow */
         }
 
-        .academic-info {
-            text-align: center;
-            margin-top: 4rem;
-            padding: 2rem;
-            background: rgba(0, 255, 157, 0.05);
-            border-radius: 15px;
-            position: relative;
-            overflow: hidden;
+        /* Team card hover state for the pseudo-element */
+        .team-card:hover::before {
+            transform: translateX(100%); /* Slide the gradient across */
         }
 
-        .academic-info p {
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        /* Team member name styling */
+        .member-name {
+            font-size: 1.5rem; /* Font size */
+            font-weight: 700; /* Bold font weight */
+            margin-bottom: 0.5rem; /* Bottom margin */
+            /* Apply gradient text effect */
             background: linear-gradient(45deg, var(--accent-1), var(--accent-2));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            padding: 1rem;
-            position: relative;
-            z-index: 1;
+            cursor: pointer;
         }
 
+        /* Team member role styling */
+        .member-role {
+            color: var(--text-secondary); /* Secondary text color */
+            font-size: 1rem; /* Font size */
+            text-transform: uppercase; /* Uppercase text */
+            letter-spacing: 2px; /* Increased letter spacing */
+            position: relative; /* Needed for pseudo-element */
+            padding-left: 1rem; /* Space for the pseudo-element */
+        }
+
+        /* Small dot before the member role */
+        .member-role::before {
+            content: ''; /* Required */
+            position: absolute; /* Position relative to the role text */
+            left: 0; /* Position at the start of the padding */
+            top: 50%; /* Center vertically */
+            width: 5px; /* Dot width */
+            height: 5px; /* Dot height */
+            background: var(--accent-1); /* Neon green color */
+            border-radius: 50%; /* Make it a circle */
+            transform: translateY(-50%); /* Fine-tune vertical centering */
+        }
+
+        /* Academic information section styling */
+        .academic-info {
+            text-align: center; /* Center text */
+            margin-top: 4rem; /* Top margin */
+            padding: 2rem; /* Padding */
+            background: rgba(0, 255, 157, 0.05); /* Subtle green background */
+            border-radius: 15px; /* Rounded corners */
+            position: relative; /* Needed for pseudo-element */
+            overflow: hidden; /* Hide overflowing pseudo-element */
+        }
+
+        /* Text styling within academic info */
+        .academic-info p {
+            font-size: 1.2rem; /* Font size */
+            letter-spacing: 2px; /* Letter spacing */
+            text-transform: uppercase; /* Uppercase text */
+            /* Gradient text effect */
+            background: linear-gradient(45deg, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 1rem; /* Padding */
+            position: relative; /* Ensure text is above the pseudo-element */
+            z-index: 1; /* Stack text above the rotating gradient */
+        }
+
+        /* Rotating gradient background effect for academic info */
         .academic-info::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(0, 255, 157, 0.1), transparent);
-            animation: rotateGradient 8s linear infinite;
+            content: ''; /* Required */
+            position: absolute; /* Position relative to the container */
+            top: -50%; /* Position offset */
+            left: -50%; /* Position offset */
+            width: 200%; /* Make it larger than the container */
+            height: 200%; /* Make it larger than the container */
+            /* Rotating gradient */
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(0, 255, 157, 0.1),
+                transparent
+            );
+            animation: rotateGradient 8s linear infinite; /* Apply rotation animation */
         }
 
+        /* Keyframes for the rotating gradient animation */
         @keyframes rotateGradient {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% { transform: rotate(0deg); } /* Start rotation */
+            100% { transform: rotate(360deg); } /* End rotation (full circle) */
         }
 
+        /* Responsive Design Media Queries */
+
+        /* Styles for screens up to 1024px wide (tablets, small laptops) */
         @media (max-width: 1024px) {
             .hero-section {
-                flex-direction: column;
-                gap: 2rem;
+                flex-direction: column; /* Stack items vertically */
+                gap: 2rem; /* Reduce gap */
             }
 
             .hero-content {
-                padding-right: 0;
-                text-align: center;
+                padding-right: 0; /* Remove right padding */
+                text-align: center; /* Center text */
             }
 
             .brain-model {
-                width: 100%;
-                height: 400px;
+                width: 100%; /* Full width */
+                height: 400px; /* Reduce height */
             }
 
             .team-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr); /* Two columns */
             }
         }
 
+        /* Styles for screens up to 768px wide (large phones, small tablets) */
         @media (max-width: 768px) {
             .about-container {
-                padding: 6rem 1rem 2rem;
+                padding: 6rem 1rem 2rem; /* Adjust padding */
             }
 
             .team-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
+                grid-template-columns: 1fr; /* Single column */
+                gap: 1.5rem; /* Reduce gap */
             }
 
             .team-card {
-                padding: 1.5rem;
+                padding: 1.5rem; /* Reduce padding */
             }
 
             .brain-model {
-                height: 300px;
+                height: 300px; /* Further reduce height */
             }
 
+            /* Hide desktop navigation links */
             .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
+                display: none; /* Hide by default */
+                position: fixed; /* Keep it fixed relative to viewport (will be changed later) */
+                top: 80px; /* Position below header */
                 left: 0;
                 width: 100%;
-                background: rgba(10, 10, 10, 0.95);
+                background: rgba(10, 10, 10, 0.95); /* Background for mobile menu */
                 padding: 1rem;
-                flex-direction: column;
-                align-items: center;
-                backdrop-filter: blur(10px);
-                border-bottom: 1px solid var(--accent-1);
-                z-index: 100;
+                flex-direction: column; /* Stack links vertically */
+                align-items: center; /* Center links */
             }
 
+            /* Show mobile navigation links when active */
             .nav-links.active {
-                display: flex;
+                display: flex; /* Show the menu */
             }
 
+            /* Styling for individual links in mobile menu */
             .nav-links a {
-                margin: 1rem 0;
-                font-size: 1.1rem;
-                width: 100%;
-                text-align: center;
-                padding: 0.5rem;
+                margin: 1rem 0; /* Vertical margin */
             }
 
+            /* Show the menu toggle button */
             .menu-toggle {
-                display: flex;
-                flex-direction: column;
-                gap: 6px;
-                padding: 5px;
-                z-index: 101;
-                cursor: pointer;
+                display: block; /* Make it visible */
+                cursor: pointer; /* Indicate it's clickable */
             }
 
             .college-name {
-                font-size: 2rem;
+                font-size: 2rem; /* Reduce font size */
             }
         }
 
+        /* Styles for screens up to 480px wide (standard phones) */
         @media (max-width: 480px) {
             .about-container {
-                padding: 6rem 1rem 2rem;
+                padding: 6rem 1rem 2rem; /* Adjust padding */
             }
 
             .college-name {
-                font-size: 1.8rem;
+                font-size: 1.8rem; /* Further reduce font size */
             }
 
             .brain-model {
-                height: 250px;
-            }
-
-            .member-image {
-                width: 80px;
-                height: 80px;
-            }
-
-            .team-card::after {
-                width: 80px;
-                height: 80px;
+                height: 250px; /* Further reduce height */
             }
         }
 
+        /* Project description styling */
         .project-description {
-            line-height: 1.8;
-            font-size: 1.1rem;
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 15px;
-            border: 1px solid rgba(0, 255, 157, 0.2);
+            line-height: 1.8; /* Increase line spacing */
+            font-size: 1.1rem; /* Font size */
+            margin-top: 2rem; /* Top margin */
+            padding: 1.5rem; /* Padding */
+            background: rgba(255, 255, 255, 0.03); /* Subtle background */
+            border-radius: 15px; /* Rounded corners */
+            border: 1px solid rgba(0, 255, 157, 0.2); /* Subtle border */
         }
 
+        /* Highlighted text styling */
         .highlight {
-            color: var(--accent-1);
-            font-weight: 600;
+            color: var(--accent-1); /* Neon green color */
+            font-weight: 600; /* Semi-bold */
         }
 
+        /* Mobile menu toggle button (hamburger icon) styling */
+        .menu-toggle {
+            display: none; /* Hidden by default on larger screens */
+            flex-direction: column; /* Stack bars vertically */
+            gap: 6px; /* Space between bars */
+            padding: 5px; /* Padding around bars */
+            z-index: 101; /* Ensure it's above the header background */
+            cursor: pointer; /* Indicate clickability */
+        }
+
+        /* Individual bars of the hamburger icon */
         .menu-toggle .bar {
-            width: 25px;
-            height: 2px;
-            background: var(--text-primary);
-            transition: 0.3s;
+            width: 25px; /* Bar width */
+            height: 2px; /* Bar height */
+            background: var(--text-primary); /* Bar color */
+            transition: 0.3s; /* Smooth transition for animation */
         }
 
+        /* Animation for the top bar when menu is active (forms an 'X') */
         .menu-toggle.active .bar:nth-child(1) {
             transform: rotate(45deg) translate(6px, 6px);
         }
 
+        /* Hide the middle bar when menu is active */
         .menu-toggle.active .bar:nth-child(2) {
             opacity: 0;
         }
 
+        /* Animation for the bottom bar when menu is active (forms an 'X') */
         .menu-toggle.active .bar:nth-child(3) {
             transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Responsive adjustments for mobile navigation positioning */
+        @media (max-width: 768px) {
+            .nav-container { /* Added relative positioning */
+                position: relative; /* Needed for absolute positioning of the mobile menu */
+            }
+
+            .nav-links {
+                display: none; /* Ensure it's hidden by default */
+                position: absolute; /* Position relative to nav-container */
+                top: 100%; /* Position directly below the header */
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.95); /* Background */
+                padding: 1rem;
+                flex-direction: column; /* Stack links */
+                align-items: center; /* Center links */
+                backdrop-filter: blur(10px); /* Blur effect */
+                border-bottom: 1px solid var(--accent-1); /* Bottom border */
+                z-index: 100; /* Ensure it's below the toggle button but above content */
+            }
+
+            /* Show mobile menu when active */
+            .nav-links.active {
+                display: flex;
+            }
+
+            /* Styling for links within the mobile menu */
+            .nav-links a {
+                margin: 1rem 0; /* Vertical margin */
+                font-size: 1.1rem; /* Font size */
+                width: 100%; /* Full width */
+                text-align: center; /* Center text */
+                padding: 0.5rem; /* Padding */
+            }
+
+            /* Ensure the menu toggle is displayed as flex */
+            .menu-toggle {
+                display: flex;
+            }
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 80%;
+            max-height: 80vh;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 2px solid var(--accent-1);
+            border-radius: 8px;
+            box-shadow: var(--neon-glow);
+        }
+
+        .close {
+            position: absolute;
+            right: 25px;
+            top: 25px;
+            color: var(--accent-1);
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
+    <!-- Header section -->
     <header class="cyber-header">
         <nav class="nav-container">
+            <!-- Logo/Brand Name -->
             <h1><a href="index.html" style="text-decoration: none; color: var(--text-primary);">
-                Biyani<span style="color: var(--accent-1);">Bot</span>
+                Biyani<span style="color: var(--accent-1);">Bot</span> <!-- Bot part highlighted -->
             </a></h1>
+            <!-- Navigation links container (populated by JavaScript) -->
             <div class="nav-links">
+                <!-- Links will be populated by auth.js based on login status -->
             </div>
+            <!-- Mobile menu toggle button (hamburger icon) -->
             <div class="menu-toggle">
                 <div class="bar"></div>
                 <div class="bar"></div>
@@ -499,8 +517,11 @@
         </nav>
     </header>
 
+    <!-- Main content area -->
     <main class="about-container">
+        <!-- Hero section with college name and 3D model -->
         <section class="hero-section">
+            <!-- Left side content -->
             <div class="hero-content">
                 <h1 class="college-name">Brijlal Biyani Science College</h1>
                 <p class="project-description">
@@ -511,52 +532,45 @@
                     <span class="highlight">cutting-edge technology</span> to academic support services.
                 </p>
             </div>
+            <!-- Right side content (3D brain model) -->
             <div class="brain-model">
+                <!-- Embedded 3D model using iframe from Spline -->
                 <iframe
                     src="https://my.spline.design/particleaibrain-632951f6f863ed73e8ebb59c67bb6ca0/"
-                    frameborder="0"
+                    frameborder="0" /* Remove iframe border */
                     width="100%"
                     height="100%"
-                    style="mix-blend-mode: screen; transform: scale(1.2);"
+                    style="mix-blend-mode: screen; transform: scale(1.2);" /* Styling for visual effect */
                 ></iframe>
             </div>
         </section>
 
+        <!-- Team section displaying project members -->
         <section class="team-grid">
+            <!-- Individual team member cards -->
             <div class="team-card">
-                <div class="member-info">
-                    <div class="member-name team-member-name-hover">Sahil Thakur</div>
-                    <div class="member-role">Main Developer</div>
-                </div>
-                <img src="images/sahil.jpg" alt="Sahil Thakur" class="member-image">
+                <div class="member-name team-member-name-hover" data-image="images/sahil.jpg">Sahil Thakur</div>
+                <div class="member-role">Main Developer</div>
             </div>
             <div class="team-card">
-                <div class="member-info">
-                    <div class="member-name team-member-name-hover">Manaswi Ingale</div>
-                    <div class="member-role">Developer</div>
-                </div>
-                <img src="images/m.jpg" alt="Manaswi Ingale" class="member-image">
+                <div class="member-name team-member-name-hover" data-image="images/manaswi.jpg">Manaswi Ingale</div>
+                <div class="member-role">Developer</div>
             </div>
             <div class="team-card">
-                <div class="member-info">
-                    <div class="member-name team-member-name-hover">Sanika Jirapure</div>
-                    <div class="member-role">Developer</div>
-                </div>
+                <div class="member-name team-member-name-hover" data-image="images/sanika.jpg">Sanika Jirapure</div>
+                <div class="member-role">Developer</div>
             </div>
             <div class="team-card">
-                <div class="member-info">
-                    <div class="member-name team-member-name-hover">Shilpa Tayade</div>
-                    <div class="member-role">Developer</div>
-                </div>
+                <div class="member-name team-member-name-hover" data-image="images/shilpa.jpg">Shilpa Tayade</div>
+                <div class="member-role">Developer</div>
             </div>
             <div class="team-card">
-                <div class="member-info">
-                    <div class="member-name team-member-name-hover">Achal Jane</div>
-                    <div class="member-role">Developer</div>
-                </div>
+                <div class="member-name team-member-name-hover" data-image="images/achal.jpg">Achal Jane</div>
+                <div class="member-role">Developer</div>
             </div>
         </section>
 
+        <!-- Academic information section -->
         <div class="academic-info">
             <p>
                 <span style="font-weight: 700">Final Year BCA Project</span>
@@ -566,14 +580,56 @@
         </div>
     </main>
 
+    <!-- Add modal structure at the end of body -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
+
+    <!-- JavaScript for mobile menu toggle functionality -->
     <script>
+        // Get the menu toggle button and navigation links container
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
 
+        // Add click event listener to the toggle button
         menuToggle.addEventListener('click', () => {
+            // Toggle the 'active' class on the navigation links container to show/hide it
             navLinks.classList.toggle('active');
+            // Toggle the 'active' class on the menu toggle button itself (for styling the 'X')
             menuToggle.classList.toggle('active');
         });
+
+        // Get modal elements
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImg');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        // Add click handlers to member names
+        document.querySelectorAll('.member-name').forEach(name => {
+            name.onclick = function() {
+                const imagePath = this.getAttribute('data-image');
+                if (imagePath) {
+                    modal.style.display = 'block';
+                    modalImg.src = imagePath;
+                }
+            }
+        });
+
+        // Close modal when clicking (X)
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
     </script>
+    <!-- Include the authentication script (likely handles login status and updates nav links) -->
+    <script src="auth.js"></script>
+    <script src="audio.js" defer></script>
 </body>
 </html>
