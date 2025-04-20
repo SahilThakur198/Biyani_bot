@@ -327,9 +327,9 @@
                 affiliation: "Sant Gadge Baba Amravati University (SGBAU)",
                 website: "https://sgbau.ac.in/",
                 accreditations: "NAAC Re-accredited \"B\" Grade (CGPA: 2.71), ISO 9001:2015 Certified, Recognized as a Linguistic Minority Institution (Hindi) by the Government of Maharashtra",
-                campus: "7.2 acres in Durgavihar, Amravati, with modern labs, libraries, sports facilities, and a girls' hostel (60 seats)"
+                campus: "7.2 acres in Durgavihar, Amravati, with modern labs, libraries and sports facilities"
             },
-            
+            	
             /**
              * Academic Programs Information
              * Contains details about all courses offered
@@ -603,8 +603,16 @@
                 return "✔️ It is a private college run by Shri Brijlal Biyani Shiksha Samiti, affiliated to SGBAU Amravati.";
             }
 
-            if (normalizedInput.includes("ncc or nss")) {
-                return "✔️ Yes, both NCC (Boys & Girls) and NSS are available with benefits like incentive marks.";
+            if (normalizedInput.includes("ncc and nss") || normalizedInput.includes("ncc nss") || normalizedInput.includes("ncc & nss") || normalizedInput.includes("nss and ncc") || normalizedInput.includes("nss ncc") || normalizedInput.includes("nss & ncc")) {
+                return "✔️ Both NCC and NSS are available:\n\nNCC (National Cadet Corps):\n- Available for both Boys & Girls\n- Benefits include incentive marks\n- Activities: parades, camps, rifle training\n\nNSS (National Service Scheme):\n- Social service activities\n- Blood donation camps\n- Tree plantation drives\n- Students get incentive marks";
+            }
+            
+            if (normalizedInput.includes("ncc")) {
+                return "✔️ NCC (National Cadet Corps) is available for both Boys & Girls with benefits like incentive marks. Activities include parades, camps, rifle training and more.";
+            }
+
+            if (normalizedInput.includes("nss")) {
+                return "✔️ NSS (National Service Scheme) organizes social service activities, blood donation camps, tree plantation drives and more. Students get incentive marks for participation.";
             }
 
             if (normalizedInput.includes("attendance compulsory")) {
@@ -703,6 +711,10 @@
                 return "Specific names of all BBA faculty are not listed in the prospectus, but the department is led by Dr. N. J. Honrao.";
             }
 
+            if (normalizedInput.includes("bus")) {
+                return "no, the college does not provide bus services. Students need to arrange their own transport.";
+            }
+
             if(normalizedInput.includes("wifi password") || normalizedInput.includes("wifi")){
                 return "The WiFi password is biyani@1234";
             }
@@ -731,6 +743,7 @@
                 const greetings = [
                     "👋 Hello! I'm BiyaniBot, your college companion. How can I assist you?",
                     "Hi there! Ready to help you learn about Brijlal Biyani College! 🎓",
+                    "👋 Hi I'm Robo memory one Giga Byte",
                     "Hey! I'm your college guide. What would you like to know? 🤝",
                     "Greetings! Let me help you explore our college! 🏫",
                     "Hello! Ask me anything about the college! 📚",
@@ -1010,27 +1023,6 @@ if (normalizedInput.includes("yasar")) {
   return responses[Math.floor(Math.random() * responses.length)];
 }
 
-if (normalizedInput.includes("shankar") || normalizedInput.includes("dhadake")) {
-    // Static counter that persists between function calls
-    if (!window.shankarResponseCounter) {
-        window.shankarResponseCounter = 0;
-    }
-
-    const responses = [
-        "Ah, Shankar! He was my father's best buddy from school days. Though distance separates them now, their friendship remains timeless! 🌟",
-        "Shankar and pappa Sahil go way back to school days. Miles apart but forever best friends! ❤️", 
-        "Oh, you mean Shankar? He's that special friend from Sahil's school years. Distance can't touch their unbreakable bond! 🤝",
-        "Shankar holds a special place in Sahil's heart - their friendship from school days stands strong despite the miles between them. ✨",
-        "Shankar bhai 🏑 hokey ke bhot bade player the phir ekdin unhone mere pappa se udhar le liye...., lekin mere pappa ❤️ ke bhot achese"
-    ];
-
-    // Get response based on counter and increment it
-    const response = responses[window.shankarResponseCounter % responses.length];
-    window.shankarResponseCounter++;
-
-    return response;
-}
-
 if (normalizedInput.includes("barka")) {
   const responses = [
     "वो हमारी फुफी है ✌️ for 👶👶 ",
@@ -1039,7 +1031,7 @@ if (normalizedInput.includes("barka")) {
   return responses[Math.floor(Math.random() * responses.length)];
 }
 
-if (normalizedInput.includes("kapil") || normalizedInput.includes("kapil sir who") || normalizedInput.includes("kapil sir kon") || normalizedInput.includes("tell me about kapil sir") || normalizedInput.includes("kapil sir who is") || normalizedInput.includes("kapil sir kaun")) {
+if (normalizedInput.includes("who is kapil sir") || normalizedInput.includes("kapil sir who") || normalizedInput.includes("kapil sir kon") || normalizedInput.includes("tell me about kapil sir") || normalizedInput.includes("kapil sir who is") || normalizedInput.includes("kapil sir kaun")) {
     const responses = [
         "Kapil Sir is my developer Sahil's mentor and former colleague. Their bond is stronger than ever despite the distance. 🌟",
         "He's a mentor, guide and one of the most influential people in Sahil's professional journey. 🎯", 
@@ -1091,39 +1083,13 @@ if (normalizedInput.includes("priti")) {
   return responses[Math.floor(Math.random() * responses.length)];
 }
 
-if (normalizedInput.includes("yugandhara") || normalizedInput.includes("vairagale") || normalizedInput.includes("yugu") || normalizedInput.includes("manager")) {
-  const responses = [
-    "👩‍💼 Yugandhara is an amazing manager at Amazon VCS - she's one of my developer's most trusted mentors! 🌟",
-    "Meet Yugandhara! She's not just a manager at Amazon VCS, but also someone who inspires my developer every day! ✨",
-    "Yugandhara? Oh, she's the incredible Amazon VCS manager who guides my developer through challenges and growth! 💫",
-    "She's one of the finest managers at Amazon VCS - Yugandhara brings wisdom and support to my developer's journey! 🚀",
-    "A brilliant leader at Amazon VCS, Yugandhara helps shape career paths with her exceptional guidance! 💪",
-    "Yugandhara is that special mentor who transforms challenges into opportunities at Amazon VCS! 🌟",
-    "An inspirational manager from Amazon VCS - that's Yugandhara! She's always there to support and guide! ⭐",
-    "In the world of Amazon VCS, Yugandhara stands out as a manager who truly cares about her team's growth! 🌠",
-    "She's the kind of manager everyone wishes for - Yugandhara brings both expertise and empathy to Amazon VCS! 💫",
-    "A phenomenal manager and mentor at Amazon VCS - Yugandhara makes every day a learning opportunity! ✨"
-
-  ];
-  return responses[Math.floor(Math.random() * responses.length)];
-}
-
 if (normalizedInput.includes("rizwan")) {
   const responses = [
     "Rizwan Khan is like a big brother to my developer Sahil — and an uncle to me! Very supportive and always there when needed. 🙏",
     "Rizwan Uncle! Elder brother of Sahil and a guiding force behind him. A true gentleman. 👑",
-    "Rizwan Bhai Hokey 🏑 ke bhot bade player the, Phir ek din unki nazar glti se Amazon ki vacancy per chali tb se abhi tk wo night shift kr rahe hai, magar Rizwan Bhai ❤️ ke bhot ache hai 😂 ",
+    "You mean Rizwan bhai? He’s the elder brother of my developer and one of the most supportive figures in his life. 🤝",
   ];
-// Use a static counter that persists between function calls
-if (!window.rizwanResponseCounter) {
-    window.rizwanResponseCounter = 0;
-}
-
-// Get response based on counter and increment it
-const response = responses[window.rizwanResponseCounter % responses.length];
-window.rizwanResponseCounter++;
-
-return response;
+  return responses[Math.floor(Math.random() * responses.length)];
 }
 
 if (normalizedInput.includes("manmeet") || normalizedInput.includes("manit")) {
@@ -1181,13 +1147,7 @@ if (normalizedInput.includes("vivan") || normalizedInput.includes("vevan")) {
   return responses[Math.floor(Math.random() * responses.length)];
 }
 
-   if (normalizedInput.includes("jane")) {
-    return "Miss Achal Jane is most रिकामटेकडी 👶 person working on the project bot";
-  }
 
-  if (normalizedInput.includes("dhote")) {
-    return "Principal of college";
-  }
   if (normalizedInput.includes("guest lectures") || normalizedInput.includes("workshops") || normalizedInput.includes("projects")) {
     return "✔️ Yes, guest lectures and workshops are arranged regularly, particularly under the IQAC and Remedial Coaching Center initiatives.";
   }
@@ -1498,6 +1458,12 @@ function getCollegeResponse(userInput) {
             if (normalizedInput.includes("campus") || normalizedInput.includes("infrastructure") || normalizedInput.includes("facilities")) {
                 return `🏫 The college has a 7.2-acre campus in Durgavihar, Amravati, featuring modern labs, a well-stocked library with 22,896+ books, sports facilities including cricket, basketball, archery, swimming, and gym, and a girls' hostel with 60 seats.`;
             }
+            if (normalizedInput.includes("hostel") || normalizedInput.includes("accommodation")) {
+    return (
+        "🏘️ Girls' Hostel Info: 60 seats available, Monthly rent ₹2,000 + Mess ₹1,800. Features: CCTV surveillance, clean rooms with 24/7 security. First-come-first-serve basis!"
+    );
+}
+
             
             // Contact
             if (normalizedInput.includes("contact") || normalizedInput.includes("address") || normalizedInput.includes("location")) {
@@ -1507,6 +1473,10 @@ function getCollegeResponse(userInput) {
             // Library
             if (normalizedInput.includes("library") || normalizedInput.includes("books")) {
                 return `📚 The college library has ${knowledgeBase.infrastructure.library}`;
+            }
+            
+            if (normalizedInput.includes("aatish") || normalizedInput.includes("kachave")) {
+                return `He is best friend of my developer Sahil. He is a very good friend and Sahil. He is my uncle`;
             }
             
             // Sports
