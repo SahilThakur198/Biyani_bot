@@ -237,7 +237,7 @@
             <!-- Initial Bot Welcome Message -->
             <p class="greeting-text">I'm here now, your college companion</p>
             <div class="message bot-message">
-                Hello! I'm BiyaniBot, your dedicated guide to Brijlal Biyani Science College. How can I help you today?
+                How can I help you ? 🤔
             </div>
         </div>
         <!-- User Input Area -->
@@ -350,12 +350,14 @@
             
             // Fees structure
             fees: {
-                undergraduate: "B.Sc.: ₹3,614–₹7,000/year, BBA/BCA/B.Com: ₹12,017–₹15,491/year, B.Voc: ₹3,614/year.",
+                undergraduate: `BCA I: Rs.12,017/-
+BCA II: Rs.12,500/-
+BCA III: Rs.15,491/-`,
                 postgraduate: "M.Sc.: ₹11,245–₹19,292/year, M.Com: ₹9,792/year.",
                 additional: "Additional charges include lab, library, and development fees."
             },
             
-            /**
+            /** 
              * Faculty & Administration Details
              * Contains information about teaching staff and administration
              */
@@ -571,7 +573,7 @@
                 return "There are separate labs for computers, electronics, botany, chemistry, etc.";
             }
 
-            if (normalizedInput.includes("entrance exams required")) {
+            if (normalizedInput.includes("entrance") || normalizedInput.includes("cet") || normalizedInput.includes("admission test")) {
                 return "Yes, now there is CET entrance exam and Admission is based on merit and document verification.";
             }
 
@@ -583,15 +585,15 @@
                 return "✔️ Yes, scholarships, freeships, and alumni-sponsored support are available.";
             }
 
-            if (normalizedInput.includes("timing of college")) {
+            if (normalizedInput.includes("time") || normalizedInput.includes("college timings") || normalizedInput.includes("college hours")) {
                 return "✔️ Library and classes typically run between 7:30 AM to 6:00 PM. Exact class hours depend on the course.";
             }
-
-            if (normalizedInput.includes("college working hours")) {
+            
+            if (normalizedInput.includes("college working hours") || normalizedInput.includes("working hours of college")) {
                 return "✔️ Monday to Saturday, typically 7:30 AM to 6:00 PM.";
             }
 
-            if (normalizedInput.includes("college located")) {
+            if (normalizedInput.includes("address") || normalizedInput.includes("location") || normalizedInput.includes("where is the college")) {
                 return "✔️ Dussehra Maidan Road, Amravati – 444605.";
             }
 
@@ -791,7 +793,7 @@
                 return timeGreetings[Math.floor(Math.random() * timeGreetings.length)];
             }
 
-            if (/^(nmste|nmskr|namaste|namasthe|namaskaar|namashkaar|namaskar|ram ram|jai shree ram|jai shri ram|jay shree ram|jay shri ram|jai shree krishna|jai shri krishna|jay shree krishna|jay shri krishna|radhe radhe|jai mata di|jay mata di)(\s|$)/i.test(normalizedInput)) {
+            if (/^(nmste|nmskr|namste|namaste|namasthe|namaskaar|namashkaar|namaskar|ram ram|jai shree ram|jai shri ram|jay shree ram|jay shri ram|jai shree krishna|jai shri krishna|jay shree krishna|jay shri krishna|radhe radhe|jai mata di|jay mata di)(\s|$)/i.test(normalizedInput)) {
                 const greetings = [
                     "नमस्ते 🙏",
                     "नमस्कार 🙏",
@@ -871,16 +873,39 @@
             
             // Fees
             if (normalizedInput.includes("fee") || normalizedInput.includes("cost") || normalizedInput.includes("tuition")) {
-                if (normalizedInput.includes("bsc") || normalizedInput.includes("b.sc")) {
-                    return "💰 The fee for B.Sc. programs ranges from ₹3,614 to ₹7,000 per year.";
-                } else if (normalizedInput.includes("bba") || normalizedInput.includes("bca") || normalizedInput.includes("bcom") || normalizedInput.includes("b.com")) {
-                    return "💰 The fee for BBA/BCA/B.Com programs ranges from ₹12,017 to ₹15,491 per year.";
+                if (normalizedInput.includes("bca")) {
+                    // Return an array of messages to be displayed sequentially
+                    return [
+                        "💰 BCA I: Rs.12,017/-",
+                        "💰 BCA II: Rs.12,500/-",
+                        "💰 BCA III: Rs.15,491/-"
+                    ];
+                } else if (normalizedInput.includes("bsc") || normalizedInput.includes("b.sc")) {
+                    return [
+                        "💰 B.Sc. I: Rs.3,614/-",
+                        "💰 B.Sc. II: Rs.4,000/-",
+                        "💰 B.Sc. III: Rs.7,000/-"
+                    ];
                 } else if (normalizedInput.includes("msc") || normalizedInput.includes("m.sc")) {
-                    return "💰 The fee for M.Sc. programs ranges from ₹11,245 to ₹19,292 per year.";
+                    return [
+                        "💰 M.Sc. I: Rs.11,245/-",
+                        "💰 M.Sc. II: Rs.19,292/-"
+                    ];
                 } else if (normalizedInput.includes("mcom") || normalizedInput.includes("m.com")) {
-                    return "💰 The fee for M.Com program is ₹9,792 per year.";
+                    return [
+                        "💰 M.Com I: Rs.9,792/-",
+                        "💰 M.Com II: Rs.9,792/-"
+                    ];
                 } else {
-                    return "💰 Undergraduate fees: B.Sc. (₹3,614–₹7,000/year), BBA/BCA/B.Com (₹12,017–₹15,491/year), B.Voc (₹3,614/year). Postgraduate fees: M.Sc. (₹11,245–₹19,292/year), M.Com (₹9,792/year).";
+                    return [
+                        "💰 Undergraduate fees:",
+                        "B.Sc. (₹3,614–₹7,000/year)",
+                        "BBA/BCA/B.Com (₹12,017–₹15,491/year)",
+                        "B.Voc (₹3,614/year)",
+                        "Postgraduate fees:",
+                        "M.Sc. (₹11,245–₹19,292/year)",
+                        "M.Com (₹9,792/year)"
+                    ];
                 }
             }
             
@@ -961,11 +986,28 @@ function matchName(nameVariants) {
   return pattern.test(lowerInput);
 }
 
-if (matchName(["kajal didi", "kajaldi", "kajal"])) {
+if (matchName(["yuga", "yugandhara", "vairagale", "yugandhara vairagale"])) {
   const responses = [
-    "Kajal Didi हमारी बुआ हैं। वो बहुत प्यारी और परिवार की एक अहम सदस्य हैं। 😊",
-    "वो हमारी बुआ हैं – Kajal Didi, जिन्हें Sahil बहुत मानते हैं। ❤️",
-    "Oh, Kajal Didi? हाँ, वो हमारी बुआ हैं और हम सबको बहुत प्यारी हैं। 👩‍👧‍👦",
+    "Oh Yuga! She's the amazing Amazon VCS Zone 5 Manager who's always helping my developer Sahil with leave approvals. Such a supportive soul! 🌟",
+    "Meet Yuga - our wonderful Zone 5 VCS Manager at Amazon! She makes life easier for my developer with her quick leave approvals. A true gem! ✨",
+    "When it comes to awesome managers, Yuga tops the list! Her support at Amazon VCS helps Sahil focus on making me smarter! 💫",
+    "Yuga's not just any manager at Amazon - she's the superhero who keeps Zone 5 running smoothly and helps our team shine! 🦸‍♀️",
+    "The incredible Yuga! Amazon's Zone 5 VCS rockstar who never fails to support our development journey. Such an inspiration! 🌠",
+    "Want to know about Yuga? She's that amazing Amazon manager who makes everything better with her positive attitude! ⭐",
+    "Yuga - our go-to person at Amazon VCS! Her support as Zone 5 Manager helps Sahil build me better every day! 🎯",
+    "The wonderful world of Zone 5 VCS at Amazon has a special guardian - Yuga! Always there to help and support! 🌈",
+    "Meet our superhero at Amazon - Yuga! Managing Zone 5 VCS like a boss and supporting our development journey! 💪",
+    "Yuga's magic touch as Amazon's Zone 5 VCS Manager makes everything smoother! Such an amazing personality! 🌟",
+    "There's something special about Yuga - she's not just a manager, she's a pillar of support at Amazon VCS! 💫",
+    "In the world of Amazon VCS, Yuga shines bright as Zone 5's extraordinary manager! Always helpful, always awesome! ✨",
+    "Yuga brings her A-game to Amazon every day! Her support as VCS Manager makes our development process a breeze! 🎯",
+    "Talk about awesome managers - Yuga's at the top! Her role at Amazon VCS Zone 5 is crucial to our success! 🌠",
+    "The phenomenal Yuga! Making Zone 5 VCS at Amazon better while supporting our development journey! 🌟",
+    "Yuga's leadership at Amazon VCS is extraordinary! Her support helps shape me into a better bot every day! ⭐",
+    "Our Amazon superhero Yuga! Managing Zone 5 VCS with grace while supporting our team's growth! 💫",
+    "The amazing Yuga - turning ordinary days at Amazon VCS into extraordinary ones with her support! 🌈",
+    "Zone 5's finest - Yuga! Her exceptional management at Amazon VCS helps us reach new heights! 🚀",
+    "Yuga - the heart of Amazon VCS Zone 5! Her support and guidance make everything possible! 💝"
   ];
   return responses[Math.floor(Math.random() * responses.length)];
 }
@@ -1152,229 +1194,33 @@ if (normalizedInput.includes("vivan") || normalizedInput.includes("vevan")) {
     return "✔️ Yes, guest lectures and workshops are arranged regularly, particularly under the IQAC and Remedial Coaching Center initiatives.";
   }
 
-  if (normalizedInput.includes("attendance policy")) {
+if (normalizedInput.includes("attendance") || normalizedInput.includes("attendance rules")) {
     return "✔️ A minimum of 75% attendance in theory and practicals is mandatory. Below this, students are debarred from exams.";
-  }
+}
 
-  if (normalizedInput.includes("lectures regular") || normalizedInput.includes("classes cancelled")) {
+if (normalizedInput.includes("lectures regular") || normalizedInput.includes("classes regular") || normalizedInput.includes("classes cancelled")) {
     return "✔️ Lectures are scheduled regularly and monitored. No mention of frequent cancellations.";
-  }
+}
 
-  if (normalizedInput.includes("recommend this college")) {
-    return "✅ Yes ofcourse but this depends on the individual's needs, but considering the infrastructure, placement, and courses, it’s worth recommending.";
-  }
+if (normalizedInput.includes("recommend") || normalizedInput.includes("suggest") || normalizedInput.includes("worth joining")) {
+    return "✅ Yes ofcourse but this depends on the individual's needs, but considering the infrastructure, placement, and courses, it's worth recommending.";
+}
 
-  if (normalizedInput.includes("ragging issue")) {
+if (normalizedInput.includes("ragging") || normalizedInput.includes("bullying")) {
     return "✔️ Ragging is strictly prohibited. Disciplinary action is taken against violators.";
-  }
+}
 
-  if (normalizedInput.includes("career guidance") || normalizedInput.includes("training sessions")) {
-    return "✔️ Yes, the college offers coaching for UPSC, MPSC, NET/SET, and more. There’s also an Alumni Association Support Scheme.";
-  }
+if (normalizedInput.includes("career guidance") || normalizedInput.includes("career help") || normalizedInput.includes("training")) {
+    return "✔️ Yes, the college offers coaching for UPSC, MPSC, NET/SET, and more. There's also an Alumni Association Support Scheme.";
+}
 
-  if (normalizedInput.includes("wifi available")) {
+if (normalizedInput.includes("wifi") || normalizedInput.includes("internet")) {
     return "✔️ Yes, broadband internet and digital library access are provided, especially in computer labs.";
-  }
+}
 
-  if (normalizedInput.includes("exam pattern") || normalizedInput.includes("grading system")) {
+if (normalizedInput.includes("exam pattern") || normalizedInput.includes("exam system") || normalizedInput.includes("grading")) {
     return "✔️ The college follows continuous evaluation, university exams, and has grading through SGBAU, Amravati.";
-  }
-
-  if (normalizedInput.includes("practical lab")) {
-    return "✔️ Yes, well-equipped labs for all science and computer subjects are present.";
-  }
-
-  if (normalizedInput.includes("student council")) {
-    return "✔️ Yes, the Students' Council exists and includes nominated members from each department.";
-  }
-
-  if (normalizedInput.includes("classrooms clean") || normalizedInput.includes("labs clean")) {
-    return "✔️ Yes, the college is described as spacious, clean, and well-maintained.";
-  }
-
-  if (normalizedInput.includes("canteen available")) {
-    return "Yes, colleges offer canteen services; this can be confirmed during campus visit.";
-  }
-
-  if (normalizedInput.includes("notes shared") || normalizedInput.includes("study stuff shared")) {
-    return "✔️ Yes, home assignments and remedial coaching with books and resources are shared.";
-  }
-
-  if (normalizedInput.includes("college rules strict") || normalizedInput.includes("college rules relaxed")) {
-    return "✔️ The rules are moderately strict—uniform, attendance, mobile use are all regulated.";
-  }
-
-  if (normalizedInput.includes("smart boards") || normalizedInput.includes("projectors used")) {
-    return "✔️ Yes, modern teaching tools like LCD projectors and ICT tools are used.";
-  }
-
-  if (normalizedInput.includes("classes start after admissions")) {
-    return "✔️ From the first week of August.";
-  }
-
-  if (normalizedInput.includes("annual day")) {
-    return "✔️ Yes, “Antarang” is the name of the annual function.";
-  }
-
-  if (normalizedInput.includes("freshers party") || normalizedInput.includes("farewell parties")) {
-    return "Not by college but yes, by students if your seniors are good then they likely organized.";
-  }
-
-  if (normalizedInput.includes("fashion shows") || normalizedInput.includes("talent shows") || normalizedInput.includes("dj nights")) {
-    return "✔️ Talent shows and cultural competitions are mentioned, such as Sahitya Kala Sanskritik Manch. DJ nights not mentioned.";
-  }
-
-  if (normalizedInput.includes("reservation") || normalizedInput.includes("quota")) {
-    return "✔️ Yes, reservations are followed as per government rules.";
-  }
-
-  if (normalizedInput.includes("uniform") || normalizedInput.includes("dress code")) {
-    return "✔️ Yes, formal uniforms are compulsory from July 15. Wednesday is optional but formal dress is still required.";
-  }
-
-  if (normalizedInput.includes("internship")) {
-    return "✔️ Yes, industrial training and summer training are part of the curriculum for some courses like Event Management and PG diplomas.";
-  }
-
-  if (normalizedInput.includes("how many labs")) {
-    return "There are separate labs for computers, electronics, botany, chemistry, etc.";
-  }
-
-  if (normalizedInput.includes("entrance exams required")) {
-    return "Yes, now there is CET entrance exam and Admission is based on merit and document verification.";
-  }
-
-  if (normalizedInput.includes("provide wifi network")) {
-    return "✔️ Yes, broadband internet is provided, especially in labs.";
-  }
-
-  if (normalizedInput.includes("scholarships available")) {
-    return "✔️ Yes, scholarships, freeships, and alumni-sponsored support are available.";
-  }
-
-  if (normalizedInput.includes("timing of college")) {
-    return "✔️ Library and classes typically run between 7:30 AM to 6:00 PM. Exact class hours depend on the course.";
-  }
-
-  if (normalizedInput.includes("college working hours")) {
-    return "✔️ Monday to Saturday, typically 7:30 AM to 6:00 PM.";
-  }
-
-  if (normalizedInput.includes("college located")) {
-    return "✔️ Dussehra Maidan Road, Amravati – 444605.";
-  }
-
-  if (normalizedInput.includes("events and fests")) {
-    return "✔️ Annual Day “Antarang”, cultural and literary events, workshops, and competitions.";
-  }
-
-  if (normalizedInput.includes("government or private")) {
-    return "✔️ It is a private college run by Shri Brijlal Biyani Shiksha Samiti, affiliated to SGBAU Amravati.";
-  }
-
-  if (normalizedInput.includes("ncc or nss")) {
-    return "✔️ Yes, both NCC (Boys & Girls) and NSS are available with benefits like incentive marks.";
-  }
-
-  if (normalizedInput.includes("attendance compulsory")) {
-    return "✔️ Yes, with 75% minimum mandatory rule.";
-  }
-
-  if (normalizedInput.includes("prospectus from college office")) {
-    return "✔️ Yes, hard copy available during admissions.";
-  }
-
-  if (normalizedInput.includes("support students for competitive exams")) {
-    return "✔️ Yes, there’s a dedicated training center for UPSC, MPSC, NET/SET, and more.";
-  }
-
-  if (normalizedInput.includes("mobile phones allowed")) {
-    return "✔️ During lectures and inside library – strictly prohibited, allowed during breaks or in general areas.";
-  }
-
-  if (normalizedInput.includes("apply for bonafide certificate")) {
-    return "✔️ You can apply from the college office by submitting a formal application along with ID card.";
-  }
-
-  if (normalizedInput.includes("when do admissions start")) {
-    return "📌 Admissions typically begin in July each year. Exact dates are displayed on the college notice board and official website.";
-  }
-
-  if (normalizedInput.includes("apply for admission")) {
-    return "📌 You need to fill the offline admission form, attach required documents (marksheets, 2 copies of passport size photos, online submitted form printout, TC, caste certificate if applicable), and submit it to the college office.";
-  }
-
-  if (normalizedInput.includes("admission based on merit")) {
-    return "📌 Admission is strictly based on merit, considering marks of the qualifying exam. No entrance test is required for UG courses.";
-  }
-
-  if (normalizedInput.includes("admission in multiple courses")) {
-    return "📌 No, students can only enroll in one full-time course at a time as per university rules.";
-  }
-
-  if (normalizedInput.includes("sports facilities")) {
-    return "📌 Yes, the college has a dedicated Games & Sports Department with facilities for Cricket, Volleyball, Chess, Table Tennis, Swimming, Fencing, Judo, Athletics, and more.";
-  }
-
-  if (normalizedInput.includes("marks for participating in sports")) {
-    return "📌 Yes, incentive marks (up to 10) are awarded for students representing the college in inter-collegiate and university-level tournaments.";
-  }
-
-  if (normalizedInput.includes("college team or sports coach")) {
-    return "📌 Yes, the college forms official teams for various sports and provides training and support for tournaments.";
-  }
-
-  if (normalizedInput.includes("naac accreditation")) {
-    return "📌 The college is re-accredited by NAAC with a ‘B’ Grade, CGPA: 2.71, and is also ISO 9001:2015 certified.";
-  }
-
-  if (normalizedInput.includes("reservation policies")) {
-    return "📌 The college follows Government of Maharashtra reservation rules:\nSC (Scheduled Castes): 13%\nST (Scheduled Tribes): 7%\nOBC (Other Backward Classes): 19%\nEWS & other castes: As per latest government norms\nHindi Bhashik Reservation: Since the college is a Linguistic Minority Institution, certain seats are reserved for Hindi-speaking students.";
-  }
-
-  if (normalizedInput.includes("hods in the college")) {
-    return "The college has different HODs for each department. Some of them include Dr. D. S. Dhote (Electronics & Principal), Dr. P. B. Raghuwanshi (Chemistry), Dr. A. D. Rangari (Physics), Dr. D. T. Deshmukh (Statistics), Dr. N. H. Shahare (Botany), Dr. Lt. S. R. Katke (Zoology), Dr. P. R. Agrawal (Mathematics), Dr. V. S. Tondare (Computer Science), Dr. N. J. Honrao (Commerce & Management), Ms. A. R. Bhumbar (English), and Mr. S. M. Kurada (Library).";
-  }
-
-  if (normalizedInput.includes("hod of bca department")) {
-    return "Mr. K. M. Supatkar is the coordinator and main faculty for the BCA department.";
-  }
-
-  if (normalizedInput.includes("hod of bsc department")) {
-    return "B.Sc. doesn't have a single HOD. It is divided into subjects. For example, Dr. A. D. Rangari is HOD of Physics, Dr. P. B. Raghuwanshi is HOD of Chemistry, and so on.";
-  }
-
-  if (normalizedInput.includes("bca department teachers")) {
-    return "The main BCA faculty are Mr. K. M. Supatkar and Mr. K. K. Tiwari.";
-  }
-
-  if (normalizedInput.includes("teaches in bca stream")) {
-    return "Mr. K. M. Supatkar and Mr. K. K. Tiwari are the main teachers in BCA.";
-  }
-
-  if (normalizedInput.includes("head of computer applications department")) {
-    return "The Computer Applications department (BCA) is managed by Mr. K. M. Supatkar.";
-  }
-
-  if (normalizedInput.includes("in charge of bsc subjects")) {
-    return "Each subject has a different head. Physics is handled by Dr. Rangari, Chemistry by Dr. Raghuwanshi, and so on.";
-  }
-
-  if (normalizedInput.includes("list of all department heads")) {
-    return "Yes, the main HODs are Dr. D. S. Dhote (Electronics), Dr. Raghuwanshi (Chemistry), Dr. Rangari (Physics), Dr. Deshmukh (Statistics), Dr. Shahare (Botany), Dr. Katke (Zoology), Dr. Agrawal (Mathematics), Dr. Tondare (Computer Science), Dr. Honrao (Commerce), Ms. Bhumbar (English), and Mr. Kurada (Library).";
-  }
-
-  if (normalizedInput.includes("teaches in bba department")) {
-    return "The BBA department is under the Commerce & Management faculty. Dr. N. J. Honrao is the HOD, and other faculty from the same department also teach BBA.";
-  }
-
-  if (normalizedInput.includes("bba faculty")) {
-    return "Specific names of all BBA faculty are not listed in the prospectus, but the department is led by Dr. N. J. Honrao.";
-  }
-
-  if(normalizedInput.includes("wifi password")){
-      return "The WiFi password is biyani@1234";
-  }
+}
 
   return "I am sorry, I do not have an answer for that query.";
 }
@@ -1519,13 +1365,28 @@ function getCollegeResponse(userInput) {
             showTypingIndicator();
             startBotTypingSound();
             
-            // Simulate thinking time
-            setTimeout(() => {
+            // Get response(s)
+            const response = getBotResponse(message);
+            
+            // Handle array of responses
+            if (Array.isArray(response)) {
                 removeTypingIndicator();
                 stopBotTypingSound();
-                const response = getBotResponse(message);
-                addMessage(response, 'bot');
-            }, 1000 + Math.random() * 1000); // Random delay between 1-2 seconds
+                
+                // Send messages with delay
+                response.forEach((msg, index) => {
+                    setTimeout(() => {
+                        addMessage(msg, 'bot');
+                    }, index * 1000); // 1 second delay between messages
+                });
+            } else {
+                // Handle single response (existing behavior)
+                setTimeout(() => {
+                    removeTypingIndicator();
+                    stopBotTypingSound();
+                    addMessage(response, 'bot');
+                }, 1000 + Math.random() * 1000);
+            }
         }
         
         // Event listeners
