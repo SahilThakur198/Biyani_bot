@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BiyaniBot - Your College Companion</title>
+    <title>College Companion - Your AI Assistant</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
@@ -404,14 +404,13 @@ BCA III: Rs.15,491/-`,
             },
             
             // Project team
-            developers: {
-                team: "The BiyaniBot was developed by a team of Final Year BCA students as their 2024-25 project. The team is often referred to as MASSS, derived from the first letters of their names.",
-                sahil: "Sahil Arakh Thakur is the Lead Developer of the BiyaniBot project.",
-                manaswi: "Manaswi Ingale is a Developer on the BiyaniBot project team.",
-                sanika: "Sanika Jirapure is a Developer on the BiyaniBot project team.",
-                shilpa: "Shilpa Tayade is a Developer on the BiyaniBot project team.",
-                achal: "Achal Jane is a Developer on the BiyaniBot project team.",
-                masss: "MASSS stands for the team of developers: Manaswi, Achal, Sahil, Shilpa, and Sanika who created the BiyaniBot as their Final Year BCA project for 2024-25."
+            developers: {                team: "The College Companion was developed by a team of Final Year BCA students as their 2024-25 project. The team is often referred to as MASSS, derived from the first letters of their names.",
+                sahil: "Sahil Arakh Thakur is the Lead Developer of the College Companion project.",
+                manaswi: "Manaswi Ingale is a Developer on the College Companion project team.",
+                sanika: "Sanika Jirapure is a Developer on the College Companion project team.",
+                shilpa: "Shilpa Tayade is a Developer on the College Companion project team.",
+                achal: "Achal Jane is a Developer on the College Companion project team.",
+                masss: "MASSS stands for the team of developers: Manaswi, Achal, Sahil, Shilpa, and Sanika who created the College Companion as their Final Year BCA project for 2024-25."
             }
 
         };
@@ -743,7 +742,7 @@ BCA III: Rs.15,491/-`,
             // Greetings and introduction variations
             if (/^(hi|hello|hey|hii|hiii|hiiii|hiiiiii|helo|hellow|helloo|hy|heyy|heyyy|heya|hiya|wassup|yo|hai|howdy|greetings|what'?s up|sup|namaste|ram ram|jai shree ram|jai shree krishna)(\s|$)/i.test(normalizedInput)) {
                 const greetings = [
-                    "👋 Hello! I'm BiyaniBot, your college companion. How can I assist you?",
+                    "👋 Hello! I'm College Companion, your AI assistant. How can I help you?",
                     "Hi there! Ready to help you learn about Brijlal Biyani College! 🎓",
                     "👋 Hi I'm Robo memory one Giga Byte",
                     "Hey! I'm your college guide. What would you like to know? 🤝",
@@ -761,7 +760,7 @@ BCA III: Rs.15,491/-`,
             // General purpose questions
             if (/^(what can you (do|help with)|how can you help|what do you do|what'?s your purpose|who are you|what are you|tell me about yourself|introduce yourself|what services)(\s|$)/i.test(normalizedInput)) {
                 const responses = [
-                    "I'm BiyaniBot! 🤖 I can help you with:\n- College information 📚\n- Course details 🎓\n- Admission process 📝\n- Faculty info 👨‍🏫\n- Fees structure 💰\n- Campus facilities 🏫",
+                    "I'm College Companion! 🤖 I can help you with:\n- College information 📚\n- Course details 🎓\n- Admission process 📝\n- Faculty info 👨‍🏫\n- Fees structure 💰\n- Campus facilities 🏫",
                     "I'm your college companion! Ask me about:\n- Programs offered 📚\n- Admission requirements 📋\n- Campus life 🏃\n- Faculty members 👩‍🏫\n- Infrastructure 🏢\n- Events & activities 🎯",
                     "Hello! I can assist with:\n- Course information 📖\n- Application process 📝\n- Fee details 💳\n- Department info 🏫\n- Student services 🎓\n- Contact details 📞",
                     "I'm here to help with:\n- Academic programs 🎓\n- Enrollment info 📚\n- Campus facilities 🏫\n- Faculty details 👨‍🏫\n- Student life 🎯\n- College rules 📋"
@@ -812,12 +811,11 @@ BCA III: Rs.15,491/-`,
             // General questions
             // Name-related questions with variations
             if (/^(what'?s your name|what is your name|who are you|your name|tell me your name|may i know your name|name please|introduce yourself|could you tell me your name|can you tell me your name|how should i call you|what do they call you|what can i call you|what do people call you|how are you called|what name do you go by|what is your bot name|give me your name|share your name|state your name|identify yourself|your identity|who am i talking to|who am i speaking with|what should i address you as)(\?|\s|$)/i.test(normalizedInput)) {
-                const nameResponses = [
-                    "I'm BiyaniBot! 🤖 How can I assist you?",
-                    "My name is BiyaniBot - your college companion! 🎓",
-                    "I'm BiyaniBot, ready to help you! 💫",
-                    "BiyaniBot here! What can I do for you? ✨",
-                    "I go by BiyaniBot - your friendly college guide! 🌟",
+                const nameResponses = [                    "I'm College Companion! 🤖 How can I assist you?",
+                    "My name is College Companion - your AI assistant! 🎓",
+                    "I'm College Companion, ready to help you! 💫",
+                    "College Companion here! What can I do for you? ✨",
+                    "I go by College Companion - your friendly college guide! 🌟",
                     "They call me BiyaniBot! How may I help? 🤝",
                     "BiyaniBot at your service! 🎯",
                     "Hello! I'm BiyaniBot, your college assistant! 📚",
@@ -925,6 +923,10 @@ if (normalizedInput.includes("k. m. supatkar") || normalizedInput.includes("supa
 
 if (normalizedInput.includes("k. k. tiwari") || normalizedInput.includes("tiwari") || normalizedInput.includes("tiu") || normalizedInput.includes("teu") ) {
     return "K. K. Tiwari sir is an Assistant Professor in BCA Program. They have 13 years of experience and he is known for his deep understanding and unique way of explaining complex topics. He’s been a constant support from BCA 1st to 6th semester.";
+}
+
+if (normalizedInput.includes("anmol") || normalizedInput.includes("jitu") ) {
+    return "Is the brother of my main developer";
 }
 
 if (normalizedInput.includes("samiksha madam") || normalizedInput.includes("samiksha")) {

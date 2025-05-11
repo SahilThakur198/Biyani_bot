@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"> <!-- Specifies the character encoding for the document -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configures the viewport for responsive design -->
-    <title>About Us - Biyani Bot</title> <!-- Sets the title of the page -->
+    <title>About Us - College Companion</title> <!-- Sets the title of the page -->
     <!-- Link to Google Fonts for the 'Inter' font family -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -201,7 +201,6 @@
             background: linear-gradient(45deg, var(--accent-1), var(--accent-2));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            cursor: pointer;
         }
 
         /* Team member role styling */
@@ -459,40 +458,54 @@
             }
         }
 
-        /* Modal styles */
+        /* Modal styling */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
         }
 
         .modal-content {
-            margin: auto;
-            display: block;
             max-width: 80%;
             max-height: 80vh;
-            position: relative;
-            top: 50%;
-            transform: translateY(-50%);
+            transform: scale(0.7);
+            opacity: 0;
+            transition: all 0.3s ease;
             border: 2px solid var(--accent-1);
-            border-radius: 8px;
             box-shadow: var(--neon-glow);
         }
 
-        .close {
+        .modal.show .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-close {
             position: absolute;
-            right: 25px;
-            top: 25px;
+            top: 20px;
+            right: 20px;
             color: var(--accent-1);
-            font-size: 35px;
-            font-weight: bold;
+            font-size: 30px;
             cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-close:hover {
+            transform: scale(1.2);
         }
     </style>
 </head>
@@ -502,7 +515,7 @@
         <nav class="nav-container">
             <!-- Logo/Brand Name -->
             <h1><a href="index.html" style="text-decoration: none; color: var(--text-primary);">
-                Biyani<span style="color: var(--accent-1);">Bot</span> <!-- Bot part highlighted -->
+                College <span style="color: var(--accent-1);">Companion</span> <!-- Companion part highlighted -->
             </a></h1>
             <!-- Navigation links container (populated by JavaScript) -->
             <div class="nav-links">
@@ -525,7 +538,7 @@
             <div class="hero-content">
                 <h1 class="college-name">Brijlal Biyani Science College</h1>
                 <p class="project-description">
-                    Welcome to <span class="highlight">BiyaniBot</span> - An innovative
+                    Welcome to <span class="highlight">College Companion</span> - An innovative
                     AI-powered chatbot designed to enhance the college experience.
                     <br><br>
                     This project represents our commitment to bringing
@@ -549,23 +562,23 @@
         <section class="team-grid">
             <!-- Individual team member cards -->
             <div class="team-card">
-                <div class="member-name team-member-name-hover" data-image="images/sahil.jpg">Sahil Thakur</div>
+                <div class="member-name team-member-name-hover">Sahil Thakur</div>
                 <div class="member-role">Main Developer</div>
             </div>
             <div class="team-card">
-                <div class="member-name team-member-name-hover" data-image="images/manaswi.jpg">Manaswi Ingale</div>
+                <div class="member-name team-member-name-hover">Manaswi Ingale</div>
                 <div class="member-role">Developer</div>
             </div>
             <div class="team-card">
-                <div class="member-name team-member-name-hover" data-image="images/sanika.jpg">Sanika Jirapure</div>
+                <div class="member-name team-member-name-hover">Sanika Jirapure</div>
                 <div class="member-role">Developer</div>
             </div>
             <div class="team-card">
-                <div class="member-name team-member-name-hover" data-image="images/shilpa.jpg">Shilpa Tayade</div>
+                <div class="member-name team-member-name-hover">Shilpa Tayade</div>
                 <div class="member-role">Developer</div>
             </div>
             <div class="team-card">
-                <div class="member-name team-member-name-hover" data-image="images/achal.jpg">Achal Jane</div>
+                <div class="member-name team-member-name-hover">Achal Jane</div>
                 <div class="member-role">Developer</div>
             </div>
         </section>
@@ -580,10 +593,10 @@
         </div>
     </main>
 
-    <!-- Add modal structure at the end of body -->
-    <div id="imageModal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="modalImg">
+    <!-- Add modal container at the end of body -->
+    <div class="modal" id="imageModal">
+        <span class="modal-close">&times;</span>
+        <img src="images/sahil.jpg" alt="Sahil" class="modal-content">
     </div>
 
     <!-- JavaScript for mobile menu toggle functionality -->
@@ -600,33 +613,40 @@
             menuToggle.classList.toggle('active');
         });
 
-        // Get modal elements
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImg');
-        const closeBtn = document.getElementsByClassName('close')[0];
+        // Add triple click handler
+        const sahilName = document.querySelector('.team-card:first-child .member-name');
+        const imageModal = document.getElementById('imageModal');
+        const modalClose = document.querySelector('.modal-close');
 
-        // Add click handlers to member names
-        document.querySelectorAll('.member-name').forEach(name => {
-            name.onclick = function() {
-                const imagePath = this.getAttribute('data-image');
-                if (imagePath) {
-                    modal.style.display = 'block';
-                    modalImg.src = imagePath;
-                }
+        let clickCount = 0;
+        let lastClickTime = 0;
+
+        sahilName.addEventListener('click', (e) => {
+            const currentTime = new Date().getTime();
+            
+            if (currentTime - lastClickTime > 500) {
+                clickCount = 1;
+            } else {
+                clickCount++;
+            }
+
+            lastClickTime = currentTime;
+
+            if (clickCount === 3) {
+                imageModal.classList.add('show');
+                clickCount = 0;
             }
         });
 
-        // Close modal when clicking (X)
-        closeBtn.onclick = function() {
-            modal.style.display = 'none';
-        }
+        modalClose.addEventListener('click', () => {
+            imageModal.classList.remove('show');
+        });
 
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
+        imageModal.addEventListener('click', (e) => {
+            if (e.target === imageModal) {
+                imageModal.classList.remove('show');
             }
-        }
+        });
     </script>
     <!-- Include the authentication script (likely handles login status and updates nav links) -->
     <script src="auth.js"></script>
