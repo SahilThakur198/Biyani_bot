@@ -1080,13 +1080,37 @@ const responses = [
 }
 
 
-if (normalizedInput.includes("gauri")) {
-  const responses = [
-    "Gauri is a close friend of my creator Sahil. She's kind, supportive, and truly one of the sweetest souls he knows. 😊",
-    "Gauri is an incredibly impressive individual and a cherished friend of my father. They have always shared a strong bond, and even now, their friendship remains as steadfast as ever",
-    "Oh, you're talking about Yawatkar ? That means Gauri! She's one of the dearest friends of my main developer, Sahil. He always speaks highly of her. 🌟"
-  ];
-  return responses[Math.floor(Math.random() * responses.length)];
+if (normalizedInput.includes("gauri", "yawatkar", "yavatkar", "gouri", "gauri yawatkar", "gauri yavatkar", "yawatkar gauri", "yavatkar gauri")) {
+    const responses = [
+        "Oh, you're talking about Yawatkar ? That means Gauri! She's one of the dearest friends of Dad. He always speaks highly of her. 🌟",
+        "Gauri is an incredibly impressive individual and a cherished friend of my father. They have always shared a strong bond, and even now, their friendship remains as steadfast as ever",
+        "A Loyal friend Gauri is one of my father's closest friends—someone he deeply admires and respects.",
+        "My dad always speaks highly of Gauri, describing her as a wonderful and loyal friend.",
+        "Gauri and my father have a friendship that has stood the test of time—truly inspiring!",
+        "Few friendships are as strong as the one between Gauri and my dad; they’re like family.",
+        "Gauri is not just a friend to my father, but a source of encouragement and positivity.",
+        "Whenever my dad talks about Gauri, it’s always with a smile and fond memories.",
+        "Their friendship is built on trust and mutual respect—Gauri is truly special to my father.",
+        "Gauri has been a constant presence in my dad’s life, always supportive and kind.",
+        "My father considers Gauri one of his dearest friends, and their bond is unbreakable.",
+        "Gauri’s friendship means a lot to my dad; he values her advice and companionship.",
+        "Over the years, Gauri and my father have shared countless memories and laughter.",
+        "Gauri is the kind of friend who stands by you through thick and thin—my dad is grateful for her.",
+        "My dad often says that Gauri’s friendship is a blessing in his life.",
+        "Gauri’s positive influence and unwavering support have made a big difference to my father.",
+        "Their friendship is a beautiful example of loyalty and understanding.",
+        "Gauri is always there for my dad, offering encouragement and wise counsel.",
+        "My father treasures his friendship with Gauri, and it’s easy to see why.",
+        "Gauri’s kindness and sincerity have earned her a special place in my dad’s heart.",
+        "The bond between Gauri and my father is rare and precious—something to be celebrated.",
+        "Gauri is more than a friend to my dad; she’s like family, always supportive and caring.",
+        "Gauri is a close friend of my creator Sahil. She's kind, supportive, and truly one of the sweetest souls he knows. 😊"
+    ];
+    // Use a static index to return responses in order
+    if (!window.gauriResponseIndex) window.gauriResponseIndex = 0;
+    const response = responses[window.gauriResponseIndex];
+    window.gauriResponseIndex = (window.gauriResponseIndex + 1) % responses.length;
+    return response;
 }
 
 if (normalizedInput.includes("barka")) {
