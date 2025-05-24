@@ -1080,7 +1080,9 @@ const responses = [
 }
 
 
-if (normalizedInput.includes("gauri", "yawatkar", "yavatkar", "gouri", "gauri yawatkar", "gauri yavatkar", "yawatkar gauri", "yavatkar gauri")) {
+if (
+    ["gauri", "yawatkar", "yavatkar", "gouri"].some(name => normalizedInput.includes(name))
+) {
     const responses = [
         "Oh, you're talking about Yawatkar ? That means Gauri! She's one of the dearest friends of Dad. He always speaks highly of her. 🌟",
         "Gauri is an incredibly impressive individual and a cherished friend of my father. They have always shared a strong bond, and even now, their friendship remains as steadfast as ever",
